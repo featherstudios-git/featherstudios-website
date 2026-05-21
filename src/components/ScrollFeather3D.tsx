@@ -127,8 +127,10 @@ export default function ScrollFeather3D() {
           const maxY = windowH - 150 - 32;
           const yOffset = progress * maxY;
 
-          // Sway left and right like a falling feather (3 full zig-zags)
-          const swayX = Math.sin(progress * Math.PI * 6) * 40;
+          // Sway left and right across the entire screen
+          // Use 8 full sweeps (Math.PI * 8) matching roughly the number of sections
+          const maxSway = window.innerWidth * 0.4; // 40% of screen width left and right
+          const swayX = Math.sin(progress * Math.PI * 8) * maxSway;
 
           mount.parentElement.style.transform = `translateY(${yOffset}px) translateX(${swayX}px)`;
         }
@@ -178,7 +180,8 @@ export default function ScrollFeather3D() {
       style={{
         position: 'fixed',
         top: 0,
-        right: '4rem',
+        left: '50%',
+        marginLeft: '-75px',
         width: '150px',
         height: '150px',
         zIndex: 50,
