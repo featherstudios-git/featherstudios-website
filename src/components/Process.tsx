@@ -119,11 +119,11 @@ function StepCard({ step, index, inView, total }: { step: typeof steps[0]; index
         border: hovered ? 'none' : `1px solid transparent` // Border is handled by grid gap
       }} />
 
-      {/* Subtle glow (Always On, Brighter on hover) */}
+      {/* Subtle glow (Always On) */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: 20,
         background: `radial-gradient(circle at 0% 0%, ${step.accent}0A 0%, transparent 60%)`,
-        opacity: hovered ? 1 : 0.4, transition: 'opacity 0.4s', pointerEvents: 'none',
+        opacity: 1, transition: 'opacity 0.4s', pointerEvents: 'none',
         zIndex: 2,
       }} />
 

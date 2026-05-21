@@ -103,9 +103,9 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
       {/* Animated Background (Always on) */}
       <WorkBg id={work.id} color={work.accent} hovered={hovered} />
 
-      {/* Glow (Always on, brighter on hover) */}
+      {/* Glow (Always on) */}
       <motion.div
-        animate={{ opacity: hovered ? 0.8 : 0.3 }}
+        animate={{ opacity: 0.8 }}
         transition={{ duration: 0.5 }}
         style={{
           position: 'absolute', top: -60, right: -60,
@@ -168,7 +168,7 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
 function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: boolean }) {
   const bgStyle: React.CSSProperties = {
     position: 'absolute', inset: 0, zIndex: 2,
-    opacity: hovered ? 0.3 : 0.1,
+    opacity: 0.3,
     transition: 'opacity 0.5s ease',
     overflow: 'hidden',
     pointerEvents: 'none',

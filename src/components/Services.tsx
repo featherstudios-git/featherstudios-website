@@ -158,13 +158,13 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       {/* Content wrapper to stay above bg */}
       <div style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
         
-        {/* Accent glow top-right (Always on, intensifies on hover) */}
+        {/* Accent glow top-right */}
         <div style={{
           position: 'absolute', top: -40, right: -40,
           width: 140, height: 140, borderRadius: '50%',
           background: `radial-gradient(circle, ${service.accent}1A 0%, transparent 70%)`,
-          transition: 'opacity 0.4s, transform 0.4s',
-          opacity: hovered ? 1 : 0.5,
+          transition: 'transform 0.4s',
+          opacity: 1,
           transform: hovered ? 'scale(1.2)' : 'scale(1)',
           pointerEvents: 'none',
         }} />
@@ -248,7 +248,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 function ServiceBg({ id, color, hovered }: { id: string; color: string; hovered: boolean }) {
   const bgStyle: React.CSSProperties = {
     position: 'absolute', inset: 0, zIndex: 2,
-    opacity: hovered ? 0.15 : 0.05,
+    opacity: 0.2,
     transition: 'opacity 0.5s ease',
     overflow: 'hidden',
     pointerEvents: 'none',
