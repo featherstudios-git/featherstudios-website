@@ -182,7 +182,7 @@ function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: bo
     return (
       <div style={bgStyle}>
         <motion.div
-          style={{ position: 'absolute', top: '10%', right: '10%', width: '150%', height: '150%', background: \`radial-gradient(circle at 100% 0%, \${color} 0%, transparent 60%)\` }}
+          style={{ position: 'absolute', top: '10%', right: '10%', width: '150%', height: '150%', background: `radial-gradient(circle at 100% 0%, ${color} 0%, transparent 60%)` }}
           animate={{ opacity: hovered ? 0.3 : 0, scale: hovered ? 1.1 : 1 }}
           transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
         />
@@ -202,7 +202,7 @@ function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: bo
       <div style={bgStyle}>
         <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 10 }}>
           {[0, 1, 2].map((i) => (
-             <motion.div key={i} style={{ width: 40, height: 60, border: \`2px solid \${color}\`, borderRadius: 8 }}
+             <motion.div key={i} style={{ width: 40, height: 60, border: `2px solid ${color}`, borderRadius: 8 }}
                animate={{
                  y: hovered ? [-10, 10, -10] : 0,
                  opacity: hovered ? [0.4, 1, 0.4] : 0.4
@@ -225,7 +225,7 @@ function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: bo
            }}
            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
          />
-         <motion.div style={{ position: 'absolute', bottom: '10%', right: '10%', width: 80, height: 80, border: \`4px solid \${color}\`, borderRadius: '50%' }}
+         <motion.div style={{ position: 'absolute', bottom: '10%', right: '10%', width: 80, height: 80, border: `4px solid ${color}`, borderRadius: '50%' }}
            animate={{ scale: hovered ? [1, 1.2, 1] : 1, rotate: hovered ? 180 : 0 }}
            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
          />

@@ -294,10 +294,10 @@ const styles = {
   if (id === 'ecom') {
     return (
       <div style={bgStyle}>
-        <motion.div style={{ position: 'absolute', top: '20%', left: '20%', width: 40, height: 40, border: \`2px solid \${color}\`, borderRadius: 8 }}
+        <motion.div style={{ position: 'absolute', top: '20%', left: '20%', width: 40, height: 40, border: `2px solid ${color}`, borderRadius: 8 }}
           animate={{ rotate: hovered ? 180 : 0, scale: hovered ? 1.2 : 1 }} transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
         />
-        <motion.div style={{ position: 'absolute', bottom: '30%', right: '20%', width: 30, height: 30, border: \`2px solid \${color}\`, borderRadius: '50%' }}
+        <motion.div style={{ position: 'absolute', bottom: '30%', right: '20%', width: 30, height: 30, border: `2px solid ${color}`, borderRadius: '50%' }}
           animate={{ y: hovered ? [-10, 10] : 0, x: hovered ? [10, -10] : 0 }} transition={{ duration: 3, repeat: Infinity, repeatType: 'mirror' }}
         />
       </div>
@@ -340,7 +340,7 @@ const styles = {
   if (id === 'brand') {
     return (
       <div style={bgStyle}>
-         <motion.div style={{ position: 'absolute', top: '50%', left: '50%', x: '-50%', y: '-50%', width: 80, height: 80, border: \`3px solid \${color}\` }}
+         <motion.div style={{ position: 'absolute', top: '50%', left: '50%', x: '-50%', y: '-50%', width: 80, height: 80, border: `3px solid ${color}` }}
           animate={{
             borderRadius: hovered ? ['0%', '50%', '0%'] : '0%',
             rotate: hovered ? 180 : 0
