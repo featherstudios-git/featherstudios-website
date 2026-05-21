@@ -114,28 +114,42 @@ function StepCard({ step, index, inView, total }: { step: typeof steps[0]; index
       {/* Inner Mask (Solid Background) */}
       <div style={{
         position: 'absolute', inset: 1,
-        background: hovered ? 'var(--black)' : 'transparent',
+        background: hovered ? `${step.accent}0A` : 'var(--black-2)',
         borderRadius: 19, zIndex: 1, transition: 'background 0.4s',
-        border: hovered ? 'none' : `1px solid transparent` // Border is handled by grid gap
+        border: hovered ? 'none' : `1px solid var(--border)`
       }} />
 
       {/* Subtle glow (Always On) */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: 20,
-        background: `radial-gradient(circle at 0% 0%, ${step.accent}0A 0%, transparent 60%)`,
+        background: `radial-gradient(circle at 0% 0%, ${step.accent}1A 0%, transparent 70%)`,
         opacity: 1, transition: 'opacity 0.4s', pointerEvents: 'none',
         zIndex: 2,
       }} />
 
       {/* Content wrapper */}
       <div style={{ position: 'relative', zIndex: 3 }}>
-        {/* Connector line between steps (not last) */}
+        {/* Connector Arrow between steps (not last) */}
         {index < total - 1 && (
-          <div className="step-connector" style={{
-            position: 'absolute', top: '2.5rem', right: '-2rem',
-            width: 1, height: 'calc(100% - 5rem)',
-            background: 'var(--border)', zIndex: 0,
-          }} />
+          <div className="step-arrow" style={{
+            position: 'absolute', top: '2.8rem', right: '-1.5rem',
+            width: '1.5rem', height: '1.5rem',
+            zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transform: 'translateX(50%)'
+          }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <motion.path 
+                d="M4 12H20M20 12L14 6M20 12L14 18" 
+                stroke={step.accent} 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ filter: `drop-shadow(0 0 5px ${step.accent}80)` }}
+              />
+            </svg>
+          </div>
         )}
 
         {/* Step number */}

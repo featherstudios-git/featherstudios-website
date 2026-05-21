@@ -9,6 +9,7 @@ import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ScrollFeather3D from './components/ScrollFeather3D';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <ScrollFeather3D />
     </>
   );
 }

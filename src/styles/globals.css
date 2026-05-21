@@ -285,11 +285,7 @@ select {
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
+  gap: 1.5rem;
 }
 
 /* ── PRICING GRID ───────────────────────────── */
@@ -412,8 +408,8 @@ select {
     grid-template-columns: 1fr 1fr;
   }
 
-  .step-connector {
-    display: none;
+  .step-connector, .step-arrow {
+    display: none !important;
   }
 
   /* Work bento — reset colspan on tablet */
@@ -452,7 +448,7 @@ select {
 
   /* Process */
   .process-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   /* Footer */
