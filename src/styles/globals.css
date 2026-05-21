@@ -153,15 +153,15 @@ select {
 }
 
 .h1 {
-  font-size: clamp(2.8rem, 7vw, 7.5rem);
+  font-size: clamp(2rem, 8vw, 7.5rem);
 }
 
 .h2 {
-  font-size: clamp(2rem, 4.5vw, 4.5rem);
+  font-size: clamp(1.8rem, 6vw, 4.5rem);
 }
 
 .h3 {
-  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.3rem, 3vw, 2.2rem);
 }
 
 /* ── BUTTONS ────────────────────────────────── */
@@ -332,6 +332,13 @@ select {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Reset bento spans early when columns drop to 2 */
+  .services-grid > div,
+  .work-grid > div {
+    grid-column: span 1 !important;
+    grid-row: auto !important;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
@@ -412,11 +419,16 @@ select {
     display: none !important;
   }
 
-  /* Work & Services bento — reset colspan on tablet */
-  .work-grid>div[style*="span"],
-  .services-grid>div[style*="span"] {
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
+  /* Ensure strict stacking for 1fr layouts */
+  .about-grid > div,
+  .founders-grid > div,
+  .work-grid > div,
+  .pricing-grid > div,
+  .process-grid > div,
+  .contact-grid > div,
+  .services-grid > div {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
   }
 }
 
@@ -489,12 +501,9 @@ select {
     grid-template-columns: 1fr;
   }
 
-  .h2 {
-    font-size: clamp(1.8rem, 8vw, 2.8rem);
-  }
-
   .hero-stats {
-    flex-direction: row;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1.25rem;
   }
 }
