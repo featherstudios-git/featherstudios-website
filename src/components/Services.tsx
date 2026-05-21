@@ -323,7 +323,7 @@ const styles = {
           <motion.div key={i}
             style={{
               position: 'absolute',
-              top: \`\${20 + i * 15}%\`, left: \`\${20 + (i % 2) * 40}%\`,
+              top: `${20 + i * 15}%`, left: `${20 + (i % 2) * 40}%`,
               width: 10, height: 10, borderRadius: '50%', backgroundColor: color
             }}
             animate={{
