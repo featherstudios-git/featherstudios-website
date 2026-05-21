@@ -105,24 +105,32 @@ export default function ScrollFeather3D() {
 
     const onScroll = () => {
       const scrollY = window.scrollY;
+      const windowH = window.innerHeight;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - windowH);
+
       targetRotationY = scrollY * 0.003;
       targetRotationZ = 0.2 + Math.sin(scrollY * 0.001) * 0.3;
 
       if (mount && mount.parentElement) {
-        // Start dropping in after 400px of scroll (leaving hero)
-        // Finish dropping at 1000px
-        if (scrollY < 400) {
+        // Start dropping in after scrolling past half the hero
+        const startScroll = windowH * 0.5;
+        if (scrollY < startScroll) {
           mount.parentElement.style.opacity = '0';
-          mount.parentElement.style.transform = `translateY(-100vh)`;
-        } else if (scrollY < 1000) {
-          mount.parentElement.style.opacity = '1';
-          // Calculate drop distance: at 400px it's -100vh, at 1000px it's 0.
-          const progress = (scrollY - 400) / 600; 
-          const yOffset = -100 + (progress * 100);
-          mount.parentElement.style.transform = `translateY(${yOffset}vh)`;
+          mount.parentElement.style.transform = `translateY(-150px) translateX(0px)`;
         } else {
           mount.parentElement.style.opacity = '1';
-          mount.parentElement.style.transform = `translateY(0)`;
+          
+          // Progress from end of hero to absolute bottom of page
+          const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / (maxScroll - startScroll)));
+          
+          // Fall distance: from top (0) to bottom (windowH - feather height - padding)
+          const maxY = windowH - 150 - 32;
+          const yOffset = progress * maxY;
+
+          // Sway left and right like a falling feather (3 full zig-zags)
+          const swayX = Math.sin(progress * Math.PI * 6) * 40;
+
+          mount.parentElement.style.transform = `translateY(${yOffset}px) translateX(${swayX}px)`;
         }
       }
     };
@@ -169,8 +177,8 @@ export default function ScrollFeather3D() {
     <div
       style={{
         position: 'fixed',
-        bottom: '2rem',
-        right: '2rem',
+        top: 0,
+        right: '4rem',
         width: '150px',
         height: '150px',
         zIndex: 50,
