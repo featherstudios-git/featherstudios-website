@@ -169,16 +169,17 @@ export default function HeroBg3D() {
         position: 'absolute',
         top: 0,
         right: 0,
-        width: isMobile ? '100%' : '50vw',
+        width: '100%',
         height: '100%',
         zIndex: 0,
-        opacity: isMobile ? 0.3 : 0.8,
+        filter: isMobile ? 'none' : 'blur(1px) drop-shadow(0 0 20px rgba(188,255,79,0.3))',
+        opacity: isMobile ? 0.3 : 0.9,
         maskImage: isMobile 
           ? 'linear-gradient(to bottom, transparent 0%, black 50%, transparent 100%)'
-          : 'linear-gradient(to left, black 40%, transparent 100%)',
+          : 'none',
         WebkitMaskImage: isMobile 
           ? 'linear-gradient(to bottom, transparent 0%, black 50%, transparent 100%)'
-          : 'linear-gradient(to left, black 40%, transparent 100%)',
+          : 'none',
         pointerEvents: 'none',
       }}
     />
