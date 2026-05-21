@@ -8,10 +8,12 @@ export default function HeroBg3D() {
     const mount = mountRef.current;
     if (!mount) return;
 
-    // Scene
+    // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, mount.clientWidth / mount.clientHeight, 0.1, 100);
-    camera.position.z = 5;
+    
+    // Camera setup - shifted slightly left so object appears on the right
+    const camera = new THREE.PerspectiveCamera(45, mount.clientWidth / mount.clientHeight, 0.1, 100);
+    camera.position.set(0, 0, 15);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(mount.clientWidth, mount.clientHeight);
@@ -19,78 +21,90 @@ export default function HeroBg3D() {
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
 
-    // Lime color
-    const limeColor = new THREE.Color('#BCFF4F');
-    const whiteColor = new THREE.Color('#F2F0EB');
+    // Lighting for glass effect
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
 
-    // Meshes
-    const meshes: THREE.Mesh[] = [];
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 2);
+    dirLight1.position.set(5, 5, 5);
+    scene.add(dirLight1);
 
-    // Large slow torus knot — centerpiece
-    const torusKnotGeo = new THREE.TorusKnotGeometry(1.8, 0.45, 120, 20, 2, 3);
-    const torusKnotMat = new THREE.MeshBasicMaterial({
-      color: limeColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.07,
+    const dirLight2 = new THREE.DirectionalLight(0xBCFF4F, 3); // Lime green light
+    dirLight2.position.set(-5, -5, 5);
+    scene.add(dirLight2);
+
+    // Premium Glass Material
+    const glassMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      transmission: 0.9,
+      opacity: 1,
+      metalness: 0.1,
+      roughness: 0.1,
+      ior: 1.5,
+      thickness: 0.5,
+      specularIntensity: 1,
+      clearcoat: 1,
+      emissive: new THREE.Color('#BCFF4F'),
+      emissiveIntensity: 0.1,
+      side: THREE.DoubleSide,
     });
-    const torusKnot = new THREE.Mesh(torusKnotGeo, torusKnotMat);
-    torusKnot.position.set(2.5, 0, -1);
-    scene.add(torusKnot);
-    meshes.push(torusKnot);
 
-    // Medium torus
-    const torusGeo = new THREE.TorusGeometry(1.2, 0.3, 20, 60);
-    const torusMat = new THREE.MeshBasicMaterial({
-      color: whiteColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.05,
-    });
-    const torus = new THREE.Mesh(torusGeo, torusMat);
-    torus.position.set(-3, 1, -2);
-    torus.rotation.x = 0.8;
-    scene.add(torus);
-    meshes.push(torus);
+    // Create Procedural Feather Group
+    const featherGroup = new THREE.Group();
 
-    // Icosahedron
-    const icoGeo = new THREE.IcosahedronGeometry(1.1, 1);
-    const icoMat = new THREE.MeshBasicMaterial({
-      color: limeColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.08,
-    });
-    const ico = new THREE.Mesh(icoGeo, icoMat);
-    ico.position.set(-1.5, -2.5, -1);
-    scene.add(ico);
-    meshes.push(ico);
+    // 1. Central Quill
+    const quillGeo = new THREE.CylinderGeometry(0.05, 0.15, 10, 8);
+    // Taper the quill by scaling top vertices if needed, but Cylinder does it.
+    const quill = new THREE.Mesh(quillGeo, glassMaterial);
+    featherGroup.add(quill);
 
-    // Small sphere cluster
-    const sphGeo = new THREE.SphereGeometry(0.6, 16, 12);
-    const sphMat = new THREE.MeshBasicMaterial({
-      color: whiteColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.06,
-    });
-    const sph = new THREE.Mesh(sphGeo, sphMat);
-    sph.position.set(3.5, -2, 0);
-    scene.add(sph);
-    meshes.push(sph);
+    // 2. Barbs (the feather hairs)
+    const numBarbs = 150;
+    const barbGeo = new THREE.PlaneGeometry(1, 0.05);
+    barbGeo.translate(0.5, 0, 0); // origin at base
 
-    // Octahedron
-    const octGeo = new THREE.OctahedronGeometry(0.9, 0);
-    const octMat = new THREE.MeshBasicMaterial({
-      color: limeColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.09,
-    });
-    const oct = new THREE.Mesh(octGeo, octMat);
-    oct.position.set(0, 2.5, -1.5);
-    scene.add(oct);
-    meshes.push(oct);
+    // InstancedMesh for performance
+    const instancedBarbs = new THREE.InstancedMesh(barbGeo, glassMaterial, numBarbs * 2);
+    const dummy = new THREE.Object3D();
+
+    let instanceIdx = 0;
+    for (let i = 0; i < numBarbs; i++) {
+      const t = i / numBarbs; // 0 to 1 along the quill
+      const y = (t * 9) - 4.5; // position along Y axis (-4.5 to 4.5)
+      
+      // Feather shape curve (wider in middle, tapered at ends)
+      const widthScale = Math.sin(t * Math.PI) * (1.5 - t * 0.5) * 2;
+      
+      // Curve upwards slightly
+      const angleUp = 0.3 + (t * 0.2); 
+
+      // Left Barb
+      dummy.position.set(0, y, 0);
+      dummy.rotation.set(0, 0, Math.PI - angleUp);
+      // Slight random twist
+      dummy.rotation.x = (Math.random() - 0.5) * 0.2;
+      dummy.scale.set(widthScale * (0.8 + Math.random()*0.4), 1, 1);
+      dummy.updateMatrix();
+      instancedBarbs.setMatrixAt(instanceIdx++, dummy.matrix);
+
+      // Right Barb
+      dummy.position.set(0, y, 0);
+      dummy.rotation.set(0, 0, angleUp);
+      dummy.rotation.x = (Math.random() - 0.5) * 0.2;
+      dummy.scale.set(widthScale * (0.8 + Math.random()*0.4), 1, 1);
+      dummy.updateMatrix();
+      instancedBarbs.setMatrixAt(instanceIdx++, dummy.matrix);
+    }
+    
+    featherGroup.add(instancedBarbs);
+
+    // Position feather on the right
+    featherGroup.position.set(4, 5, 0);
+    // Initial rotation
+    featherGroup.rotation.z = -0.2;
+    featherGroup.rotation.x = 0.5;
+
+    scene.add(featherGroup);
 
     // Animation
     let animId: number;
@@ -100,31 +114,26 @@ export default function HeroBg3D() {
       animId = requestAnimationFrame(animate);
       const t = (performance.now() - startTime) / 1000;
 
-      torusKnot.rotation.x = t * 0.07;
-      torusKnot.rotation.y = t * 0.05;
-      torusKnot.position.y = Math.sin(t * 0.3) * 0.3;
+      // Falling motion
+      // Loop the fall: start at y=8, fall to y=-8
+      let yPos = 8 - ((t * 1.5) % 16); 
+      featherGroup.position.y = yPos;
 
-      torus.rotation.y = t * 0.08;
-      torus.rotation.z = t * 0.04;
-      torus.position.x = -3 + Math.sin(t * 0.2) * 0.4;
+      // Gentle swaying
+      featherGroup.position.x = 3.5 + Math.sin(t * 0.5) * 1.5;
+      featherGroup.position.z = Math.cos(t * 0.7) * 2;
 
-      ico.rotation.x = t * 0.12;
-      ico.rotation.y = t * 0.09;
-      ico.position.y = -2.5 + Math.sin(t * 0.4 + 1) * 0.3;
-
-      sph.rotation.y = t * 0.15;
-      sph.position.y = -2 + Math.cos(t * 0.35) * 0.4;
-
-      oct.rotation.x = t * 0.1;
-      oct.rotation.z = t * 0.13;
-      oct.position.x = Math.sin(t * 0.25) * 0.5;
+      // Rotating
+      featherGroup.rotation.y = t * 0.3;
+      featherGroup.rotation.z = -0.2 + Math.sin(t * 0.4) * 0.2;
+      featherGroup.rotation.x = 0.3 + Math.cos(t * 0.6) * 0.2;
 
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // Resize
+    // Resize handling
     const handleResize = () => {
       if (!mount) return;
       camera.aspect = mount.clientWidth / mount.clientHeight;
@@ -138,6 +147,9 @@ export default function HeroBg3D() {
       window.removeEventListener('resize', handleResize);
       if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
       renderer.dispose();
+      quillGeo.dispose();
+      barbGeo.dispose();
+      glassMaterial.dispose();
     };
   }, []);
 
@@ -148,8 +160,9 @@ export default function HeroBg3D() {
         position: 'absolute',
         inset: 0,
         zIndex: 0,
-        filter: 'blur(32px)',
-        opacity: 0.85,
+        // Less blur to show off the premium glass details, just a subtle softening
+        filter: 'blur(2px) drop-shadow(0 0 20px rgba(188,255,79,0.3))',
+        opacity: 0.9,
         pointerEvents: 'none',
       }}
     />

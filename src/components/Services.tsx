@@ -7,6 +7,7 @@ import {
 
 const services = [
   {
+    id: 'web',
     num: '01',
     icon: Globe,
     name: 'Website Design & Development',
@@ -15,6 +16,7 @@ const services = [
     accent: '#BCFF4F',
   },
   {
+    id: 'landing',
     num: '02',
     icon: Rocket,
     name: 'Landing Pages',
@@ -23,6 +25,7 @@ const services = [
     accent: '#60a5fa',
   },
   {
+    id: 'ecom',
     num: '03',
     icon: ShoppingBag,
     name: 'E-Commerce Stores',
@@ -31,6 +34,7 @@ const services = [
     accent: '#fb923c',
   },
   {
+    id: 'seo',
     num: '04',
     icon: Search,
     name: 'Google SEO Optimization',
@@ -39,6 +43,7 @@ const services = [
     accent: '#34d399',
   },
   {
+    id: 'social',
     num: '05',
     icon: Megaphone,
     name: 'Social Media Ads',
@@ -47,6 +52,7 @@ const services = [
     accent: '#f472b6',
   },
   {
+    id: 'brand',
     num: '06',
     icon: Palette,
     name: 'Brand Identity & Design',
@@ -131,86 +137,219 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         gap: '1.25rem',
       }}
     >
-      {/* Accent glow top-right */}
-      <div style={{
-        position: 'absolute', top: -40, right: -40,
-        width: 140, height: 140, borderRadius: '50%',
-        background: `radial-gradient(circle, ${service.accent}18 0%, transparent 70%)`,
-        transition: 'opacity 0.4s',
-        opacity: hovered ? 1 : 0,
-        pointerEvents: 'none',
-      }} />
+      {/* Animated Background */}
+      <ServiceBg id={service.id} color={service.accent} hovered={hovered} />
 
-      {/* Top row — icon + number */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+      {/* Content wrapper to stay above bg */}
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
+        
+        {/* Accent glow top-right */}
         <div style={{
-          width: 48, height: 48, borderRadius: 14,
-          background: hovered ? `${service.accent}18` : 'rgba(255,255,255,0.04)',
-          border: `1px solid ${hovered ? service.accent + '35' : 'var(--border)'}`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'all 0.4s',
-          flexShrink: 0,
-        }}>
-          <Icon size={20} color={hovered ? service.accent : 'var(--white-3)'} style={{ transition: 'color 0.4s' }} />
-        </div>
-        <span style={{
-          fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
-          color: hovered ? service.accent : 'var(--white-3)',
-          letterSpacing: '0.12em', transition: 'color 0.4s',
-        }}>
-          {service.num}
-        </span>
-      </div>
+          position: 'absolute', top: -40, right: -40,
+          width: 140, height: 140, borderRadius: '50%',
+          background: `radial-gradient(circle, ${service.accent}18 0%, transparent 70%)`,
+          transition: 'opacity 0.4s',
+          opacity: hovered ? 1 : 0,
+          pointerEvents: 'none',
+        }} />
 
-      {/* Name */}
-      <div style={{
-        fontFamily: 'var(--font-display)', fontWeight: 700,
-        fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-        letterSpacing: '-0.02em',
-        color: hovered ? 'var(--white)' : 'var(--white-2)',
-        transition: 'color 0.3s',
-        lineHeight: 1.3,
-      }}>
-        {service.name}
-      </div>
-
-      {/* Desc — revealed on hover */}
-      <motion.p
-        animate={{ opacity: hovered ? 1 : 0.4, y: hovered ? 0 : 4 }}
-        transition={{ duration: 0.3 }}
-        style={{ fontSize: '0.85rem', color: 'var(--white-2)', lineHeight: 1.65, flex: 1 }}
-      >
-        {service.desc}
-      </motion.p>
-
-      {/* Tags */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-        {service.tags.map((tag) => (
-          <span key={tag} style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
-            letterSpacing: '0.08em', textTransform: 'uppercase',
-            color: hovered ? service.accent : 'var(--white-3)',
-            border: `1px solid ${hovered ? service.accent + '40' : 'var(--border)'}`,
-            padding: '0.25rem 0.6rem', borderRadius: 5,
-            transition: 'all 0.3s',
+        {/* Top row — icon + number */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <div style={{
+            width: 48, height: 48, borderRadius: 14,
+            background: hovered ? `${service.accent}18` : 'rgba(255,255,255,0.04)',
+            border: `1px solid ${hovered ? service.accent + '35' : 'var(--border)'}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'all 0.4s',
+            flexShrink: 0,
           }}>
-            {tag}
+            <Icon size={20} color={hovered ? service.accent : 'var(--white-3)'} style={{ transition: 'color 0.4s' }} />
+          </div>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
+            color: hovered ? service.accent : 'var(--white-3)',
+            letterSpacing: '0.12em', transition: 'color 0.4s',
+          }}>
+            {service.num}
           </span>
-        ))}
-      </div>
+        </div>
 
-      {/* CTA arrow */}
-      <motion.div
-        animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -8 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          display: 'flex', alignItems: 'center', gap: 6,
-          fontFamily: 'var(--font-display)', fontSize: '0.8rem', fontWeight: 600,
-          color: service.accent,
-        }}
-      >
-        Learn more <ArrowRight size={14} />
-      </motion.div>
+        {/* Name */}
+        <div style={{
+          fontFamily: 'var(--font-display)', fontWeight: 700,
+          fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+          letterSpacing: '-0.02em',
+          color: hovered ? 'var(--white)' : 'var(--white-2)',
+          transition: 'color 0.3s',
+          lineHeight: 1.3,
+        }}>
+          {service.name}
+        </div>
+
+        {/* Desc — revealed on hover */}
+        <motion.p
+          animate={{ opacity: hovered ? 1 : 0.4, y: hovered ? 0 : 4 }}
+          transition={{ duration: 0.3 }}
+          style={{ fontSize: '0.85rem', color: 'var(--white-2)', lineHeight: 1.65, flex: 1 }}
+        >
+          {service.desc}
+        </motion.p>
+
+        {/* Tags */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+          {service.tags.map((tag) => (
+            <span key={tag} style={{
+              fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+              color: hovered ? service.accent : 'var(--white-3)',
+              border: `1px solid ${hovered ? service.accent + '40' : 'var(--border)'}`,
+              padding: '0.25rem 0.6rem', borderRadius: 5,
+              transition: 'all 0.3s',
+            }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* CTA arrow */}
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -8 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 6,
+            fontFamily: 'var(--font-display)', fontSize: '0.8rem', fontWeight: 600,
+            color: service.accent,
+          }}
+        >
+          Learn more <ArrowRight size={14} />
+        </motion.div>
+      </div>
     </motion.div>
   );
+}
+
+// ---- Background Animations ----
+function ServiceBg({ id, color, hovered }: { id: string; color: string; hovered: boolean }) {
+  const bgStyle: React.CSSProperties = {
+    position: 'absolute', inset: 0, zIndex: 0,
+    opacity: hovered ? 0.15 : 0.02,
+    transition: 'opacity 0.5s ease',
+    overflow: 'hidden',
+    pointerEvents: 'none',
+  };
+
+  if (id === 'web') {
+    return (
+      <div style={bgStyle}>
+        <motion.div 
+          animate={{ y: hovered ? ['0%', '-50%'] : '0%' }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+          style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color, whiteSpace: 'pre', padding: '2rem', opacity: 0.5 }}
+        >
+          {`const render = () => {
+  return (
+    <Container>
+      <Header />
+      <Hero3D />
+      <Content />
+    </Container>
+  );
+};
+
+export default App;
+// More lines...
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+};
+`}
+        </motion.div>
+      </div>
+    );
+  }
+
+  if (id === 'landing') {
+    return (
+      <div style={bgStyle}>
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <motion.path 
+            d="M10,90 L30,60 L50,70 L90,20" 
+            fill="none" stroke={color} strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: hovered ? 1 : 0.2 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
+          <motion.circle cx="90" cy="20" r="4" fill={color} 
+            initial={{ scale: 0 }} animate={{ scale: hovered ? 1 : 0 }} transition={{ delay: 1 }}
+          />
+        </svg>
+      </div>
+    );
+  }
+
+  if (id === 'ecom') {
+    return (
+      <div style={bgStyle}>
+        <motion.div style={{ position: 'absolute', top: '20%', left: '20%', width: 40, height: 40, border: \`2px solid \${color}\`, borderRadius: 8 }}
+          animate={{ rotate: hovered ? 180 : 0, scale: hovered ? 1.2 : 1 }} transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
+        />
+        <motion.div style={{ position: 'absolute', bottom: '30%', right: '20%', width: 30, height: 30, border: \`2px solid \${color}\`, borderRadius: '50%' }}
+          animate={{ y: hovered ? [-10, 10] : 0, x: hovered ? [10, -10] : 0 }} transition={{ duration: 3, repeat: Infinity, repeatType: 'mirror' }}
+        />
+      </div>
+    );
+  }
+
+  if (id === 'seo') {
+    return (
+      <div style={bgStyle}>
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <motion.rect x="10" y="60" width="15" height="30" fill={color} opacity="0.3" animate={{ height: hovered ? 40 : 30, y: hovered ? 50 : 60 }} transition={{ duration: 0.5 }} />
+          <motion.rect x="35" y="40" width="15" height="50" fill={color} opacity="0.6" animate={{ height: hovered ? 60 : 50, y: hovered ? 30 : 40 }} transition={{ duration: 0.7 }} />
+          <motion.rect x="60" y="20" width="15" height="70" fill={color} animate={{ height: hovered ? 80 : 70, y: hovered ? 10 : 20 }} transition={{ duration: 0.9 }} />
+        </svg>
+      </div>
+    );
+  }
+
+  if (id === 'social') {
+    return (
+      <div style={bgStyle}>
+        {[...Array(5)].map((_, i) => (
+          <motion.div key={i}
+            style={{
+              position: 'absolute',
+              top: \`\${20 + i * 15}%\`, left: \`\${20 + (i % 2) * 40}%\`,
+              width: 10, height: 10, borderRadius: '50%', backgroundColor: color
+            }}
+            animate={{
+              scale: hovered ? [1, 2, 1] : 1,
+              opacity: hovered ? [0.5, 1, 0.5] : 0.2
+            }}
+            transition={{ duration: 1.5, delay: i * 0.2, repeat: Infinity }}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (id === 'brand') {
+    return (
+      <div style={bgStyle}>
+         <motion.div style={{ position: 'absolute', top: '50%', left: '50%', x: '-50%', y: '-50%', width: 80, height: 80, border: \`3px solid \${color}\` }}
+          animate={{
+            borderRadius: hovered ? ['0%', '50%', '0%'] : '0%',
+            rotate: hovered ? 180 : 0
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+    );
+  }
+
+  return null;
 }
