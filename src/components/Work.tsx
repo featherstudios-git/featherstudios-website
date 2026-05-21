@@ -165,7 +165,7 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
       {/* Floating 3D Content (outside overflow: hidden to allow popping out) */}
       <div style={{
         position: 'absolute', inset: 0,
-        padding: '3rem',
+        padding: 'clamp(1.5rem, 5vw, 3rem)',
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         zIndex: 10,
         transform: 'translateZ(40px)', // The 3D pop-out effect
@@ -196,7 +196,7 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
         <div>
           <div style={{
             fontFamily: 'var(--font-display)', fontWeight: 800,
-            fontSize: isLarge ? 'clamp(2.5rem, 4vw, 3.5rem)' : 'clamp(2rem, 3vw, 2.5rem)',
+            fontSize: isLarge ? 'clamp(1.8rem, 8vw, 3.5rem)' : 'clamp(1.5rem, 6vw, 2.5rem)',
             letterSpacing: '-0.04em', lineHeight: 1.1,
             marginBottom: '1rem', color: 'var(--white)',
             textShadow: hovered ? `0 10px 30px ${work.accent}33` : 'none',

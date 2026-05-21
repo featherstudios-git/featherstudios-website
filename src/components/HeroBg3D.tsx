@@ -15,11 +15,8 @@ export default function HeroBg3D() {
     const camera = new THREE.PerspectiveCamera(45, mount.clientWidth / mount.clientHeight, 0.1, 100);
     camera.position.set(0, 0, 15);
 
-    const isMobile = window.innerWidth < 768;
-    const canvasWidth = isMobile ? window.innerWidth : window.innerWidth * 0.5;
-
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(canvasWidth, window.innerHeight);
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
@@ -132,7 +129,7 @@ export default function HeroBg3D() {
       featherGroup.rotation.x = 0.3 + Math.cos(t * 0.6) * 0.2;
       
       // On mobile, push it lower and further right so it doesn't clash with text
-      if (isMobile) {
+      if (window.innerWidth < 768) {
         featherGroup.position.x += 1;
         featherGroup.position.y += -2;
       }
