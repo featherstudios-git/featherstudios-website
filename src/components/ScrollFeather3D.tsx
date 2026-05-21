@@ -105,14 +105,31 @@ export default function ScrollFeather3D() {
 
     const onScroll = () => {
       const scrollY = window.scrollY;
-      // Calculate rotation based on scroll distance. 
-      // Scrolling 1000px rotates it roughly 1 radian
       targetRotationY = scrollY * 0.003;
-      // Add a slight tilt based on scroll
       targetRotationZ = 0.2 + Math.sin(scrollY * 0.001) * 0.3;
+
+      if (mount && mount.parentElement) {
+        // Start dropping in after 400px of scroll (leaving hero)
+        // Finish dropping at 1000px
+        if (scrollY < 400) {
+          mount.parentElement.style.opacity = '0';
+          mount.parentElement.style.transform = `translateY(-100vh)`;
+        } else if (scrollY < 1000) {
+          mount.parentElement.style.opacity = '1';
+          // Calculate drop distance: at 400px it's -100vh, at 1000px it's 0.
+          const progress = (scrollY - 400) / 600; 
+          const yOffset = -100 + (progress * 100);
+          mount.parentElement.style.transform = `translateY(${yOffset}vh)`;
+        } else {
+          mount.parentElement.style.opacity = '1';
+          mount.parentElement.style.transform = `translateY(0)`;
+        }
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
+    // Initialize position immediately
+    onScroll();
     
     const startTime = performance.now();
 

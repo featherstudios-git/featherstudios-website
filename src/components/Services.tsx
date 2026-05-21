@@ -153,7 +153,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       }} />
 
       {/* Animated Background (Always on) */}
-      <ServiceBg id={service.id} color={service.accent} hovered={hovered} />
+      <ServiceBg id={service.id} color={service.accent} />
 
       {/* Content wrapper to stay above bg */}
       <div style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
@@ -245,7 +245,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 }
 
 // ---- Background Animations (Always On, Contextual) ----
-function ServiceBg({ id, color, hovered }: { id: string; color: string; hovered: boolean }) {
+function ServiceBg({ id, color }: { id: string; color: string }) {
   const bgStyle: React.CSSProperties = {
     position: 'absolute', inset: 0, zIndex: 2,
     opacity: 0.2,
