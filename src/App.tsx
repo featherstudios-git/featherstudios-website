@@ -14,18 +14,20 @@ import ScrollFeather3D from './components/ScrollFeather3D';
 export default function App() {
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Work />
-        <Process />
-        <Pricing />
-        <FAQ />
-        <Contact />
-      </main>
-      <Footer />
+      <div style={{ overflowX: 'hidden', width: '100%', position: 'relative' }}>
+        <Navbar />
+        <main>
+          <Hero />
+          <Services />
+          <About />
+          <Work />
+          <Process />
+          <Pricing />
+          <FAQ />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
       <ScrollFeather3D />
     </>
   );

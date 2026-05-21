@@ -15,8 +15,11 @@ export default function HeroBg3D() {
     const camera = new THREE.PerspectiveCamera(45, mount.clientWidth / mount.clientHeight, 0.1, 100);
     camera.position.set(0, 0, 15);
 
+    const isMobile = window.innerWidth < 768;
+    const canvasWidth = isMobile ? window.innerWidth : window.innerWidth * 0.5;
+
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    renderer.setSize(canvasWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
@@ -113,7 +116,7 @@ export default function HeroBg3D() {
     const animate = () => {
       animId = requestAnimationFrame(animate);
       const t = (performance.now() - startTime) / 1000;
-
+      
       // Falling motion
       // Loop the fall: start at y=8, fall to y=-8
       let yPos = 8 - ((t * 1.5) % 16); 
@@ -127,6 +130,12 @@ export default function HeroBg3D() {
       featherGroup.rotation.y = t * 0.3;
       featherGroup.rotation.z = -0.2 + Math.sin(t * 0.4) * 0.2;
       featherGroup.rotation.x = 0.3 + Math.cos(t * 0.6) * 0.2;
+      
+      // On mobile, push it lower and further right so it doesn't clash with text
+      if (isMobile) {
+        featherGroup.position.x += 1;
+        featherGroup.position.y += -2;
+      }
 
       renderer.render(scene, camera);
     };
@@ -153,16 +162,26 @@ export default function HeroBg3D() {
     };
   }, []);
 
+  // Get initial mobile state for inline styles
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   return (
     <div
       ref={mountRef}
       style={{
         position: 'absolute',
-        inset: 0,
+        top: 0,
+        right: 0,
+        width: isMobile ? '100%' : '50vw',
+        height: '100%',
         zIndex: 0,
-        // Less blur to show off the premium glass details, just a subtle softening
-        filter: 'blur(1px) drop-shadow(0 0 20px rgba(188,255,79,0.3))',
-        opacity: 0.9,
+        opacity: isMobile ? 0.3 : 0.8,
+        maskImage: isMobile 
+          ? 'linear-gradient(to bottom, transparent 0%, black 50%, transparent 100%)'
+          : 'linear-gradient(to left, black 40%, transparent 100%)',
+        WebkitMaskImage: isMobile 
+          ? 'linear-gradient(to bottom, transparent 0%, black 50%, transparent 100%)'
+          : 'linear-gradient(to left, black 40%, transparent 100%)',
         pointerEvents: 'none',
       }}
     />
