@@ -412,9 +412,11 @@ select {
     display: none !important;
   }
 
-  /* Work bento — reset colspan on tablet */
-  .work-grid>div[style*="span 2"] {
+  /* Work & Services bento — reset colspan on tablet */
+  .work-grid>div[style*="span"],
+  .services-grid>div[style*="span"] {
     grid-column: span 1 !important;
+    grid-row: span 1 !important;
   }
 }
 

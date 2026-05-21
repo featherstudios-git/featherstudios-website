@@ -124,15 +124,17 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
+        gridColumn: index === 0 || index === 5 ? 'span 2' : 'span 1',
+        gridRow: index === 1 ? 'span 2' : 'span 1',
         position: 'relative',
         borderRadius: 20,
-        padding: '2rem',
+        padding: '2.5rem',
         cursor: 'default',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         gap: '1.25rem',
-        minHeight: 320,
+        minHeight: index === 1 ? '100%' : 340,
       }}
     >
       {/* Sliding Gradient Border (Behind Mask) */}
@@ -155,6 +157,20 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       {/* Animated Background (Always on) */}
       <ServiceBg id={service.id} color={service.accent} />
 
+      {/* Massive Watermark Number (Behind content) */}
+      <div style={{
+        position: 'absolute', bottom: '-5%', right: '-5%',
+        fontFamily: 'var(--font-display)', fontWeight: 800,
+        fontSize: 'clamp(8rem, 15vw, 14rem)', lineHeight: 1,
+        color: service.accent,
+        opacity: hovered ? 0.05 : 0.02,
+        pointerEvents: 'none', zIndex: 1,
+        transition: 'opacity 0.5s ease',
+        userSelect: 'none'
+      }}>
+        {service.num}
+      </div>
+
       {/* Content wrapper to stay above bg */}
       <div style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
         
@@ -169,76 +185,60 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           pointerEvents: 'none',
         }} />
 
-        {/* Top row — icon + number */}
+        {/* Top bar with icon */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div style={{
-            width: 48, height: 48, borderRadius: 14,
-            background: hovered ? `${service.accent}18` : 'rgba(255,255,255,0.04)',
-            border: `1px solid ${hovered ? service.accent + '35' : 'var(--border)'}`,
+            width: 52, height: 52, borderRadius: 16,
+            background: `${service.accent}14`,
+            border: `1px solid ${service.accent}33`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'all 0.4s',
-            flexShrink: 0,
-            transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
+            boxShadow: hovered ? `0 0 20px ${service.accent}33` : 'none',
+            transition: 'all 0.4s ease'
           }}>
-            <Icon size={20} color={hovered ? service.accent : 'var(--white)'} style={{ transition: 'color 0.4s' }} />
+            <Icon size={24} color={service.accent} />
           </div>
-          <span style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
-            color: hovered ? service.accent : 'var(--white-3)',
-            letterSpacing: '0.12em', transition: 'color 0.4s',
+          
+          {/* Arrow indicator */}
+          <motion.div
+            animate={{ x: hovered ? 0 : -8, opacity: hovered ? 1 : 0 }}
+            style={{ color: service.accent, fontSize: '1.2rem', fontWeight: 600 }}
+          >
+            ↗
+          </motion.div>
+        </div>
+
+        {/* Text content */}
+        <div style={{ marginTop: 'auto' }}>
+          <h3 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 700,
+            fontSize: index === 0 || index === 5 ? 'clamp(1.8rem, 3vw, 2.2rem)' : '1.5rem',
+            letterSpacing: '-0.02em', color: 'var(--white)',
+            marginBottom: '0.75rem',
           }}>
-            {service.num}
-          </span>
+            {service.name}
+          </h3>
+          <p style={{
+            fontSize: '0.95rem', color: 'var(--white-2)', lineHeight: 1.6,
+            maxWidth: index === 0 || index === 5 ? '70%' : '100%', margin: 0
+          }}>
+            {service.desc}
+          </p>
         </div>
-
-        {/* Name */}
-        <div style={{
-          fontFamily: 'var(--font-display)', fontWeight: 700,
-          fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-          letterSpacing: '-0.02em',
-          color: hovered ? 'var(--white)' : 'var(--white)',
-          transition: 'color 0.3s',
-          lineHeight: 1.3,
-        }}>
-          {service.name}
-        </div>
-
-        {/* Desc */}
-        <p
-          style={{ fontSize: '0.85rem', color: 'var(--white-2)', lineHeight: 1.65, flex: 1, margin: 0, transition: 'color 0.3s' }}
-        >
-          {service.desc}
-        </p>
 
         {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-          {service.tags.map((tag) => (
-            <span key={tag} style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              color: hovered ? service.accent : 'var(--white-3)',
-              border: `1px solid ${hovered ? service.accent + '40' : 'var(--border)'}`,
-              padding: '0.25rem 0.6rem', borderRadius: 5,
-              transition: 'all 0.3s',
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem' }}>
+          {service.tags.map(t => (
+            <span key={t} style={{
+              fontSize: '0.7rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em',
+              textTransform: 'uppercase', padding: '0.4rem 0.8rem',
+              background: 'rgba(255,255,255,0.03)', border: `1px solid ${hovered ? service.accent + '40' : 'rgba(255,255,255,0.05)'}`,
+              borderRadius: 100, color: hovered ? service.accent : 'var(--white-3)',
+              transition: 'all 0.3s'
             }}>
-              {tag}
+              {t}
             </span>
           ))}
         </div>
-
-        {/* CTA arrow */}
-        <motion.div
-          animate={{ opacity: hovered ? 1 : 0.5, x: hovered ? 0 : -4 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            fontFamily: 'var(--font-display)', fontSize: '0.8rem', fontWeight: 600,
-            color: hovered ? service.accent : 'var(--white-3)',
-            marginTop: 'auto'
-          }}
-        >
-          Learn more <ArrowRight size={14} />
-        </motion.div>
       </div>
     </motion.div>
   );
