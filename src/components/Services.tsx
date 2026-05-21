@@ -124,32 +124,48 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? 'var(--black-3)' : 'var(--black-2)',
-        border: `1px solid ${hovered ? service.accent + '35' : 'var(--border)'}`,
+        position: 'relative',
         borderRadius: 20,
         padding: '2rem',
         cursor: 'default',
-        transition: 'all 0.4s var(--ease-out)',
-        position: 'relative',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         gap: '1.25rem',
+        minHeight: 320,
       }}
     >
-      {/* Animated Background */}
+      {/* Sliding Gradient Border (Behind Mask) */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%',
+        background: `conic-gradient(from 0deg, transparent 70%, ${service.accent} 100%)`,
+        animation: 'spin-gradient 2.5s linear infinite',
+        transformOrigin: '0 0', zIndex: 0,
+        opacity: hovered ? 1 : 0, transition: 'opacity 0.4s'
+      }} />
+
+      {/* Inner Mask (Solid Background) */}
+      <div style={{
+        position: 'absolute', inset: 1,
+        background: hovered ? 'var(--black-3)' : 'var(--black-2)',
+        borderRadius: 19, zIndex: 1, transition: 'background 0.4s',
+        border: hovered ? 'none' : '1px solid var(--border)'
+      }} />
+
+      {/* Animated Background (Always on) */}
       <ServiceBg id={service.id} color={service.accent} hovered={hovered} />
 
       {/* Content wrapper to stay above bg */}
-      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
+      <div style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
         
-        {/* Accent glow top-right */}
+        {/* Accent glow top-right (Always on, intensifies on hover) */}
         <div style={{
           position: 'absolute', top: -40, right: -40,
           width: 140, height: 140, borderRadius: '50%',
-          background: `radial-gradient(circle, ${service.accent}18 0%, transparent 70%)`,
-          transition: 'opacity 0.4s',
-          opacity: hovered ? 1 : 0,
+          background: `radial-gradient(circle, ${service.accent}1A 0%, transparent 70%)`,
+          transition: 'opacity 0.4s, transform 0.4s',
+          opacity: hovered ? 1 : 0.5,
+          transform: hovered ? 'scale(1.2)' : 'scale(1)',
           pointerEvents: 'none',
         }} />
 
@@ -162,8 +178,9 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             transition: 'all 0.4s',
             flexShrink: 0,
+            transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
           }}>
-            <Icon size={20} color={hovered ? service.accent : 'var(--white-3)'} style={{ transition: 'color 0.4s' }} />
+            <Icon size={20} color={hovered ? service.accent : 'var(--white)'} style={{ transition: 'color 0.4s' }} />
           </div>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
@@ -179,21 +196,19 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           fontFamily: 'var(--font-display)', fontWeight: 700,
           fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
           letterSpacing: '-0.02em',
-          color: hovered ? 'var(--white)' : 'var(--white-2)',
+          color: hovered ? 'var(--white)' : 'var(--white)',
           transition: 'color 0.3s',
           lineHeight: 1.3,
         }}>
           {service.name}
         </div>
 
-        {/* Desc — revealed on hover */}
-        <motion.p
-          animate={{ opacity: hovered ? 1 : 0.4, y: hovered ? 0 : 4 }}
-          transition={{ duration: 0.3 }}
-          style={{ fontSize: '0.85rem', color: 'var(--white-2)', lineHeight: 1.65, flex: 1 }}
+        {/* Desc */}
+        <p
+          style={{ fontSize: '0.85rem', color: 'var(--white-2)', lineHeight: 1.65, flex: 1, margin: 0, transition: 'color 0.3s' }}
         >
           {service.desc}
-        </motion.p>
+        </p>
 
         {/* Tags */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
@@ -213,12 +228,13 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
         {/* CTA arrow */}
         <motion.div
-          animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -8 }}
+          animate={{ opacity: hovered ? 1 : 0.5, x: hovered ? 0 : -4 }}
           transition={{ duration: 0.3 }}
           style={{
             display: 'flex', alignItems: 'center', gap: 6,
             fontFamily: 'var(--font-display)', fontSize: '0.8rem', fontWeight: 600,
-            color: service.accent,
+            color: hovered ? service.accent : 'var(--white-3)',
+            marginTop: 'auto'
           }}
         >
           Learn more <ArrowRight size={14} />
@@ -228,11 +244,11 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
   );
 }
 
-// ---- Background Animations ----
+// ---- Background Animations (Always On, Contextual) ----
 function ServiceBg({ id, color, hovered }: { id: string; color: string; hovered: boolean }) {
   const bgStyle: React.CSSProperties = {
-    position: 'absolute', inset: 0, zIndex: 0,
-    opacity: hovered ? 0.15 : 0.02,
+    position: 'absolute', inset: 0, zIndex: 2,
+    opacity: hovered ? 0.15 : 0.05,
     transition: 'opacity 0.5s ease',
     overflow: 'hidden',
     pointerEvents: 'none',
@@ -242,9 +258,9 @@ function ServiceBg({ id, color, hovered }: { id: string; color: string; hovered:
     return (
       <div style={bgStyle}>
         <motion.div 
-          animate={{ y: hovered ? ['0%', '-50%'] : '0%' }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-          style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color, whiteSpace: 'pre', padding: '2rem', opacity: 0.5 }}
+          animate={{ y: ['0%', '-50%'] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+          style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color, whiteSpace: 'pre', padding: '2rem', opacity: 0.7 }}
         >
           {`const render = () => {
   return (
@@ -257,7 +273,7 @@ function ServiceBg({ id, color, hovered }: { id: string; color: string; hovered:
 };
 
 export default App;
-// More lines...
+
 const styles = {
   container: {
     display: 'flex',
@@ -276,15 +292,15 @@ const styles = {
     return (
       <div style={bgStyle}>
         <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {/* Funnel shape */}
+          <path d="M20,20 L80,20 L60,50 L60,80 L40,80 L40,50 Z" fill="none" stroke={color} strokeWidth="1" opacity="0.3" />
+          {/* Animated line moving down funnel */}
           <motion.path 
-            d="M10,90 L30,60 L50,70 L90,20" 
+            d="M20,20 L80,20 L60,50 L60,80 L40,80 L40,50 Z" 
             fill="none" stroke={color} strokeWidth="2"
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: hovered ? 1 : 0.2 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-          />
-          <motion.circle cx="90" cy="20" r="4" fill={color} 
-            initial={{ scale: 0 }} animate={{ scale: hovered ? 1 : 0 }} transition={{ delay: 1 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, ease: "linear", repeat: Infinity }}
           />
         </svg>
       </div>
@@ -294,12 +310,18 @@ const styles = {
   if (id === 'ecom') {
     return (
       <div style={bgStyle}>
-        <motion.div style={{ position: 'absolute', top: '20%', left: '20%', width: 40, height: 40, border: `2px solid ${color}`, borderRadius: 8 }}
-          animate={{ rotate: hovered ? 180 : 0, scale: hovered ? 1.2 : 1 }} transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
-        />
-        <motion.div style={{ position: 'absolute', bottom: '30%', right: '20%', width: 30, height: 30, border: `2px solid ${color}`, borderRadius: '50%' }}
-          animate={{ y: hovered ? [-10, 10] : 0, x: hovered ? [10, -10] : 0 }} transition={{ duration: 3, repeat: Infinity, repeatType: 'mirror' }}
-        />
+        <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 15 }}>
+          {/* Animated product boxes */}
+          {[0, 1, 2].map((i) => (
+             <motion.div key={i} style={{ width: 30, height: 40, border: \`1.5px solid \${color}\`, borderRadius: 4 }}
+               animate={{
+                 y: [-5, 5, -5],
+                 opacity: [0.4, 1, 0.4]
+               }}
+               transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4, ease: 'easeInOut' }}
+             />
+          ))}
+        </div>
       </div>
     );
   }
@@ -308,9 +330,19 @@ const styles = {
     return (
       <div style={bgStyle}>
         <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <motion.rect x="10" y="60" width="15" height="30" fill={color} opacity="0.3" animate={{ height: hovered ? 40 : 30, y: hovered ? 50 : 60 }} transition={{ duration: 0.5 }} />
-          <motion.rect x="35" y="40" width="15" height="50" fill={color} opacity="0.6" animate={{ height: hovered ? 60 : 50, y: hovered ? 30 : 40 }} transition={{ duration: 0.7 }} />
-          <motion.rect x="60" y="20" width="15" height="70" fill={color} animate={{ height: hovered ? 80 : 70, y: hovered ? 10 : 20 }} transition={{ duration: 0.9 }} />
+          {/* Base graph line */}
+          <path d="M10,80 L30,60 L50,65 L70,30 L90,20" fill="none" stroke={color} strokeWidth="1" opacity="0.3" />
+          {/* Animated graph line */}
+          <motion.path d="M10,80 L30,60 L50,65 L70,30 L90,20" fill="none" stroke={color} strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2.5, ease: "easeInOut", repeat: Infinity }}
+          />
+          {/* Nodes */}
+          <circle cx="30" cy="60" r="2" fill={color} opacity="0.5" />
+          <circle cx="50" cy="65" r="2" fill={color} opacity="0.5" />
+          <circle cx="70" cy="30" r="2" fill={color} opacity="0.5" />
+          <circle cx="90" cy="20" r="3" fill={color} />
         </svg>
       </div>
     );
@@ -319,18 +351,19 @@ const styles = {
   if (id === 'social') {
     return (
       <div style={bgStyle}>
-        {[...Array(5)].map((_, i) => (
+        {/* Network nodes */}
+        {[...Array(6)].map((_, i) => (
           <motion.div key={i}
             style={{
               position: 'absolute',
-              top: `${20 + i * 15}%`, left: `${20 + (i % 2) * 40}%`,
-              width: 10, height: 10, borderRadius: '50%', backgroundColor: color
+              top: \`\${15 + (i * 12)}%\`, left: \`\${15 + ((i * 17) % 60)}%\`,
+              width: 6, height: 6, borderRadius: '50%', backgroundColor: color
             }}
             animate={{
-              scale: hovered ? [1, 2, 1] : 1,
-              opacity: hovered ? [0.5, 1, 0.5] : 0.2
+              scale: [1, 2, 1],
+              opacity: [0.3, 0.8, 0.3]
             }}
-            transition={{ duration: 1.5, delay: i * 0.2, repeat: Infinity }}
+            transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
           />
         ))}
       </div>
@@ -340,12 +373,17 @@ const styles = {
   if (id === 'brand') {
     return (
       <div style={bgStyle}>
-         <motion.div style={{ position: 'absolute', top: '50%', left: '50%', x: '-50%', y: '-50%', width: 80, height: 80, border: `3px solid ${color}` }}
+        {/* Morphing color swatches */}
+        <motion.div style={{ position: 'absolute', top: '30%', left: '30%', width: 50, height: 50, border: \`2px solid \${color}\` }}
           animate={{
-            borderRadius: hovered ? ['0%', '50%', '0%'] : '0%',
-            rotate: hovered ? 180 : 0
+            borderRadius: ['0%', '50%', '30%', '0%'],
+            rotate: [0, 90, 180, 360]
           }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div style={{ position: 'absolute', bottom: '20%', right: '20%', width: 30, height: 30, border: \`1.5px dashed \${color}\`, borderRadius: '50%' }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
         />
       </div>
     );

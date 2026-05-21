@@ -14,7 +14,7 @@
   --white: #F2F0EB;
   --white-2: rgba(242, 240, 235, 0.55);
   --white-3: rgba(242, 240, 235, 0.28);
-  --lime: #bbaa73;
+  --lime: #BCFF4F;
   --lime-dim: rgba(188, 255, 79, 0.12);
   --lime-border: rgba(188, 255, 79, 0.25);
 
@@ -504,4 +504,10 @@ select {
 /* ── MOBILE MENU OPEN ───────────────────────── */
 .nav-mobile-menu.open {
   display: flex;
+}
+
+/* ── ANIMATIONS ─────────────────────────────── */
+@keyframes spin-gradient {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

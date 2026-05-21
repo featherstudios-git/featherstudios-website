@@ -76,32 +76,46 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         gridColumn: isLarge ? 'span 2' : 'span 1',
-        background: hovered ? work.color : 'var(--black-2)',
-        border: `1px solid ${hovered ? work.accent + '40' : 'var(--border)'}`,
+        position: 'relative', overflow: 'hidden',
         borderRadius: 20, padding: '2.5rem',
         cursor: 'default',
-        transition: 'all 0.5s var(--ease-out)',
-        position: 'relative', overflow: 'hidden',
         minHeight: 240,
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
       }}
     >
-      {/* Animated Background */}
+      {/* Sliding Gradient Border (Behind Mask) */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%',
+        background: `conic-gradient(from 0deg, transparent 70%, ${work.accent} 100%)`,
+        animation: 'spin-gradient 2.5s linear infinite',
+        transformOrigin: '0 0', zIndex: 0,
+        opacity: hovered ? 1 : 0, transition: 'opacity 0.4s'
+      }} />
+
+      {/* Inner Mask (Solid Background) */}
+      <div style={{
+        position: 'absolute', inset: 1,
+        background: hovered ? work.color : 'var(--black-2)',
+        borderRadius: 19, zIndex: 1, transition: 'background 0.4s',
+        border: hovered ? 'none' : '1px solid var(--border)'
+      }} />
+
+      {/* Animated Background (Always on) */}
       <WorkBg id={work.id} color={work.accent} hovered={hovered} />
 
-      {/* Glow */}
+      {/* Glow (Always on, brighter on hover) */}
       <motion.div
-        animate={{ opacity: hovered ? 1 : 0 }}
+        animate={{ opacity: hovered ? 0.8 : 0.3 }}
         transition={{ duration: 0.5 }}
         style={{
           position: 'absolute', top: -60, right: -60,
           width: 260, height: 260, borderRadius: '50%',
           background: `radial-gradient(circle, ${work.accent}1A 0%, transparent 70%)`,
-          pointerEvents: 'none',
+          pointerEvents: 'none', zIndex: 2
         }}
       />
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div style={{ position: 'relative', zIndex: 3 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.12em',
@@ -131,7 +145,7 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
         </div>
       </div>
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div style={{ position: 'relative', zIndex: 3 }}>
         <div style={{
           fontFamily: 'var(--font-display)', fontWeight: 800,
           fontSize: isLarge ? 'clamp(1.4rem, 2.5vw, 2rem)' : '1.2rem',
@@ -140,8 +154,8 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
           {work.title}
         </div>
         <motion.p
-          animate={{ opacity: hovered ? 1 : 0.5 }}
-          style={{ fontSize: '0.85rem', color: 'var(--white-2)', lineHeight: 1.65 }}
+          animate={{ opacity: hovered ? 1 : 0.7 }}
+          style={{ fontSize: '0.85rem', color: 'var(--white-2)', lineHeight: 1.65, margin: 0 }}
         >
           {work.desc}
         </motion.p>
@@ -150,64 +164,24 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
   );
 }
 
-// ---- Background Animations ----
+// ---- Background Animations (Always On, Contextual) ----
 function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: boolean }) {
   const bgStyle: React.CSSProperties = {
-    position: 'absolute', inset: 0, zIndex: 0,
-    opacity: hovered ? 0.2 : 0.02,
+    position: 'absolute', inset: 0, zIndex: 2,
+    opacity: hovered ? 0.3 : 0.1,
     transition: 'opacity 0.5s ease',
     overflow: 'hidden',
     pointerEvents: 'none',
   };
 
-  if (id === 'w1') { // Music Artist
+  if (id === 'w1') { // Music Artist - Equalizer
     return (
       <div style={bgStyle}>
-        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {[20, 35, 50, 65, 80].map((x, i) => (
-             <motion.rect key={i} x={x} y="40" width="8" height="20" fill={color} rx="4"
-               animate={{
-                 height: hovered ? [20, 60, 20] : 20,
-                 y: hovered ? [40, 20, 40] : 40
-               }}
-               transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
-             />
-          ))}
-        </svg>
-      </div>
-    );
-  }
-
-  if (id === 'w2') { // SaaS Landing
-    return (
-      <div style={bgStyle}>
-        <motion.div
-          style={{ position: 'absolute', top: '10%', right: '10%', width: '150%', height: '150%', background: `radial-gradient(circle at 100% 0%, ${color} 0%, transparent 60%)` }}
-          animate={{ opacity: hovered ? 0.3 : 0, scale: hovered ? 1.1 : 1 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
-        />
-        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <motion.path d="M-10,80 Q25,20 50,50 T110,10" fill="none" stroke={color} strokeWidth="3"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-          />
-        </svg>
-      </div>
-    );
-  }
-
-  if (id === 'w3') { // E-Commerce
-    return (
-      <div style={bgStyle}>
-        <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 10 }}>
-          {[0, 1, 2].map((i) => (
-             <motion.div key={i} style={{ width: 40, height: 60, border: `2px solid ${color}`, borderRadius: 8 }}
-               animate={{
-                 y: hovered ? [-10, 10, -10] : 0,
-                 opacity: hovered ? [0.4, 1, 0.4] : 0.4
-               }}
-               transition={{ duration: 2, repeat: Infinity, delay: i * 0.3, ease: 'easeInOut' }}
+        <div style={{ position: 'absolute', bottom: '10%', left: '10%', display: 'flex', gap: 6, alignItems: 'flex-end', height: '40%' }}>
+          {[20, 60, 40, 80, 50, 90, 30].map((h, i) => (
+             <motion.div key={i} style={{ width: 6, backgroundColor: color, borderRadius: 3, opacity: 0.6 }}
+               animate={{ height: [\`\${h}%\`, \`\${h * 0.4}%\`, \`\${h}%\`] }}
+               transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.1, ease: 'easeInOut' }}
              />
           ))}
         </div>
@@ -215,52 +189,103 @@ function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: bo
     );
   }
 
-  if (id === 'w4') { // Brand Identity
-    return (
-      <div style={bgStyle}>
-         <motion.div style={{ position: 'absolute', top: '30%', left: '20%', width: 100, height: 100, background: color, filter: 'blur(30px)', opacity: 0.5 }}
-           animate={{
-             x: hovered ? [0, 50, 0] : 0,
-             scale: hovered ? [1, 1.5, 1] : 1
-           }}
-           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-         />
-         <motion.div style={{ position: 'absolute', bottom: '10%', right: '10%', width: 80, height: 80, border: `4px solid ${color}`, borderRadius: '50%' }}
-           animate={{ scale: hovered ? [1, 1.2, 1] : 1, rotate: hovered ? 180 : 0 }}
-           transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-         />
-      </div>
-    );
-  }
-
-  if (id === 'w5') { // Creator Hub
+  if (id === 'w2') { // SaaS Landing - Dashboard wireframe
     return (
       <div style={bgStyle}>
         <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <motion.rect x="30" y="20" width="40" height="20" rx="4" fill="none" stroke={color} strokeWidth="2"
-            animate={{ opacity: hovered ? 1 : 0.2, y: hovered ? 15 : 20 }} transition={{ duration: 0.5 }}
-          />
-          <motion.circle cx="50" cy="60" r="15" fill="none" stroke={color} strokeWidth="2"
-            animate={{ opacity: hovered ? 1 : 0.2, scale: hovered ? 1.2 : 1 }} transition={{ duration: 0.5, delay: 0.1 }}
+          {/* Sidebar */}
+          <rect x="5" y="10" width="20" height="80" rx="2" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+          {/* Header */}
+          <rect x="30" y="10" width="65" height="15" rx="2" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+          {/* Main Content Area */}
+          <rect x="30" y="30" width="65" height="60" rx="2" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+          {/* Animated cursor/click */}
+          <motion.circle cx="50" cy="50" r="4" fill={color}
+            animate={{ scale: [1, 2, 1], opacity: [0.8, 0, 0.8] }}
+            transition={{ duration: 2, repeat: Infinity }}
           />
         </svg>
       </div>
     );
   }
 
-  if (id === 'w6') { // Corporate Site
+  if (id === 'w3') { // E-Commerce - Product grid
+    return (
+      <div style={bgStyle}>
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {[10, 40, 70].map((x, i) => (
+            <g key={i}>
+              <rect x={x} y="20" width="20" height="25" rx="2" fill="none" stroke={color} strokeWidth="1" opacity="0.5" />
+              <rect x={x} y="50" width="20" height="5" rx="1" fill={color} opacity="0.3" />
+            </g>
+          ))}
+          {/* Animated cart addition indicator */}
+          <motion.circle cx="80" cy="52" r="3" fill={color}
+            animate={{ y: [0, -10, 0], opacity: [0, 1, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+          />
+        </svg>
+      </div>
+    );
+  }
+
+  if (id === 'w4') { // Brand Identity - Geometric elements
+    return (
+      <div style={bgStyle}>
+        <motion.div style={{ position: 'absolute', top: '20%', right: '20%', width: 60, height: 60, border: \`2px solid \${color}\`, opacity: 0.4 }}
+          animate={{ rotate: 360, borderRadius: ['0%', '50%', '0%'] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div style={{ position: 'absolute', bottom: '20%', left: '30%', width: 40, height: 40, background: color, opacity: 0.2, borderRadius: '50%' }}
+          animate={{ scale: [1, 1.5, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+    );
+  }
+
+  if (id === 'w5') { // Creator Hub - Mobile social feed layout
+    return (
+      <div style={bgStyle}>
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {/* Phone outline */}
+          <rect x="35" y="5" width="30" height="90" rx="4" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+          {/* Profile pic */}
+          <circle cx="50" cy="20" r="5" fill={color} opacity="0.4" />
+          {/* Bio lines */}
+          <rect x="42" y="30" width="16" height="2" fill={color} opacity="0.3" />
+          <rect x="40" y="34" width="20" height="2" fill={color} opacity="0.3" />
+          {/* Feed Grid */}
+          <rect x="38" y="45" width="10" height="10" fill={color} opacity="0.2" />
+          <rect x="52" y="45" width="10" height="10" fill={color} opacity="0.2" />
+          <rect x="38" y="60" width="10" height="10" fill={color} opacity="0.2" />
+          <rect x="52" y="60" width="10" height="10" fill={color} opacity="0.2" />
+          {/* Animated scrolling effect via translation of a line */}
+          <motion.rect x="38" y="75" width="24" height="10" fill="none" stroke={color} strokeWidth="1" opacity="0.5"
+             animate={{ y: [0, -5, 0] }} transition={{ duration: 3, repeat: Infinity }}
+          />
+        </svg>
+      </div>
+    );
+  }
+
+  if (id === 'w6') { // Corporate Site - Enterprise architecture layout
     return (
       <div style={bgStyle}>
          <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-           {[10, 40, 70].map((y, i) => (
-             <motion.rect key={i} x="10" y={y} width="80" height="15" rx="2" fill="none" stroke={color} strokeWidth="1.5"
-               animate={{
-                 x: hovered ? (i % 2 === 0 ? 5 : -5) : 0,
-                 opacity: hovered ? 1 : 0.2
-               }}
-               transition={{ duration: 0.5, delay: i * 0.1 }}
-             />
-           ))}
+           {/* Header */}
+           <rect x="10" y="10" width="80" height="10" rx="1" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+           {/* Hero section */}
+           <rect x="10" y="25" width="80" height="30" rx="1" fill={color} opacity="0.1" />
+           {/* Three columns */}
+           <rect x="10" y="60" width="23" height="30" rx="1" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+           <rect x="38" y="60" width="24" height="30" rx="1" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+           <rect x="67" y="60" width="23" height="30" rx="1" fill="none" stroke={color} strokeWidth="1" opacity="0.4" />
+           
+           {/* Data flow animated lines */}
+           <motion.path d="M50,25 L50,55" fill="none" stroke={color} strokeWidth="2" strokeDasharray="4 4"
+             animate={{ strokeDashoffset: [0, -20] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+           />
          </svg>
       </div>
     );

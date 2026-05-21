@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { X, Link2, Mail, Zap, Code2, Target, DollarSign } from 'lucide-react';
 
@@ -146,52 +146,78 @@ export default function About() {
 }
 
 function FounderCard({ founder, index, inView }: { founder: typeof founders[0]; index: number; inView: boolean }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: 0.7 + index * 0.12 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        background: 'var(--black)',
-        border: '1px solid var(--border)',
+        position: 'relative',
         borderRadius: 20,
         padding: '2rem',
         display: 'flex',
         flexDirection: 'column',
         gap: '1.25rem',
+        overflow: 'hidden',
       }}
     >
-      {/* Avatar + name */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div style={{
-          width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
-          background: founder.accentBg,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--font-display)', fontWeight: 800,
-          fontSize: '1.1rem', color: founder.accentText,
-          border: '2px solid var(--border)',
-        }}>
-          {founder.initials}
-        </div>
-        <div>
-          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '-0.02em' }}>
-            {founder.name}
-          </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--white-3)', letterSpacing: '0.08em', marginTop: 3 }}>
-            {founder.role}
-          </div>
-        </div>
-      </div>
+      {/* Sliding Gradient Border */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%',
+        background: \`conic-gradient(from 0deg, transparent 70%, var(--lime) 100%)\`,
+        animation: 'spin-gradient 2.5s linear infinite',
+        transformOrigin: '0 0', zIndex: 0,
+        opacity: hovered ? 1 : 0, transition: 'opacity 0.4s'
+      }} />
 
-      {/* Bio */}
-      <p style={{ fontSize: '0.88rem', color: 'var(--white-2)', lineHeight: 1.7 }}>
-        {founder.bio}
-      </p>
+      {/* Inner Mask (Solid Background) */}
+      <div style={{
+        position: 'absolute', inset: 1,
+        background: hovered ? 'var(--black-3)' : 'var(--black)',
+        borderRadius: 19, zIndex: 1, transition: 'background 0.4s',
+        border: hovered ? 'none' : '1px solid var(--border)'
+      }} />
 
-      {/* Social links */}
-      <div style={{ display: 'flex', gap: '0.6rem', paddingTop: '0.25rem' }}>
-        <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={15} />} />
-        <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<Link2 size={15} />} />
-        <SocialBtn href={`mailto:${founder.email}`} label="Email" icon={<Mail size={15} />} />
+      {/* Content */}
+      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
+        {/* Avatar + name */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{
+            width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
+            background: founder.accentBg,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: 'var(--font-display)', fontWeight: 800,
+            fontSize: '1.1rem', color: founder.accentText,
+            border: '2px solid var(--border)',
+            transition: 'transform 0.4s',
+            transform: hovered ? 'scale(1.05)' : 'scale(1)'
+          }}>
+            {founder.initials}
+          </div>
+          <div>
+            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '-0.02em', color: hovered ? 'var(--white)' : 'var(--white)' }}>
+              {founder.name}
+            </div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: hovered ? 'var(--lime)' : 'var(--white-3)', transition: 'color 0.4s', letterSpacing: '0.08em', marginTop: 3 }}>
+              {founder.role}
+            </div>
+          </div>
+        </div>
+
+        {/* Bio */}
+        <p style={{ fontSize: '0.88rem', color: 'var(--white-2)', lineHeight: 1.7, margin: 0 }}>
+          {founder.bio}
+        </p>
+
+        {/* Social links */}
+        <div style={{ display: 'flex', gap: '0.6rem', paddingTop: '0.25rem', marginTop: 'auto' }}>
+          <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={15} />} />
+          <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<Link2 size={15} />} />
+          <SocialBtn href={\`mailto:\${founder.email}\`} label="Email" icon={<Mail size={15} />} />
+        </div>
       </div>
     </motion.div>
   );

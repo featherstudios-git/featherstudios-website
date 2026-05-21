@@ -161,7 +161,7 @@ export default function HeroBg3D() {
         inset: 0,
         zIndex: 0,
         // Less blur to show off the premium glass details, just a subtle softening
-        filter: 'blur(2px) drop-shadow(0 0 20px rgba(188,255,79,0.3))',
+        filter: 'blur(1px) drop-shadow(0 0 20px rgba(188,255,79,0.3))',
         opacity: 0.9,
         pointerEvents: 'none',
       }}
