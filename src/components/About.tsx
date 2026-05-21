@@ -167,7 +167,7 @@ function FounderCard({ founder, index, inView }: { founder: typeof founders[0]; 
       {/* Sliding Gradient Border */}
       <div style={{
         position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%',
-        background: \`conic-gradient(from 0deg, transparent 70%, var(--lime) 100%)\`,
+        background: `conic-gradient(from 0deg, transparent 70%, var(--lime) 100%)`,
         animation: 'spin-gradient 2.5s linear infinite',
         transformOrigin: '0 0', zIndex: 0,
         opacity: hovered ? 1 : 0, transition: 'opacity 0.4s'
@@ -216,7 +216,7 @@ function FounderCard({ founder, index, inView }: { founder: typeof founders[0]; 
         <div style={{ display: 'flex', gap: '0.6rem', paddingTop: '0.25rem', marginTop: 'auto' }}>
           <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={15} />} />
           <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<Link2 size={15} />} />
-          <SocialBtn href={\`mailto:\${founder.email}\`} label="Email" icon={<Mail size={15} />} />
+          <SocialBtn href={`mailto:${founder.email}`} label="Email" icon={<Mail size={15} />} />
         </div>
       </div>
     </motion.div>

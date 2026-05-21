@@ -105,7 +105,7 @@ function StepCard({ step, index, inView, total }: { step: typeof steps[0]; index
       {/* Sliding Gradient Border (Behind Mask) */}
       <div style={{
         position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%',
-        background: \`conic-gradient(from 0deg, transparent 70%, \${step.accent} 100%)\`,
+        background: `conic-gradient(from 0deg, transparent 70%, ${step.accent} 100%)`,
         animation: 'spin-gradient 2.5s linear infinite',
         transformOrigin: '0 0', zIndex: 0,
         opacity: hovered ? 1 : 0, transition: 'opacity 0.4s'
@@ -116,13 +116,13 @@ function StepCard({ step, index, inView, total }: { step: typeof steps[0]; index
         position: 'absolute', inset: 1,
         background: hovered ? 'var(--black)' : 'transparent',
         borderRadius: 19, zIndex: 1, transition: 'background 0.4s',
-        border: hovered ? 'none' : \`1px solid transparent\` // Border is handled by grid gap
+        border: hovered ? 'none' : `1px solid transparent` // Border is handled by grid gap
       }} />
 
       {/* Subtle glow (Always On, Brighter on hover) */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: 20,
-        background: \`radial-gradient(circle at 0% 0%, \${step.accent}0A 0%, transparent 60%)\`,
+        background: `radial-gradient(circle at 0% 0%, ${step.accent}0A 0%, transparent 60%)`,
         opacity: hovered ? 1 : 0.4, transition: 'opacity 0.4s', pointerEvents: 'none',
         zIndex: 2,
       }} />
@@ -149,8 +149,8 @@ function StepCard({ step, index, inView, total }: { step: typeof steps[0]; index
         {/* Icon */}
         <div style={{
           width: 52, height: 52, borderRadius: 16, marginBottom: '1.5rem',
-          background: \`\${step.accent}14\`,
-          border: \`1px solid \${step.accent}28\`,
+          background: `${step.accent}14`,
+          border: `1px solid ${step.accent}28`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           transition: 'transform 0.4s var(--ease-out)',
           transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
@@ -263,7 +263,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
         <div style={{
           width: 38, height: 38, borderRadius: '50%', flexShrink: 0,
-          background: \`\${t.accent}22\`, border: \`1px solid \${t.accent}40\`,
+          background: `${t.accent}22`, border: `1px solid ${t.accent}40`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.78rem',
           color: t.accent,
