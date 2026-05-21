@@ -313,7 +313,7 @@ const styles = {
         <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 15 }}>
           {/* Animated product boxes */}
           {[0, 1, 2].map((i) => (
-             <motion.div key={i} style={{ width: 30, height: 40, border: \`1.5px solid \${color}\`, borderRadius: 4 }}
+             <motion.div key={i} style={{ width: 30, height: 40, border: `1.5px solid ${color}`, borderRadius: 4 }}
                animate={{
                  y: [-5, 5, -5],
                  opacity: [0.4, 1, 0.4]
@@ -356,7 +356,7 @@ const styles = {
           <motion.div key={i}
             style={{
               position: 'absolute',
-              top: \`\${15 + (i * 12)}%\`, left: \`\${15 + ((i * 17) % 60)}%\`,
+              top: `${15 + (i * 12)}%`, left: `${15 + ((i * 17) % 60)}%`,
               width: 6, height: 6, borderRadius: '50%', backgroundColor: color
             }}
             animate={{
@@ -374,14 +374,14 @@ const styles = {
     return (
       <div style={bgStyle}>
         {/* Morphing color swatches */}
-        <motion.div style={{ position: 'absolute', top: '30%', left: '30%', width: 50, height: 50, border: \`2px solid \${color}\` }}
+        <motion.div style={{ position: 'absolute', top: '30%', left: '30%', width: 50, height: 50, border: `2px solid ${color}` }}
           animate={{
             borderRadius: ['0%', '50%', '30%', '0%'],
             rotate: [0, 90, 180, 360]
           }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <motion.div style={{ position: 'absolute', bottom: '20%', right: '20%', width: 30, height: 30, border: \`1.5px dashed \${color}\`, borderRadius: '50%' }}
+        <motion.div style={{ position: 'absolute', bottom: '20%', right: '20%', width: 30, height: 30, border: `1.5px dashed ${color}`, borderRadius: '50%' }}
           animate={{ rotate: 360 }}
           transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
         />

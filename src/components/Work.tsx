@@ -180,7 +180,7 @@ function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: bo
         <div style={{ position: 'absolute', bottom: '10%', left: '10%', display: 'flex', gap: 6, alignItems: 'flex-end', height: '40%' }}>
           {[20, 60, 40, 80, 50, 90, 30].map((h, i) => (
              <motion.div key={i} style={{ width: 6, backgroundColor: color, borderRadius: 3, opacity: 0.6 }}
-               animate={{ height: [\`\${h}%\`, \`\${h * 0.4}%\`, \`\${h}%\`] }}
+               animate={{ height: [`${h}%`, `${h * 0.4}%`, `${h}%`] }}
                transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.1, ease: 'easeInOut' }}
              />
           ))}
@@ -232,7 +232,7 @@ function WorkBg({ id, color, hovered }: { id: string; color: string; hovered: bo
   if (id === 'w4') { // Brand Identity - Geometric elements
     return (
       <div style={bgStyle}>
-        <motion.div style={{ position: 'absolute', top: '20%', right: '20%', width: 60, height: 60, border: \`2px solid \${color}\`, opacity: 0.4 }}
+        <motion.div style={{ position: 'absolute', top: '20%', right: '20%', width: 60, height: 60, border: `2px solid ${color}`, opacity: 0.4 }}
           animate={{ rotate: 360, borderRadius: ['0%', '50%', '0%'] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
         />
