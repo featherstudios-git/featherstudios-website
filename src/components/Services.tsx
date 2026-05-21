@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
   Globe, Rocket, ShoppingBag, Search, Megaphone, Palette,
-  ArrowRight, CheckCircle2
+  ArrowRight
 } from 'lucide-react';
 
 const services = [
