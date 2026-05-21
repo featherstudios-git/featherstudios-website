@@ -15,8 +15,11 @@ export default function ScrollFeather3D() {
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.set(0, 0, 10);
 
+    const isMobileInit = window.innerWidth < 768;
+    const initialSize = isMobileInit ? 80 : 150;
+
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(150, 150);
+    renderer.setSize(initialSize, initialSize);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
@@ -103,20 +106,43 @@ export default function ScrollFeather3D() {
     let currentRotationY = 0;
     let currentRotationZ = 0.2;
 
+    let isLocked = false;
+
     const onScroll = () => {
       const scrollY = window.scrollY;
       const windowH = window.innerHeight;
       const maxScroll = Math.max(1, document.documentElement.scrollHeight - windowH);
+      const isMobile = window.innerWidth < 768;
+      const featherSize = isMobile ? 80 : 150;
 
       targetRotationY = scrollY * 0.003;
       targetRotationZ = 0.2 + Math.sin(scrollY * 0.001) * 0.3;
 
       if (mount && mount.parentElement) {
+        // If we reach the bottom, lock the feather forever (until refresh)
+        if (scrollY >= maxScroll - 10) {
+          isLocked = true;
+        }
+
+        if (isLocked) {
+          // Locked at the bottom right corner
+          mount.parentElement.style.opacity = '1';
+          
+          // Determine the pixel offset for the bottom right
+          // To put it at right: 2rem, bottom: 2rem instead of sweeping
+          const padding = isMobile ? 16 : 32;
+          const maxY = windowH - featherSize - padding;
+          const maxX = (window.innerWidth / 2) - (featherSize / 2) - padding;
+          
+          mount.parentElement.style.transform = `translateY(${maxY}px) translateX(calc(-50% + ${maxX}px))`;
+          return;
+        }
+
         // Start dropping in after scrolling past half the hero
         const startScroll = windowH * 0.5;
         if (scrollY < startScroll) {
           mount.parentElement.style.opacity = '0';
-          mount.parentElement.style.transform = `translateY(-150px) translateX(0px)`;
+          mount.parentElement.style.transform = `translateY(-150px) translateX(-50%)`;
         } else {
           mount.parentElement.style.opacity = '1';
           
@@ -124,15 +150,16 @@ export default function ScrollFeather3D() {
           const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / (maxScroll - startScroll)));
           
           // Fall distance: from top (0) to bottom (windowH - feather height - padding)
-          const maxY = windowH - 150 - 32;
+          const padding = isMobile ? 16 : 32;
+          const maxY = windowH - featherSize - padding;
           const yOffset = progress * maxY;
 
           // Sway left and right across the entire screen
-          // Use 8 full sweeps (Math.PI * 8) matching roughly the number of sections
-          const maxSway = window.innerWidth * 0.4; // 40% of screen width left and right
+          // Decrease sway width on mobile so it doesn't cause horizontal scrolling overflow
+          const maxSway = isMobile ? window.innerWidth * 0.35 : window.innerWidth * 0.4;
           const swayX = Math.sin(progress * Math.PI * 8) * maxSway;
 
-          mount.parentElement.style.transform = `translateY(${yOffset}px) translateX(${swayX}px)`;
+          mount.parentElement.style.transform = `translateY(${yOffset}px) translateX(calc(-50% + ${swayX}px))`;
         }
       }
     };
@@ -181,9 +208,7 @@ export default function ScrollFeather3D() {
         position: 'fixed',
         top: 0,
         left: '50%',
-        marginLeft: '-75px',
-        width: '150px',
-        height: '150px',
+        transform: 'translateX(-50%)', // Center based on its own width instead of fixed margin
         zIndex: 50,
         pointerEvents: 'none', // Don't block clicks on the actual site
         filter: 'drop-shadow(0 0 15px rgba(188,255,79,0.4))',
