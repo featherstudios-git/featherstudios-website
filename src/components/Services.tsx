@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
-  Globe, Rocket, ShoppingBag, Search, Megaphone, Palette,
-  ArrowRight
+  Globe, Rocket, ShoppingBag, Search, Megaphone, Palette
 } from 'lucide-react';
 
 const services = [
