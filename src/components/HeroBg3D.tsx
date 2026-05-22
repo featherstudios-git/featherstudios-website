@@ -15,9 +15,10 @@ export default function HeroBg3D() {
     const camera = new THREE.PerspectiveCamera(45, mount.clientWidth / mount.clientHeight, 0.1, 100);
     camera.position.set(0, 0, 15);
 
+    const isMobile = window.innerWidth < 768;
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(mount.clientWidth, mount.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
 
@@ -33,21 +34,32 @@ export default function HeroBg3D() {
     dirLight2.position.set(-5, -5, 5);
     scene.add(dirLight2);
 
-    // Premium Glass Material
-    const glassMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      transmission: 0.9,
-      opacity: 1,
-      metalness: 0.1,
-      roughness: 0.1,
-      ior: 1.5,
-      thickness: 0.5,
-      specularIntensity: 1,
-      clearcoat: 1,
-      emissive: new THREE.Color('#BCFF4F'),
-      emissiveIntensity: 0.1,
-      side: THREE.DoubleSide,
-    });
+    // Premium Glass Material (Optimized for Mobile)
+    const glassMaterial = isMobile 
+      ? new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.4,
+          roughness: 0.2,
+          metalness: 0.8,
+          emissive: new THREE.Color('#BCFF4F'),
+          emissiveIntensity: 0.2,
+          side: THREE.DoubleSide,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          transmission: 0.9,
+          opacity: 1,
+          metalness: 0.1,
+          roughness: 0.1,
+          ior: 1.5,
+          thickness: 0.5,
+          specularIntensity: 1,
+          clearcoat: 1,
+          emissive: new THREE.Color('#BCFF4F'),
+          emissiveIntensity: 0.1,
+          side: THREE.DoubleSide,
+        });
 
     // Create Procedural Feather Group
     const featherGroup = new THREE.Group();

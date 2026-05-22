@@ -20,7 +20,7 @@ export default function ScrollFeather3D() {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(initialSize, initialSize);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobileInit ? 1 : Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
 
@@ -36,21 +36,32 @@ export default function ScrollFeather3D() {
     dirLight2.position.set(-5, -5, 5);
     scene.add(dirLight2);
 
-    // Premium Glass Material
-    const glassMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      transmission: 0.9,
-      opacity: 1,
-      metalness: 0.2,
-      roughness: 0.1,
-      ior: 1.5,
-      thickness: 0.5,
-      specularIntensity: 1,
-      clearcoat: 1,
-      emissive: new THREE.Color('#BCFF4F'),
-      emissiveIntensity: 0.2,
-      side: THREE.DoubleSide,
-    });
+    // Premium Glass Material (Optimized on Mobile)
+    const glassMaterial = isMobileInit
+      ? new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.6,
+          roughness: 0.2,
+          metalness: 0.8,
+          emissive: new THREE.Color('#BCFF4F'),
+          emissiveIntensity: 0.3,
+          side: THREE.DoubleSide,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          transmission: 0.9,
+          opacity: 1,
+          metalness: 0.2,
+          roughness: 0.1,
+          ior: 1.5,
+          thickness: 0.5,
+          specularIntensity: 1,
+          clearcoat: 1,
+          emissive: new THREE.Color('#BCFF4F'),
+          emissiveIntensity: 0.2,
+          side: THREE.DoubleSide,
+        });
 
     // Create Procedural Feather Group
     const featherGroup = new THREE.Group();
