@@ -127,7 +127,8 @@ export default function Pricing() {
               key={plan.id}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 background: plan.featured ? 'var(--white)' : 'var(--black)',
                 border: `1px solid ${plan.featured ? 'var(--white)' : 'var(--border)'}`,
@@ -231,26 +232,32 @@ export default function Pricing() {
           transition={{ duration: 0.6, delay: 0.5 }}
           style={{
             border: '1px dashed rgba(188,255,79,0.28)',
-            borderRadius: 20, padding: '2.5rem 3rem',
+            borderRadius: 24, padding: '4rem 5vw',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            flexWrap: 'wrap', gap: '2rem', background: 'rgba(188,255,79,0.03)',
-            transition: 'background 0.3s',
+            flexWrap: 'wrap', gap: '3rem', background: 'rgba(188,255,79,0.03)',
+            transition: 'all 0.4s', cursor: 'pointer'
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(188,255,79,0.06)')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(188,255,79,0.03)')}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(188,255,79,0.06)'; e.currentTarget.style.transform = 'scale(1.015)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(188,255,79,0.03)'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onClick={(e) => {
+            // Only trigger click if we aren't already clicking the button (avoid double fire)
+            if ((e.target as HTMLElement).tagName !== 'A') {
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
         >
           <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(1.2rem, 2.5vw, 1.7rem)', letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>
+            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', letterSpacing: '-0.02em', marginBottom: '1rem' }}>
               Have something unique in mind?
             </div>
-            <p style={{ color: 'var(--white-2)', fontSize: '0.9rem', maxWidth: 500, lineHeight: 1.65 }}>
+            <p style={{ color: 'var(--white-2)', fontSize: '1.05rem', maxWidth: 650, lineHeight: 1.7 }}>
               Enterprise platforms, music artist sites, creator kits, large-scale campaigns — we love custom work.
               All prices are <strong style={{ color: 'var(--lime)' }}>negotiable</strong> based on scope.
             </p>
           </div>
           <a href="#contact"
             onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="btn btn-lime" style={{ whiteSpace: 'nowrap' }}>
+            className="btn btn-lime" style={{ whiteSpace: 'nowrap', fontSize: '1.1rem', padding: '1.1rem 3rem' }}>
             Let's Talk →
           </a>
         </motion.div>

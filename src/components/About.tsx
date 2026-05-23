@@ -40,12 +40,36 @@ export default function About() {
 
   return (
     <section id="about" style={{
+      position: 'relative',
       background: 'var(--black-2)',
       borderTop: '1px solid var(--border)',
       borderBottom: '1px solid var(--border)',
       padding: 'var(--pad-y) var(--pad-x)',
+      overflow: 'hidden',
     }}>
-      <div ref={ref} style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          objectFit: 'cover', zIndex: 0, opacity: 0.35,
+        }}
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_132944_a0d124bb-eaa1-4082-aa30-2310efb42b4b.mp4"
+      />
+      {/* Dark Overlays for Readability */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 1,
+        background: 'linear-gradient(to bottom, var(--black-2) 0%, transparent 20%, transparent 80%, var(--black-2) 100%)',
+      }} />
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 1,
+        background: 'radial-gradient(circle at center, transparent 0%, var(--black-2) 90%)',
+      }} />
+
+      <div ref={ref} style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--max-w)', margin: '0 auto' }}>
 
         {/* Label */}
         <motion.div

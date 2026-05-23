@@ -50,10 +50,12 @@ export default function Navbar() {
         style={{
           position: 'fixed', top: 0, left: 0, right: 0,
           zIndex: 10000, height: 'var(--nav-h)',
-          transition: 'background 0.4s ease, border-color 0.4s ease',
-          background: scrolled ? 'rgba(12,12,12,0.85)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+          transition: 'background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease',
+          background: scrolled ? 'rgba(12,12,12,0.6)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(30px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(30px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)' : 'none',
         }}
       >
         <div style={{

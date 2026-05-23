@@ -38,8 +38,33 @@ export default function Process() {
   return (
     <>
       {/* ── Process ────────────────────────────────────────── */}
-      <section id="process" style={{ background: 'var(--black-2)', borderTop: '1px solid var(--border)', padding: 'var(--pad-y) var(--pad-x)' }}>
-        <ProcessInner />
+      <section id="process" style={{ position: 'relative', background: 'var(--black-2)', borderTop: '1px solid var(--border)', padding: 'var(--pad-y) var(--pad-x)', overflow: 'hidden' }}>
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            objectFit: 'cover', zIndex: 0, opacity: 0.35,
+            filter: 'blur(4px)',
+          }}
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260422_112520_ee819691-f2e8-4c54-bb77-3fb72c84eaa5.mp4"
+        />
+        {/* Dark Overlays for Readability */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 1,
+          background: 'linear-gradient(to bottom, var(--black-2) 0%, transparent 15%, transparent 85%, var(--black-2) 100%)',
+        }} />
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 1,
+          background: 'radial-gradient(circle at center, transparent 0%, var(--black-2) 90%)',
+        }} />
+
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <ProcessInner />
+        </div>
       </section>
 
       {/* ── Testimonials ───────────────────────────────────── */}

@@ -38,9 +38,27 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{ background: 'var(--black-2)', borderTop: '1px solid var(--border)' }}>
+    <footer style={{ position: 'relative', background: 'var(--black-2)', borderTop: '1px solid var(--border)', overflow: 'hidden' }}>
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          objectFit: 'cover', zIndex: 0, opacity: 0.35,
+        }}
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260322_013248_a74099a8-be2b-4164-a823-eddd5e149fa1.mp4"
+      />
+      {/* Dark Overlay for Readability */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 1,
+        background: 'linear-gradient(to bottom, var(--black-2) 0%, rgba(20,20,20,0.6) 40%, var(--black-2) 100%)',
+      }} />
 
-      {/* CTA Band */}
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        {/* CTA Band */}
       <div style={{ borderBottom: '1px solid var(--border)', padding: 'clamp(3rem, 6vw, 5rem) var(--pad-x)' }}>
         <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
@@ -130,7 +148,8 @@ export default function Footer() {
               </a>
             ))}
           </div>
-        </div>
+      </div>
+      </div>
       </div>
     </footer>
   );
