@@ -122,7 +122,7 @@ export default function Pricing() {
 
         {/* Cards */}
         <div className="pricing-grid" style={{ marginBottom: '2rem' }}>
-          {plans.map((plan, i) => (
+          {plans.map((plan) => (
             <motion.div
               key={plan.id}
               initial={{ opacity: 0, y: 40 }}
