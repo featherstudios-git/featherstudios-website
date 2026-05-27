@@ -63,7 +63,7 @@ export default function Work() {
         {/* Project Grid - Editorial Offset */}
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', 
           gap: 'clamp(2rem, 5vw, 4rem)',
           alignItems: 'start' 
         }}>
@@ -104,8 +104,8 @@ function ProjectCard({ work, index }: { work: typeof works[0]; index: number }) 
       ref={cardRef}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className={isOffset ? 'work-card-offset' : ''}
       style={{
-        marginTop: isOffset ? 'clamp(0px, 10vw, 8rem)' : '0px',
         display: 'flex', flexDirection: 'column', gap: '1.5rem',
         cursor: 'pointer',
       }}

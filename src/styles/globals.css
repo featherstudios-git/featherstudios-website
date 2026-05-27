@@ -227,6 +227,13 @@ select {
   gap: 2.5rem;
 }
 
+/* ── WORK LAYOUT ────────────────────────────── */
+@media (min-width: 900px) {
+  .work-card-offset {
+    margin-top: clamp(0px, 10vw, 8rem);
+  }
+}
+
 .hero-stats {
   display: flex;
   gap: 2.5rem;

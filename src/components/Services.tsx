@@ -335,24 +335,23 @@ function LandingVisual({ color, hovered }: { color: string; hovered: boolean }) 
         </div>
         <div style={{ flex: 1, padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
           {/* Mock Hero Text */}
-          <div style={{ width: '60%', height: 6, background: 'rgba(255,255,255,0.4)', borderRadius: 4 }} />
-          <div style={{ width: '40%', height: 6, background: 'rgba(255,255,255,0.2)', borderRadius: 4 }} />
+          <motion.div animate={{ width: ['40%', '70%', '40%'] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} style={{ height: 6, background: 'rgba(255,255,255,0.4)', borderRadius: 4 }} />
+          <motion.div animate={{ width: ['60%', '30%', '60%'] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} style={{ height: 6, background: 'rgba(255,255,255,0.2)', borderRadius: 4 }} />
           
           {/* Lead capture form */}
           <div style={{ width: '80%', padding: '10px', background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: `1px solid ${color}20`, display: 'flex', gap: 8 }}>
             <div style={{ flex: 1, height: 16, background: 'rgba(255,255,255,0.1)', borderRadius: 4 }} />
             <motion.div
-              animate={{ background: hovered ? color : 'rgba(255,255,255,0.2)' }}
-              transition={{ duration: 0.4 }}
+              animate={{ background: [color + '40', color, color + '40'] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               style={{ width: 30, height: 16, borderRadius: 4 }}
             />
           </div>
 
           {/* Floating conversion badge */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               position: 'absolute', right: '5%', top: '25%',
               background: 'var(--black)', border: `1px solid ${color}50`,
