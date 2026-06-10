@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Play, Clock, Globe, ArrowUpRight } from 'lucide-react';
+import { Play, ArrowUpRight } from 'lucide-react';
 import { FadingVideo } from './ui/FadingVideo';
 import { BlurText } from './ui/BlurText';
 
@@ -37,31 +37,7 @@ export default function Hero() {
         paddingLeft: 'var(--pad-x)', paddingRight: 'var(--pad-x)',
       }}>
         
-        {/* Badge */}
-        <motion.div
-          initial={{ filter: 'blur(10px)', opacity: 0, y: 20 }}
-          animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="liquid-glass"
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.75rem',
-            padding: '0.25rem', paddingRight: '1rem', borderRadius: '100px',
-            marginBottom: '2rem'
-          }}
-        >
-          <span style={{
-            background: 'var(--white)', color: 'var(--black)',
-            padding: '0.25rem 0.75rem', borderRadius: '100px',
-            fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase'
-          }}>
-            New
-          </span>
-          <span style={{ fontSize: '0.85rem', color: 'var(--white)', fontWeight: 500 }}>
-            Feather Studio Design System Arrives 2026
-          </span>
-        </motion.div>
-
-        {/* Headline */}
+                {/* Headline */}
         <BlurText
           text="We Build Digital Experiences That Convert"
           className="display"
@@ -122,37 +98,6 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Stats Row */}
-        <motion.div
-          initial={{ filter: 'blur(10px)', opacity: 0, y: 20 }}
-          animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
-          transition={{ delay: 1.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.5rem', marginTop: '4rem'
-          }}
-        >
-          <div className="liquid-glass" style={{
-            padding: '1.5rem', width: '220px', borderRadius: '1.25rem',
-            display: 'flex', flexDirection: 'column', gap: '2rem'
-          }}>
-            <Clock size={28} color="var(--white)" strokeWidth={1.5} />
-            <div>
-              <div className="display" style={{ fontSize: '2.5rem', lineHeight: 1, fontStyle: 'italic', letterSpacing: '-0.02em' }}>34.5 Min</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--white-2)', marginTop: '0.5rem', fontWeight: 300 }}>Average Session Time</div>
-            </div>
-          </div>
-          
-          <div className="liquid-glass" style={{
-            padding: '1.5rem', width: '220px', borderRadius: '1.25rem',
-            display: 'flex', flexDirection: 'column', gap: '2rem'
-          }}>
-            <Globe size={28} color="var(--white)" strokeWidth={1.5} />
-            <div>
-              <div className="display" style={{ fontSize: '2.5rem', lineHeight: 1, fontStyle: 'italic', letterSpacing: '-0.02em' }}>2.8B+</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--white-2)', marginTop: '0.5rem', fontWeight: 300 }}>Users Reached Globally</div>
-            </div>
-          </div>
-        </motion.div>
 
 
 
