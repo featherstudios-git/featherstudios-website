@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Statement from './components/Statement';
 import Services from './components/Services';
 import About from './components/About';
 import Work from './components/Work';
@@ -47,6 +48,7 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
+          <Statement />
           <Services />
           <About />
           <Work />
