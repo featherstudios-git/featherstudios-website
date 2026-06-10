@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Star } from 'lucide-react';
 
 const steps = [
@@ -68,10 +68,11 @@ export default function Process() {
 function ProcessInner() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
+  const [hoveredIndex, setHoveredIndex] = useState(0);
 
   return (
-    <div ref={ref} style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ textAlign: 'center', marginBottom: 'clamp(4rem, 10vw, 8rem)' }}>
+    <div ref={ref} style={{ maxWidth: '1400px', margin: '0 auto' }}>
+      <div style={{ textAlign: 'center', marginBottom: 'clamp(3rem, 6vw, 5rem)' }}>
         <motion.h2
           initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -81,75 +82,92 @@ function ProcessInner() {
         </motion.h2>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(3rem, 8vw, 6rem)', position: 'relative' }}>
-        {/* The glowing timeline line */}
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 'clamp(20px, 4vw, 40px)', width: '2px', background: 'rgba(255,255,255,0.1)' }}>
-          <motion.div 
-            initial={{ height: 0 }}
-            whileInView={{ height: '100%' }}
-            viewport={{ once: true }}
-            transition={{ duration: 2.5, ease: 'linear' }}
-            style={{ width: '100%', background: 'var(--lime)', boxShadow: '0 0 15px var(--lime)' }}
-          />
-        </div>
+      <div style={{ 
+        display: 'flex', 
+        height: 'clamp(400px, 60vh, 550px)', 
+        gap: 'clamp(0.5rem, 1vw, 1.5rem)',
+        padding: '0 1rem'
+      }}>
+        {steps.map((step, i) => {
+          const isActive = hoveredIndex === i;
+          return (
+            <motion.div
+              key={step.num}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onClick={() => setHoveredIndex(i)}
+              layout
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ 
+                opacity: inView ? 1 : 0, 
+                y: inView ? 0 : 50,
+                flex: isActive ? 6 : 1
+              }}
+              transition={{ 
+                duration: 0.6, 
+                delay: inView ? i * 0.1 : 0,
+                layout: { type: 'spring', bounce: 0, duration: 0.6 }
+              }}
+              className="liquid-glass"
+              style={{
+                position: 'relative',
+                borderRadius: 'clamp(16px, 2vw, 30px)',
+                background: isActive ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.01)',
+                border: '1px solid rgba(255,255,255,0.05)',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'flex-end',
+              }}
+            >
+              {/* Number Element */}
+              <motion.div 
+                layout="position"
+                className="display"
+                animate={{
+                  top: isActive ? '-5%' : '50%',
+                  right: isActive ? '5%' : '50%',
+                  x: isActive ? '0%' : '50%',
+                  y: isActive ? '0%' : '-50%',
+                  fontSize: isActive ? 'clamp(8rem, 20vw, 20rem)' : 'clamp(2.5rem, 4vw, 4rem)',
+                  opacity: isActive ? 0.04 : 0.3,
+                  rotate: isActive ? 0 : -90
+                }}
+                transition={{ type: 'spring', bounce: 0, duration: 0.6 }}
+                style={{ 
+                  position: 'absolute', 
+                  lineHeight: 0.8, color: 'var(--white)', 
+                  pointerEvents: 'none', whiteSpace: 'nowrap'
+                }}
+              >
+                {step.num}
+              </motion.div>
 
-        {steps.map((step) => (
-          <TimelineStep key={step.num} step={step} />
-        ))}
+              {/* Content Panel */}
+              <AnimatePresence mode="popLayout">
+                {isActive && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    style={{ 
+                      padding: 'clamp(1.5rem, 3vw, 3rem)', 
+                      position: 'relative', zIndex: 2, width: '100%' 
+                    }}
+                  >
+                    <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--white)', fontStyle: 'italic', marginBottom: '1rem' }}>
+                      {step.title}
+                    </h3>
+                    <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', color: 'var(--white-2)', lineHeight: 1.6, maxWidth: '500px', margin: 0 }}>
+                      {step.desc}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          );
+        })}
       </div>
-    </div>
-  );
-}
-
-function TimelineStep({ step }: { step: typeof steps[0] }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-20% 0px' });
-
-  return (
-    <div ref={ref} style={{ display: 'flex', alignItems: 'center', position: 'relative', paddingLeft: 'clamp(3.5rem, 10vw, 8rem)' }}>
-      {/* Node on the timeline */}
-      <motion.div 
-        initial={{ scale: 0 }}
-        animate={inView ? { scale: 1 } : {}}
-        transition={{ delay: 0.2, type: 'spring' }}
-        style={{ 
-          position: 'absolute', left: 'clamp(20px, 4vw, 40px)', top: '50%', transform: 'translate(-50%, -50%)',
-          width: 'clamp(16px, 2vw, 24px)', height: 'clamp(16px, 2vw, 24px)', borderRadius: '50%', background: 'var(--black)',
-          border: 'clamp(2px, 0.5vw, 4px) solid var(--lime)', zIndex: 2, boxShadow: '0 0 20px rgba(204, 255, 0, 0.5)'
-        }} 
-      />
-
-      {/* Massive Number Watermark */}
-      <motion.div 
-        initial={{ opacity: 0, x: -50 }} animate={inView ? { opacity: 0.05, x: 0 } : {}} transition={{ duration: 1 }}
-        className="display"
-        style={{ 
-          position: 'absolute', left: 'clamp(3rem, 8vw, 6rem)', top: '50%', transform: 'translateY(-50%)',
-          fontSize: 'clamp(6rem, 25vw, 25rem)', lineHeight: 0.8, color: 'var(--white)',
-          pointerEvents: 'none', zIndex: 0
-        }}
-      >
-        {step.num}
-      </motion.div>
-
-      {/* Content Card */}
-      <motion.div 
-        initial={{ opacity: 0, x: 50 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="liquid-glass"
-        style={{ 
-          flex: 1, position: 'relative', zIndex: 1,
-          padding: 'clamp(2rem, 5vw, 4rem)', borderRadius: 'clamp(20px, 4vw, 30px)',
-          background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)',
-          maxWidth: '800px'
-        }}
-      >
-        <h3 className="display" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--white)', marginBottom: '1.5rem', fontStyle: 'italic' }}>
-          {step.title}
-        </h3>
-        <p style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)', color: 'var(--white-2)', lineHeight: 1.6 }}>
-          {step.desc}
-        </p>
-      </motion.div>
     </div>
   );
 }
