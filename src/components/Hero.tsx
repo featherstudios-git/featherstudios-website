@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -184,7 +185,48 @@ export default function Hero() {
         position: 'relative', zIndex: 3,
         maxWidth: 'var(--max-w)', margin: '0 auto', width: '100%',
         padding: '0 var(--pad-x) 2rem',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'
       }}>
+        <div style={{ position: 'relative', width: '100%' }}>
+          {/* Rotating Banner */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              position: 'absolute',
+              right: 'max(5%, 2rem)',
+              top: '10%',
+              width: 'clamp(120px, 15vw, 180px)',
+              height: 'clamp(120px, 15vw, 180px)',
+              pointerEvents: 'none',
+              zIndex: 10,
+            }}
+          >
+            <motion.svg
+              viewBox="0 0 100 100"
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+              style={{ width: '100%', height: '100%', overflow: 'visible' }}
+            >
+              <defs>
+                <path
+                  id="circlePath"
+                  d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+                />
+              </defs>
+              <text fontSize="11" fill="var(--white-2)" fontWeight="500" letterSpacing="0.15em" style={{ textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+                <textPath href="#circlePath" startOffset="0%">
+                  Feather Studio • Feather Studio • 
+                </textPath>
+              </text>
+            </motion.svg>
+            <div style={{
+              position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'
+            }}>
+              <div style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--lime)', boxShadow: '0 0 20px var(--lime)' }} />
+            </div>
+          </motion.div>
         {/* Title */}
         <h1 ref={titleRef} className="display" style={{
           fontSize: 'clamp(2.5rem, 7.5vw, 6rem)',
@@ -213,6 +255,7 @@ export default function Hero() {
             </span>
           </span>
         </h1>
+        </div>
 
         {/* Bottom row */}
         <div className="hero-bottom-row">
