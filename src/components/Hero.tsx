@@ -102,7 +102,7 @@ export default function Hero() {
           if (titleRef.current) gsap.set(titleRef.current, { y: p * -150, opacity: 1 - p * 1.8 });
           if (descRef.current) gsap.set(descRef.current, { y: p * -100, opacity: 1 - p * 2 });
           if (statsRef.current) gsap.set(statsRef.current, { y: p * -80, opacity: 1 - p * 1.8 });
-          if (badgeRef.current) gsap.set(badgeRef.current, { y: p * -180, opacity: 1 - p * 2.5 });
+
           if (videoBgRef.current) gsap.set(videoBgRef.current, { scale: 1.08 + p * 0.08 });
           if (overlayRef.current) gsap.set(overlayRef.current, { opacity: p * 0.7 });
         }
