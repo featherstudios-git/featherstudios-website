@@ -195,7 +195,12 @@ export default function About() {
             background: 'rgba(255,255,255,0.02)'
           }}>
             {founders.map((f, i) => (
-              <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                style={{ display: 'flex', flexDirection: 'column', gap: '2rem', padding: '1rem', borderRadius: '24px' }}
+              >
                 {/* Avatar Circle */}
                 <div style={{
                   width: 'clamp(100px, 12vw, 140px)',
@@ -213,11 +218,8 @@ export default function About() {
                   <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 2.5rem)', color: 'var(--white)', margin: 0, letterSpacing: '-0.02em' }}>
                     {f.name}
                   </h3>
-                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--lime)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
+                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--lime)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.5rem', marginBottom: '2rem' }}>
                     {f.role}
-                  </p>
-                  <p style={{ fontSize: '1.05rem', color: 'var(--white-2)', lineHeight: 1.6, marginBottom: '2rem' }}>
-                    {f.bio}
                   </p>
                   {/* Socials */}
                   <div style={{ display: 'flex', gap: '1rem' }}>
@@ -226,7 +228,7 @@ export default function About() {
                     <SocialBtn href={`mailto:${f.email}`} label="Email" icon={<Mail size={18} />} />
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
