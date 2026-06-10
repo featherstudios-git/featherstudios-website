@@ -91,17 +91,8 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
+                className="nav-link"
                 onClick={(e) => { e.preventDefault(); handleNav(link.href); }}
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.88rem',
-                  fontWeight: 400,
-                  color: 'var(--white-2)',
-                  transition: 'color 0.2s',
-                  position: 'relative',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white-2)')}
               >
                 {link.label}
               </a>
