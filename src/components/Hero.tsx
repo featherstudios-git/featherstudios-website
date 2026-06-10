@@ -16,7 +16,6 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoBgRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -60,13 +59,6 @@ export default function Hero() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      // Badge
-      tl.fromTo(badgeRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        0.3
-      );
 
       // Title lines
       const lines = titleRef.current?.querySelectorAll('.hero-line-inner');
@@ -163,6 +155,7 @@ export default function Hero() {
             width: '100%',
             height: '100%',
             objectFit: 'cover',
+            filter: 'contrast(1.15) saturate(1.2) brightness(1.05)',
           }}
         />
       </div>
@@ -170,7 +163,7 @@ export default function Hero() {
       {/* Color grade overlay */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-        background: 'linear-gradient(180deg, rgba(12,12,12,0.3) 0%, rgba(12,12,12,0.1) 40%, rgba(12,12,12,0.7) 75%, rgba(12,12,12,0.95) 100%)',
+        background: 'linear-gradient(180deg, rgba(12,12,12,0.1) 0%, rgba(12,12,12,0) 40%, rgba(12,12,12,0.6) 75%, rgba(12,12,12,0.95) 100%)',
       }} />
 
       {/* Scroll-driven darkening overlay */}
@@ -193,28 +186,6 @@ export default function Hero() {
         maxWidth: 'var(--max-w)', margin: '0 auto', width: '100%',
         padding: '0 var(--pad-x) 2rem',
       }}>
-        {/* Badge */}
-        <div ref={badgeRef} style={{
-          display: 'inline-flex', alignItems: 'center', gap: 10,
-          marginBottom: '2rem', opacity: 0,
-        }}>
-          <span style={{
-            width: 6, height: 6, borderRadius: '50%',
-            background: 'var(--lime)', display: 'block',
-            boxShadow: '0 0 10px rgba(188,255,79,0.6)',
-            animation: 'pulse-dot 2s ease-in-out infinite',
-          }} />
-          <span className="label" style={{
-            color: 'var(--lime)',
-            background: 'rgba(188,255,79,0.06)',
-            padding: '0.35rem 0.9rem',
-            borderRadius: 100,
-            border: '1px solid rgba(188,255,79,0.1)',
-          }}>
-            Available for new projects — 2025
-          </span>
-        </div>
-
         {/* Title */}
         <h1 ref={titleRef} className="display" style={{
           fontSize: 'clamp(2.5rem, 7.5vw, 6rem)',
