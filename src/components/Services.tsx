@@ -115,14 +115,14 @@ export default function Services() {
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)' }}>
         <div ref={headerRef} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '4rem', flexWrap: 'wrap', gap: '1.5rem' }}>
           <div>
-            <div className="label" style={{ marginBottom: '1rem' }}>— What We Do</div>
+            <div className="label" style={{ marginBottom: '1rem', color: 'var(--lime)', fontSize: '0.85rem', letterSpacing: '0.15em', fontWeight: 600 }}>— WHAT WE DO</div>
             <h2 className="display h2">
               Services Built to<br />
               <span style={{ color: 'var(--lime)' }}>Grow Your Brand</span>
             </h2>
           </div>
-          <p style={{ maxWidth: 340, color: 'var(--white-2)', lineHeight: 1.7, fontSize: '0.95rem' }}>
-            From beautiful websites to full digital campaigns — everything under one roof, one team.
+          <p style={{ maxWidth: 340, color: 'var(--white)', lineHeight: 1.7, fontSize: '0.95rem' }}>
+            We provide services that help you build your identity.
           </p>
         </div>
 
