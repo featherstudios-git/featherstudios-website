@@ -1,4 +1,5 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -249,11 +250,13 @@ export default function Hero() {
           <div ref={descRef} style={{ maxWidth: 420, opacity: 0 }}>
             <p style={{
               fontSize: '1.05rem', color: 'var(--white-2)',
-              lineHeight: 1.75, marginBottom: '2rem',
+              lineHeight: 1.75,
             }}>
               Feather Studios crafts premium websites, landing pages, and digital campaigns
-              for businesses, creators, and music artists who refuse to blend in.
+              for businesses, creators, and artists who refuse to blend in.
             </p>
+
+            <TypewriterText text="We help individuals, businesses, startups, organizations start grow and sustain through out there journey. We help you to build your own story and make you the greatest main character the world has ever seen, you are the most beautiful thing you have in your journey and we won’t let you quit, cause that’s what we do we don’t let you quit that’s our promise." />
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a href="#contact" className="btn btn-lime"
                 onClick={(e) => {
@@ -317,5 +320,42 @@ export default function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function TypewriterText({ text }: { text: string }) {
+  const [displayedText, setDisplayedText] = useState('');
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setHasStarted(true), 1500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    let i = 0;
+    const intervalId = setInterval(() => {
+      setDisplayedText(text.slice(0, i));
+      i++;
+      if (i > text.length) clearInterval(intervalId);
+    }, 20); // Speed of typing
+    return () => clearInterval(intervalId);
+  }, [text, hasStarted]);
+
+  return (
+    <p style={{
+      fontSize: '0.85rem', color: 'rgba(188,255,79,0.85)',
+      lineHeight: 1.7, marginTop: '1.5rem', marginBottom: '2.5rem',
+      fontFamily: 'var(--font-mono)', maxWidth: 500
+    }}>
+      <span style={{ color: 'var(--white-3)', marginRight: 8 }}>$</span>
+      {displayedText}
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+        style={{ display: 'inline-block', width: 6, height: '1em', background: 'var(--lime)', marginLeft: 6, verticalAlign: 'middle', marginTop: -2 }}
+      />
+    </p>
   );
 }
