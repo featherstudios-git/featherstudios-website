@@ -242,7 +242,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   return (
     <div className="liquid-glass" style={{
       width: 350, minWidth: 350, flexShrink: 0,
-      background: 'rgba(255,255,255,0.02)', border: '1px solid var(--lime)',
+      background: 'rgba(255,255,255,0.02)', border: '1px solid var(--lime-border)',
       borderRadius: 20, padding: '2rem',
       display: 'flex', flexDirection: 'column', gap: '1.25rem',
     }}>

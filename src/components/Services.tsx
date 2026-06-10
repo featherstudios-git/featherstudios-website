@@ -105,7 +105,7 @@ export default function Services() {
             className="liquid-glass" style={{
               width: 'clamp(350px, 50vw, 650px)', height: 'clamp(300px, 48vh, 480px)',
               background: 'rgba(20, 20, 20, 0.65)', borderRadius: '24px',
-              border: '1px solid var(--lime)',
+              border: '1px solid var(--lime-border)',
               padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
               position: 'relative', overflow: 'hidden',
               boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
