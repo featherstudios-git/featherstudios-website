@@ -1,28 +1,28 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { MessageSquare, PenTool, Code2, Rocket, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 const steps = [
   {
-    num: '01', icon: MessageSquare, title: 'Discovery Call',
-    desc: 'We dive deep into your goals, audience, and vision. The right questions upfront save weeks later.',
-    accent: '#FFB000',
+    num: '01',
+    title: 'Discover',
+    desc: "Every journey starts with an idea. Whether you're an individual, creator, startup, business, or organization, we begin by understanding where you are today and where you want to go tomorrow.",
   },
   {
-    num: '02', icon: PenTool, title: 'Design & Strategy',
-    desc: 'Custom mockups built to your brief. Review, iterate, perfect — until every pixel is intentional.',
-    accent: '#a78bfa',
+    num: '02',
+    title: 'Build',
+    desc: "The right foundation changes everything. From branding and websites to digital systems, content, and strategy, we create the tools you need to launch with confidence.",
   },
   {
-    num: '03', icon: Code2, title: 'Build & Develop',
-    desc: 'Clean, fast, accessible code. Every site is performance-optimized and SEO-ready from day one.',
-    accent: '#60a5fa',
+    num: '03',
+    title: 'Grow',
+    desc: "Launching is only the beginning. We help you attract attention, build trust, reach the right audience, and create momentum that turns ideas into opportunities.",
   },
   {
-    num: '04', icon: Rocket, title: 'Launch & Support',
-    desc: 'Deploy, analytics setup, handover. Ongoing support always available whenever you need us.',
-    accent: '#fb923c',
-  },
+    num: '04',
+    title: 'Sustain',
+    desc: "Great brands aren't built overnight. As you evolve, we continue refining, improving, and supporting your digital presence so it grows with your ambitions.",
+  }
 ];
 
 const testimonials = [
@@ -38,29 +38,19 @@ export default function Process() {
   return (
     <>
       {/* ── Process ────────────────────────────────────────── */}
-      <section id="process" style={{ position: 'relative', background: 'var(--black-2)', borderTop: '1px solid var(--border)', padding: 'var(--pad-y) var(--pad-x)', overflow: 'hidden' }}>
+      <section id="process" style={{ position: 'relative', background: 'var(--black-2)', borderTop: '1px solid var(--border)', padding: 'calc(var(--pad-y)*1.5) var(--pad-x)', overflow: 'hidden' }}>
         {/* Background Video */}
         <video
-          autoPlay
-          loop
-          muted
-          playsInline
+          autoPlay loop muted playsInline
           style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%',
-            objectFit: 'cover', zIndex: 0, opacity: 0.35,
-            filter: 'blur(4px)',
+            objectFit: 'cover', zIndex: 0, opacity: 0.35, filter: 'blur(4px)',
           }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260422_112520_ee819691-f2e8-4c54-bb77-3fb72c84eaa5.mp4"
         />
         {/* Dark Overlays for Readability */}
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 1,
-          background: 'linear-gradient(to bottom, var(--black-2) 0%, transparent 15%, transparent 85%, var(--black-2) 100%)',
-        }} />
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 1,
-          background: 'radial-gradient(circle at center, transparent 0%, var(--black-2) 90%)',
-        }} />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(to bottom, var(--black-2) 0%, transparent 15%, transparent 85%, var(--black-2) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'radial-gradient(circle at center, transparent 0%, var(--black-2) 90%)' }} />
 
         <div style={{ position: 'relative', zIndex: 2 }}>
           <ProcessInner />
@@ -80,9 +70,8 @@ function ProcessInner() {
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
 
   return (
-    <div ref={ref} style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-
-      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+    <div ref={ref} style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ textAlign: 'center', marginBottom: 'clamp(4rem, 10vw, 8rem)' }}>
         <motion.h2
           initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -92,118 +81,76 @@ function ProcessInner() {
         </motion.h2>
       </div>
 
-      {/* Steps */}
-      <div className="process-grid">
-        {steps.map((step, i) => (
-          <StepCard key={step.num} step={step} index={i} inView={inView} total={steps.length} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(3rem, 8vw, 6rem)', position: 'relative' }}>
+        {/* The glowing timeline line */}
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 'clamp(20px, 4vw, 40px)', width: '2px', background: 'rgba(255,255,255,0.1)' }}>
+          <motion.div 
+            initial={{ height: 0 }}
+            whileInView={{ height: '100%' }}
+            viewport={{ once: true }}
+            transition={{ duration: 2.5, ease: 'linear' }}
+            style={{ width: '100%', background: 'var(--lime)', boxShadow: '0 0 15px var(--lime)' }}
+          />
+        </div>
+
+        {steps.map((step) => (
+          <TimelineStep key={step.num} step={step} />
         ))}
       </div>
     </div>
   );
 }
 
-function StepCard({ step, index, inView, total }: { step: typeof steps[0]; index: number; inView: boolean; total: number }) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = step.icon;
+function TimelineStep({ step }: { step: typeof steps[0] }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-20% 0px' });
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: index * 0.13, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'relative',
-        borderRadius: 20, padding: '2rem',
-        cursor: 'default',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Sliding Gradient Border (Behind Mask) */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%',
-        background: `conic-gradient(from 0deg, transparent 70%, ${step.accent} 100%)`,
-        animation: 'spin-gradient 2.5s linear infinite',
-        transformOrigin: '0 0', zIndex: 0,
-        opacity: hovered ? 1 : 0, transition: 'opacity 0.4s'
-      }} />
+    <div ref={ref} style={{ display: 'flex', alignItems: 'center', position: 'relative', paddingLeft: 'clamp(3.5rem, 10vw, 8rem)' }}>
+      {/* Node on the timeline */}
+      <motion.div 
+        initial={{ scale: 0 }}
+        animate={inView ? { scale: 1 } : {}}
+        transition={{ delay: 0.2, type: 'spring' }}
+        style={{ 
+          position: 'absolute', left: 'clamp(20px, 4vw, 40px)', top: '50%', transform: 'translate(-50%, -50%)',
+          width: 'clamp(16px, 2vw, 24px)', height: 'clamp(16px, 2vw, 24px)', borderRadius: '50%', background: 'var(--black)',
+          border: 'clamp(2px, 0.5vw, 4px) solid var(--lime)', zIndex: 2, boxShadow: '0 0 20px rgba(204, 255, 0, 0.5)'
+        }} 
+      />
 
-      {/* Inner Mask (Solid Background) */}
-      <div style={{
-        position: 'absolute', inset: 1,
-        background: hovered ? `${step.accent}0A` : 'var(--black-2)',
-        borderRadius: 19, zIndex: 1, transition: 'background 0.4s',
-        border: hovered ? 'none' : `1px solid var(--border)`
-      }} />
+      {/* Massive Number Watermark */}
+      <motion.div 
+        initial={{ opacity: 0, x: -50 }} animate={inView ? { opacity: 0.05, x: 0 } : {}} transition={{ duration: 1 }}
+        className="display"
+        style={{ 
+          position: 'absolute', left: 'clamp(3rem, 8vw, 6rem)', top: '50%', transform: 'translateY(-50%)',
+          fontSize: 'clamp(6rem, 25vw, 25rem)', lineHeight: 0.8, color: 'var(--white)',
+          pointerEvents: 'none', zIndex: 0
+        }}
+      >
+        {step.num}
+      </motion.div>
 
-      {/* Subtle glow (Always On) */}
-      <div style={{
-        position: 'absolute', inset: 0, borderRadius: 20,
-        background: `radial-gradient(circle at 0% 0%, ${step.accent}1A 0%, transparent 70%)`,
-        opacity: 1, transition: 'opacity 0.4s', pointerEvents: 'none',
-        zIndex: 2,
-      }} />
-
-      {/* Content wrapper */}
-      <div style={{ position: 'relative', zIndex: 3 }}>
-        {/* Connector Arrow between steps (not last) */}
-        {index < total - 1 && (
-          <div className="step-arrow" style={{
-            position: 'absolute', top: '2.8rem', right: '-1.5rem',
-            width: '1.5rem', height: '1.5rem',
-            zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transform: 'translateX(50%)'
-          }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <motion.path 
-                d="M4 12H20M20 12L14 6M20 12L14 18" 
-                stroke={step.accent} 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ filter: `drop-shadow(0 0 5px ${step.accent}80)` }}
-              />
-            </svg>
-          </div>
-        )}
-
-        {/* Step number */}
-        <div style={{
-          fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
-          color: step.accent, letterSpacing: '0.15em', marginBottom: '1.5rem',
-        }}>
-          {step.num}
-        </div>
-
-        {/* Icon */}
-        <div style={{
-          width: 52, height: 52, borderRadius: 16, marginBottom: '1.5rem',
-          background: `${step.accent}14`,
-          border: `1px solid ${step.accent}28`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'transform 0.4s var(--ease-out)',
-          transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        }}>
-          <Icon size={22} color={step.accent} />
-        </div>
-
-        {/* Text */}
-        <div style={{
-          fontFamily: 'var(--font-display)', fontWeight: 700,
-          fontSize: '1.1rem', letterSpacing: '-0.02em',
-          color: hovered ? 'var(--white)' : 'var(--white-2)',
-          transition: 'color 0.3s', marginBottom: '0.75rem',
-        }}>
+      {/* Content Card */}
+      <motion.div 
+        initial={{ opacity: 0, x: 50 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        className="liquid-glass"
+        style={{ 
+          flex: 1, position: 'relative', zIndex: 1,
+          padding: 'clamp(2rem, 5vw, 4rem)', borderRadius: 'clamp(20px, 4vw, 30px)',
+          background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)',
+          maxWidth: '800px'
+        }}
+      >
+        <h3 className="display" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--white)', marginBottom: '1.5rem', fontStyle: 'italic' }}>
           {step.title}
-        </div>
-        <p style={{ fontSize: '0.85rem', color: 'var(--white-3)', lineHeight: 1.65, margin: 0 }}>
+        </h3>
+        <p style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)', color: 'var(--white-2)', lineHeight: 1.6 }}>
           {step.desc}
         </p>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -275,9 +222,9 @@ function TestimonialsInner() {
 
 function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   return (
-    <div style={{
+    <div className="liquid-glass" style={{
       width: 350, minWidth: 350, flexShrink: 0,
-      background: 'var(--black-2)', border: '1px solid var(--border)',
+      background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)',
       borderRadius: 20, padding: '2rem',
       display: 'flex', flexDirection: 'column', gap: '1.25rem',
     }}>

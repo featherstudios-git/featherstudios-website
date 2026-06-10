@@ -102,10 +102,10 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, delay: i * 0.1 }}
-            className="service-card-massive" style={{
+            className="liquid-glass" style={{
               width: 'clamp(350px, 50vw, 650px)', height: 'clamp(300px, 48vh, 480px)',
-              background: 'var(--black-2)', borderRadius: '24px',
-              border: '1px solid var(--border)',
+              background: 'rgba(255,255,255,0.02)', borderRadius: '24px',
+              border: '1px solid rgba(255,255,255,0.05)',
               padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
               position: 'relative', overflow: 'hidden',
               boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
