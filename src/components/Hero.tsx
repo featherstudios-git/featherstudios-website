@@ -205,7 +205,7 @@ export default function Hero() {
           ))}
           <span style={{ display: 'block', overflow: 'hidden' }}>
             <span className="hero-line-inner" style={{
-              display: 'block', color: 'var(--lime)',
+              display: 'block', color: 'var(--lime)', fontStyle: 'italic',
               transformOrigin: 'left bottom',
               textShadow: '0 0 60px rgba(255,176,0,0.3)',
             }}>

@@ -31,10 +31,10 @@ export default function FAQ() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="display h2" style={{ marginBottom: '1.5rem' }}
+              className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1, marginBottom: '1.5rem' }}
             >
               Questions<br />
-              <span style={{ color: 'var(--lime)' }}>Answered</span>
+              <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Answered</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}

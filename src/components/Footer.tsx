@@ -61,9 +61,9 @@ export default function Footer() {
         {/* CTA Band */}
       <div style={{ borderBottom: '1px solid var(--border)', padding: 'clamp(3rem, 6vw, 5rem) var(--pad-x)' }}>
         <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
-          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
+          <div className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}>
             Ready to build<br />
-            <span style={{ color: 'var(--lime)' }}>something great?</span>
+            <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>something great?</span>
           </div>
           <a href="#contact" className="btn btn-lime"
             onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}

@@ -225,10 +225,10 @@ function TestimonialsInner() {
           <motion.h2
             initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="display h2"
+            className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}
           >
             Don't Take Our<br />
-            <span style={{ color: 'var(--lime)' }}>Word For It</span>
+            <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Word For It</span>
           </motion.h2>
         </div>
         <motion.div
