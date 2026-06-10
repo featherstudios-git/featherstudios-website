@@ -153,8 +153,8 @@ export default function Hero() {
           preload="auto"
           style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%',
-            objectFit: 'cover', zIndex: 0, opacity: 0.25,
-            filter: 'invert(1) sepia(0.2) blur(4px)',
+            objectFit: 'cover', zIndex: 0, opacity: 0.35,
+            filter: 'contrast(1.15) saturate(1.2) brightness(1.05)',
           }}
         />
       </div>
@@ -162,7 +162,7 @@ export default function Hero() {
       {/* Color grade overlay */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-        background: 'linear-gradient(180deg, rgba(250,246,233,0.1) 0%, rgba(250,246,233,0) 40%, rgba(250,246,233,0.7) 75%, rgba(250,246,233,0.95) 100%)',
+        background: 'linear-gradient(180deg, rgba(22,22,24,0.1) 0%, rgba(22,22,24,0) 40%, rgba(22,22,24,0.7) 75%, rgba(22,22,24,0.95) 100%)',
       }} />
 
       {/* Scroll-driven darkening overlay */}
@@ -176,7 +176,7 @@ export default function Hero() {
       {/* Subtle lime tint */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-        background: 'radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,27,0,0.03) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 60% 50% at 50% 60%, rgba(255,176,0,0.03) 0%, transparent 70%)',
       }} />
 
       {/* Content */}
@@ -207,7 +207,7 @@ export default function Hero() {
             <span className="hero-line-inner" style={{
               display: 'block', color: 'var(--lime)',
               transformOrigin: 'left bottom',
-              textShadow: '0 0 60px rgba(201,27,0,0.3)',
+              textShadow: '0 0 60px rgba(255,176,0,0.3)',
             }}>
               That Convert.
             </span>
@@ -230,7 +230,7 @@ export default function Hero() {
                   e.preventDefault();
                   document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                style={{ boxShadow: '0 0 40px rgba(201,27,0,0.15)' }}
+                style={{ boxShadow: '0 0 40px rgba(255,176,0,0.15)' }}
               >
                 Start a Project →
               </a>

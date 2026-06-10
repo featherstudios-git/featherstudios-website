@@ -14,7 +14,7 @@ const services = [
     name: 'Website Design & Development',
     desc: 'Custom-built from scratch. Pixel-perfect, performance-first, and designed to make your competitors jealous.',
     tags: ['HTML/CSS', 'React', 'Next.js', 'WordPress'],
-    accent: '#C91B00',
+    accent: '#FFB000',
   },
   {
     id: 'landing', num: '02', icon: Rocket,
@@ -92,8 +92,8 @@ export default function Services() {
         playsInline
         style={{
           position: 'absolute', inset: 0, width: '100%', height: '100%',
-          objectFit: 'cover', zIndex: 0, opacity: 0.25,
-          filter: 'invert(1) sepia(0.2) blur(4px)',
+          objectFit: 'cover', zIndex: 0, opacity: 0.35,
+          filter: 'blur(4px)',
         }}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260505_105838_084968f2-4415-42a4-971a-3bec54539549.mp4"
       />
@@ -110,7 +110,7 @@ export default function Services() {
       <div style={{
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
         width: '40%', height: 1, zIndex: 2,
-        background: 'linear-gradient(90deg, transparent, rgba(201,27,0,0.2), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(255,176,0,0.2), transparent)',
       }} />
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)' }}>
         <div ref={headerRef} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '4rem', flexWrap: 'wrap', gap: '1.5rem' }}>
