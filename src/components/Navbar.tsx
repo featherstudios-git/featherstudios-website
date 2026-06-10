@@ -44,18 +44,21 @@ export default function Navbar() {
       />
 
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        initial={{ y: -100, x: '-50%' }}
+        animate={{ y: 0, x: '-50%' }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         style={{
-          position: 'fixed', top: 0, left: 0, right: 0,
+          position: 'fixed', top: scrolled ? 20 : 0, left: '50%',
+          width: scrolled ? 'calc(100% - 40px)' : '100%',
+          maxWidth: scrolled ? 1200 : '100%',
           zIndex: 10000, height: 'var(--nav-h)',
-          transition: 'background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease',
-          background: scrolled ? 'rgba(12,12,12,0.6)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(30px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(30px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)' : 'none',
+          transition: 'top 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease',
+          background: scrolled ? 'rgba(20,20,20,0.4)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(20px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+          borderRadius: scrolled ? 100 : 0,
+          border: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)' : 'none',
         }}
       >
         <div style={{
