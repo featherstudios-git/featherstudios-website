@@ -162,7 +162,7 @@ export default function Hero() {
       {/* Color grade overlay */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-        background: 'linear-gradient(180deg, rgba(250,248,245,0.1) 0%, rgba(250,248,245,0) 40%, rgba(250,248,245,0.7) 75%, rgba(250,248,245,0.95) 100%)',
+        background: 'linear-gradient(180deg, rgba(240,248,255,0.1) 0%, rgba(240,248,255,0) 40%, rgba(240,248,255,0.7) 75%, rgba(240,248,255,0.95) 100%)',
       }} />
 
       {/* Scroll-driven darkening overlay */}
