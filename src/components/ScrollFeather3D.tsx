@@ -32,7 +32,7 @@ export default function ScrollFeather3D() {
     dirLight1.position.set(5, 5, 5);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x0047AB, 4); // Lime green pop
+    const dirLight2 = new THREE.DirectionalLight(0xC91B00, 4); // Lime green pop
     dirLight2.position.set(-5, -5, 5);
     scene.add(dirLight2);
 
@@ -44,7 +44,7 @@ export default function ScrollFeather3D() {
           opacity: 0.6,
           roughness: 0.2,
           metalness: 0.8,
-          emissive: new THREE.Color('#0047AB'),
+          emissive: new THREE.Color('#C91B00'),
           emissiveIntensity: 0.3,
           side: THREE.DoubleSide,
         })
@@ -58,7 +58,7 @@ export default function ScrollFeather3D() {
           thickness: 0.5,
           specularIntensity: 1,
           clearcoat: 1,
-          emissive: new THREE.Color('#0047AB'),
+          emissive: new THREE.Color('#C91B00'),
           emissiveIntensity: 0.2,
           side: THREE.DoubleSide,
         });
@@ -222,7 +222,7 @@ export default function ScrollFeather3D() {
         transform: 'translateX(-50%)', // Center based on its own width instead of fixed margin
         zIndex: 50,
         pointerEvents: 'none', // Don't block clicks on the actual site
-        filter: 'drop-shadow(0 0 15px rgba(0,71,171,0.4))',
+        filter: 'drop-shadow(0 0 15px rgba(201,27,0,0.4))',
       }}
     >
       <div ref={mountRef} style={{ width: '100%', height: '100%' }} />

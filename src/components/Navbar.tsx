@@ -36,7 +36,7 @@ export default function Navbar() {
       <motion.div
         style={{
           position: 'fixed', top: 0, left: 0, height: 2,
-          background: '#0047AB', zIndex: 10001,
+          background: '#C91B00', zIndex: 10001,
           transformOrigin: 'left',
           scaleX: progress / 100,
         }}
@@ -71,7 +71,7 @@ export default function Navbar() {
             style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <div style={{
               width: 32, height: 32,
-              background: '#0047AB',
+              background: '#C91B00',
               borderRadius: 8,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>

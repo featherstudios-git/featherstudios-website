@@ -10,7 +10,7 @@ const works = [
   { id: 'w1', num: '01', title: 'SoundWave', desc: 'Artist portfolio with integrated music player, tour dates & merch store.', cat: 'Web', accent: '#a855f7' },
   { id: 'w2', num: '02', title: 'Launchify', desc: 'High-converting product launch page with 34% sign-up rate.', cat: 'Landing Page', accent: '#06b6d4' },
   { id: 'w3', num: '03', title: 'Urban Threads', desc: 'Custom Shopify store — 3× revenue in 90 days post-launch.', cat: 'E-Commerce', accent: '#f97316' },
-  { id: 'w4', num: '04', title: 'NovaCafe', desc: 'Complete brand system — logo, palette, packaging & guidelines.', cat: 'Branding', accent: '#0047AB' },
+  { id: 'w4', num: '04', title: 'NovaCafe', desc: 'Complete brand system — logo, palette, packaging & guidelines.', cat: 'Branding', accent: '#C91B00' },
   { id: 'w5', num: '05', title: 'Zara Vibes', desc: 'Influencer bio page with brand deals, content showcase & booking.', cat: 'Landing Page', accent: '#ec4899' },
   { id: 'w6', num: '06', title: 'Apex Group', desc: 'Multi-page corporate site with case studies and client portal.', cat: 'Web', accent: '#3b82f6' },
 ];

@@ -14,7 +14,7 @@ const services = [
     name: 'Website Design & Development',
     desc: 'Custom-built from scratch. Pixel-perfect, performance-first, and designed to make your competitors jealous.',
     tags: ['HTML/CSS', 'React', 'Next.js', 'WordPress'],
-    accent: '#0047AB',
+    accent: '#C91B00',
   },
   {
     id: 'landing', num: '02', icon: Rocket,
@@ -110,7 +110,7 @@ export default function Services() {
       <div style={{
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
         width: '40%', height: 1, zIndex: 2,
-        background: 'linear-gradient(90deg, transparent, rgba(0,71,171,0.2), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(201,27,0,0.2), transparent)',
       }} />
       <div style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)' }}>
         <div ref={headerRef} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '4rem', flexWrap: 'wrap', gap: '1.5rem' }}>

@@ -129,7 +129,7 @@ export default function About() {
                 >
                   <div style={{
                     width: 36, height: 36, borderRadius: 10, flexShrink: 0,
-                    background: 'rgba(0,71,171,0.08)', border: '1px solid rgba(0,71,171,0.15)',
+                    background: 'rgba(201,27,0,0.08)', border: '1px solid rgba(201,27,0,0.15)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     marginTop: 2,
                   }}>
@@ -261,7 +261,7 @@ function SocialBtn({ href, label, icon }: { href: string; label: string; icon: R
         color: 'var(--white-3)', transition: 'all 0.25s',
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,71,171,0.4)';
+        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,27,0,0.4)';
         (e.currentTarget as HTMLElement).style.color = 'var(--lime)';
         (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
       }}

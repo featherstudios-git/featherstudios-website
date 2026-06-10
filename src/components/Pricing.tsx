@@ -187,12 +187,12 @@ export default function Pricing() {
                   }}>
                     <span style={{
                       width: 18, height: 18, borderRadius: '50%', flexShrink: 0,
-                      background: f.active ? (plan.featured ? '#0C0C0C' : 'rgba(0,71,171,0.15)') : 'transparent',
-                      border: `1px solid ${f.active ? (plan.featured ? '#0C0C0C' : 'rgba(0,71,171,0.4)') : 'currentColor'}`,
+                      background: f.active ? (plan.featured ? '#0C0C0C' : 'rgba(201,27,0,0.15)') : 'transparent',
+                      border: `1px solid ${f.active ? (plan.featured ? '#0C0C0C' : 'rgba(201,27,0,0.4)') : 'currentColor'}`,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
                       {f.active
-                        ? <Check size={10} color={plan.featured ? '#F2F0EB' : '#0047AB'} />
+                        ? <Check size={10} color={plan.featured ? '#F2F0EB' : '#C91B00'} />
                         : <X size={9} color="currentColor" />
                       }
                     </span>
@@ -231,14 +231,14 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
           style={{
-            border: '1px dashed rgba(0,71,171,0.28)',
+            border: '1px dashed rgba(201,27,0,0.28)',
             borderRadius: 24, padding: '4rem 5vw',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            flexWrap: 'wrap', gap: '3rem', background: 'rgba(0,71,171,0.03)',
+            flexWrap: 'wrap', gap: '3rem', background: 'rgba(201,27,0,0.03)',
             transition: 'all 0.4s', cursor: 'pointer'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0,71,171,0.06)'; e.currentTarget.style.transform = 'scale(1.015)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(0,71,171,0.03)'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(201,27,0,0.06)'; e.currentTarget.style.transform = 'scale(1.015)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(201,27,0,0.03)'; e.currentTarget.style.transform = 'scale(1)'; }}
           onClick={(e) => {
             // Only trigger click if we aren't already clicking the button (avoid double fire)
             if ((e.target as HTMLElement).tagName !== 'A') {
