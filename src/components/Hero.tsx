@@ -6,8 +6,6 @@ import { BlurText } from './ui/BlurText';
 
 const VIDEO_SRC = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4';
 
-const PARTNERS = ['Aeon', 'Vela', 'Apex', 'Orbit', 'Zeno'];
-
 export default function Hero() {
   return (
     <section className="hero-section" style={{
@@ -156,38 +154,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Spacer to push partners to bottom */}
-        <div style={{ flex: 1, minHeight: '4rem' }} />
 
-        {/* Partners */}
-        <motion.div
-          initial={{ filter: 'blur(10px)', opacity: 0, y: 20 }}
-          animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem',
-            width: '100%'
-          }}
-        >
-          <div className="liquid-glass" style={{
-            padding: '0.4rem 1.25rem', borderRadius: '100px',
-            fontSize: '0.75rem', fontWeight: 500, color: 'var(--white-2)'
-          }}>
-            Collaborating with top digital pioneers globally
-          </div>
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'clamp(2rem, 5vw, 4rem)'
-          }}>
-            {PARTNERS.map(partner => (
-              <span key={partner} className="display" style={{
-                fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontStyle: 'italic',
-                letterSpacing: '-0.02em', color: 'var(--white)', opacity: 0.9
-              }}>
-                {partner}
-              </span>
-            ))}
-          </div>
-        </motion.div>
 
       </div>
     </section>
