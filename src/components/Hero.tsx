@@ -191,7 +191,7 @@ export default function Hero() {
           fontSize: 'clamp(2.5rem, 7.5vw, 6rem)',
           lineHeight: 0.95,
           letterSpacing: '-0.04em',
-          marginBottom: '3rem',
+          marginBottom: '5rem',
           maxWidth: '18ch',
           perspective: '800px',
         }}>
