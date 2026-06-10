@@ -7,9 +7,9 @@
 
 /* ── TOKENS ─────────────────────────────────── */
 :root {
-  --black: #F0F8FF;
-  --black-2: #E6F2FC;
-  --black-3: #D9EBF9;
+  --black: #FAF6E9;
+  --black-2: #F2EDDE;
+  --black-3: #EBE5D3;
   --border: rgba(17, 17, 17, 0.15);
   --white: #111111;
   --white-2: rgba(17, 17, 17, 0.6);
