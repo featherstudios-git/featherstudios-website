@@ -97,7 +97,7 @@ export default function Footer() {
               {socialLinks.map(({ Icon, label, href }) => (
                 <a key={label} href={href} aria-label={label} title={label}
                   style={{ width: 36, height: 36, borderRadius: 9, background: 'var(--black)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white-3)', transition: 'all 0.25s' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(230,74,25,0.4)'; (e.currentTarget as HTMLElement).style.color = 'var(--lime)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,71,171,0.4)'; (e.currentTarget as HTMLElement).style.color = 'var(--lime)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--white-3)'; (e.currentTarget as HTMLElement).style.transform = ''; }}
                 >
                   <Icon size={15} />

@@ -176,7 +176,7 @@ export default function Hero() {
       {/* Subtle lime tint */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-        background: 'radial-gradient(ellipse 60% 50% at 50% 60%, rgba(230,74,25,0.03) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 60% 50% at 50% 60%, rgba(0,71,171,0.03) 0%, transparent 70%)',
       }} />
 
       {/* Content */}
@@ -207,7 +207,7 @@ export default function Hero() {
             <span className="hero-line-inner" style={{
               display: 'block', color: 'var(--lime)',
               transformOrigin: 'left bottom',
-              textShadow: '0 0 60px rgba(230,74,25,0.3)',
+              textShadow: '0 0 60px rgba(0,71,171,0.3)',
             }}>
               That Convert.
             </span>
@@ -230,7 +230,7 @@ export default function Hero() {
                   e.preventDefault();
                   document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                style={{ boxShadow: '0 0 40px rgba(230,74,25,0.15)' }}
+                style={{ boxShadow: '0 0 40px rgba(0,71,171,0.15)' }}
               >
                 Start a Project →
               </a>

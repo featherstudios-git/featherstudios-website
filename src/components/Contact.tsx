@@ -76,7 +76,7 @@ export default function Contact() {
               {socialLinks.map(({ Icon, label, href }) => (
                 <a key={label} href={href} title={label} aria-label={label}
                   style={{ width: 42, height: 42, borderRadius: 10, background: 'var(--black-2)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white-3)', transition: 'all 0.25s' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(230,74,25,0.4)'; (e.currentTarget as HTMLElement).style.color = 'var(--lime)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,71,171,0.4)'; (e.currentTarget as HTMLElement).style.color = 'var(--lime)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--white-3)'; (e.currentTarget as HTMLElement).style.transform = ''; }}
                 >
                   <Icon size={17} />
@@ -90,7 +90,7 @@ export default function Contact() {
             style={{ background: 'var(--black-2)', border: '1px solid var(--border)', borderRadius: 24, padding: '2.5rem' }}>
             {submitted ? (
               <div style={{ textAlign: 'center', padding: '3rem 0' }}>
-                <div style={{ width: 60, height: 60, borderRadius: '50%', background: 'rgba(230,74,25,0.12)', border: '1px solid rgba(230,74,25,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                <div style={{ width: 60, height: 60, borderRadius: '50%', background: 'rgba(0,71,171,0.12)', border: '1px solid rgba(0,71,171,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                   <Mail size={26} color="var(--lime)" />
                 </div>
                 <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.5rem', letterSpacing: '-0.02em', marginBottom: '0.75rem' }}>Message Sent!</div>
@@ -105,20 +105,20 @@ export default function Contact() {
                     <div>
                       <label style={labelStyle} htmlFor="name">Name *</label>
                       <input id="name" style={inputStyle} type="text" placeholder="Your name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        onFocus={(e) => { e.target.style.borderColor = 'rgba(230,74,25,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(230,74,25,0.07)'; }}
+                        onFocus={(e) => { e.target.style.borderColor = 'rgba(0,71,171,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,71,171,0.07)'; }}
                         onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }} />
                     </div>
                     <div>
                       <label style={labelStyle} htmlFor="email">Email *</label>
                       <input id="email" style={inputStyle} type="email" placeholder="your@email.com" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        onFocus={(e) => { e.target.style.borderColor = 'rgba(230,74,25,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(230,74,25,0.07)'; }}
+                        onFocus={(e) => { e.target.style.borderColor = 'rgba(0,71,171,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,71,171,0.07)'; }}
                         onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }} />
                     </div>
                   </div>
                   <div style={{ marginBottom: '1rem' }}>
                     <label style={labelStyle} htmlFor="service">Service</label>
                     <select id="service" style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }} value={formData.service} onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      onFocus={(e) => { e.target.style.borderColor = 'rgba(230,74,25,0.5)'; }} onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; }}>
+                      onFocus={(e) => { e.target.style.borderColor = 'rgba(0,71,171,0.5)'; }} onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; }}>
                       <option value="">Select a service...</option>
                       <option>Website Design & Development</option>
                       <option>Landing Page</option>
@@ -132,7 +132,7 @@ export default function Contact() {
                   <div style={{ marginBottom: '1rem' }}>
                     <label style={labelStyle} htmlFor="budget">Budget Range</label>
                     <select id="budget" style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }} value={formData.budget} onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      onFocus={(e) => { e.target.style.borderColor = 'rgba(230,74,25,0.5)'; }} onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; }}>
+                      onFocus={(e) => { e.target.style.borderColor = 'rgba(0,71,171,0.5)'; }} onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; }}>
                       <option value="">Select budget...</option>
                       <option>Under ₹10,000</option>
                       <option>₹10,000 – ₹25,000</option>
@@ -147,7 +147,7 @@ export default function Contact() {
                     <textarea id="message" style={{ ...inputStyle, resize: 'vertical', minHeight: 120 }}
                       placeholder="Tell us about your project, goals, timeline..." required
                       value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      onFocus={(e) => { e.target.style.borderColor = 'rgba(230,74,25,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(230,74,25,0.07)'; }}
+                      onFocus={(e) => { e.target.style.borderColor = 'rgba(0,71,171,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,71,171,0.07)'; }}
                       onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }} />
                   </div>
                   <button type="submit" disabled={loading}

@@ -6,7 +6,7 @@ const steps = [
   {
     num: '01', icon: MessageSquare, title: 'Discovery Call',
     desc: 'We dive deep into your goals, audience, and vision. The right questions upfront save weeks later.',
-    accent: '#E64A19',
+    accent: '#0047AB',
   },
   {
     num: '02', icon: PenTool, title: 'Design & Strategy',
@@ -26,7 +26,7 @@ const steps = [
 ];
 
 const testimonials = [
-  { quote: 'Feather Studios completely transformed our online presence. Sales up 40% since launch.', name: 'Marcus K.', role: 'CEO, Apex Solutions', init: 'MK', accent: '#E64A19' },
+  { quote: 'Feather Studios completely transformed our online presence. Sales up 40% since launch.', name: 'Marcus K.', role: 'CEO, Apex Solutions', init: 'MK', accent: '#0047AB' },
   { quote: 'My artist website looks better than any major label site. The animations, the detail — everything is perfect.', name: 'Jay-Lo R.', role: 'Independent Music Artist', init: 'JL', accent: '#a855f7' },
   { quote: 'The landing page converted at 3× our previous rate. Clean design, sharp copy, ahead of schedule.', name: 'Sophia P.', role: 'Founder, LaunchFast', init: 'SP', accent: '#ec4899' },
   { quote: '5× ROI in the first month of ads. These guys don\'t just build sites — they build businesses.', name: 'Dani M.', role: 'Owner, Urban Threads', init: 'DM', accent: '#fb923c' },
@@ -251,7 +251,7 @@ function TestimonialsInner() {
           <div>
             <div style={{ display: 'flex', gap: 3 }}>
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={16} fill="#E64A19" color="#E64A19" />
+                <Star key={i} size={16} fill="#0047AB" color="#0047AB" />
               ))}
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--white-3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: 5 }}>50+ Reviews</div>
