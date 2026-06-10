@@ -112,7 +112,7 @@ function ProcessInner() {
                 position: 'relative',
                 borderRadius: 'clamp(16px, 2vw, 30px)',
                 background: isActive ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.01)',
-                border: '1px solid rgba(255,255,255,0.05)',
+                border: isActive ? '1px solid var(--lime)' : '1px solid rgba(255,255,255,0.05)',
                 overflow: 'hidden',
                 cursor: 'pointer',
                 display: 'flex',
@@ -155,7 +155,7 @@ function ProcessInner() {
                       position: 'relative', zIndex: 2, width: '100%' 
                     }}
                   >
-                    <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--white)', fontStyle: 'italic', marginBottom: '1rem' }}>
+                    <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--lime)', fontStyle: 'italic', marginBottom: '1rem' }}>
                       {step.title}
                     </h3>
                     <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', color: 'var(--white-2)', lineHeight: 1.6, maxWidth: '500px', margin: 0 }}>
