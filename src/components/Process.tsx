@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Star } from 'lucide-react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const steps = [
   {
@@ -69,6 +70,7 @@ function ProcessInner() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
   const [hoveredIndex, setHoveredIndex] = useState(0);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div ref={ref} style={{ maxWidth: '1400px', margin: '0 auto' }}>
@@ -84,12 +86,13 @@ function ProcessInner() {
 
       <div style={{ 
         display: 'flex', 
-        height: 'clamp(400px, 60vh, 550px)', 
+        flexDirection: isMobile ? 'column' : 'row',
+        height: isMobile ? 'auto' : 'clamp(400px, 60vh, 550px)', 
         gap: 'clamp(0.5rem, 1vw, 1.5rem)',
         padding: '0 1rem'
       }}>
         {steps.map((step, i) => {
-          const isActive = hoveredIndex === i;
+          const isActive = isMobile ? true : hoveredIndex === i;
           return (
             <motion.div
               key={step.num}
@@ -100,7 +103,8 @@ function ProcessInner() {
               animate={{ 
                 opacity: inView ? 1 : 0, 
                 y: inView ? 0 : 50,
-                flex: isActive ? 6 : 1
+                flex: isMobile ? 'none' : (isActive ? 6 : 1),
+                minHeight: isMobile ? '350px' : 'auto'
               }}
               transition={{ 
                 duration: 0.6, 
@@ -128,9 +132,9 @@ function ProcessInner() {
                   right: isActive ? '5%' : '50%',
                   x: isActive ? '0%' : '50%',
                   y: isActive ? '0%' : '-50%',
-                  fontSize: isActive ? 'clamp(8rem, 20vw, 20rem)' : 'clamp(2.5rem, 4vw, 4rem)',
+                  fontSize: isActive ? 'clamp(6rem, 20vw, 20rem)' : 'clamp(2.5rem, 4vw, 4rem)',
                   opacity: isActive ? 0.04 : 0.3,
-                  rotate: isActive ? 0 : -90
+                  rotate: isMobile ? 0 : (isActive ? 0 : -90)
                 }}
                 transition={{ type: 'spring', bounce: 0, duration: 0.6 }}
                 style={{ 

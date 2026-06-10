@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const projects = [
   {
@@ -83,6 +84,7 @@ export default function Work() {
 function StickyCard({ project, index, totalCards, progress }: any) {
   const targetScale = 1 - (totalCards - 1 - index) * 0.03;
   const scale = useTransform(progress, [index / totalCards, 1], [1, targetScale]);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div style={{
@@ -136,20 +138,28 @@ function StickyCard({ project, index, totalCards, progress }: any) {
         </div>
 
         {/* Bottom Row - Image Grid */}
-        <div style={{ display: 'flex', gap: 'clamp(0.5rem, 1.5vw, 1.5rem)', flex: 1, minHeight: 0 }}>
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: 'clamp(0.5rem, 1.5vw, 1.5rem)', 
+          flex: 1, 
+          minHeight: 0 
+        }}>
           {/* Left Column (40%) */}
-          <div style={{ flex: '4', display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.5vw, 1.5rem)' }}>
-            <div style={{ flex: '0 0 auto', height: 'clamp(130px, 16vw, 230px)' }}>
-              <img src={project.images[0]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'clamp(20px, 3vw, 40px)' }} />
+          <div style={{ flex: isMobile ? '1' : '4', display: 'flex', flexDirection: isMobile ? 'row' : 'column', gap: 'clamp(0.5rem, 1.5vw, 1.5rem)' }}>
+            <div style={{ flex: '1', height: isMobile ? 'auto' : 'clamp(130px, 16vw, 230px)' }}>
+              <img src={project.images[0]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'clamp(12px, 3vw, 40px)' }} />
             </div>
-            <div style={{ flex: '1', minHeight: 0 }}>
-              <img src={project.images[1]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'clamp(20px, 3vw, 40px)' }} />
-            </div>
+            {!isMobile && (
+              <div style={{ flex: '1', minHeight: 0 }}>
+                <img src={project.images[1]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'clamp(12px, 3vw, 40px)' }} />
+              </div>
+            )}
           </div>
           
           {/* Right Column (60%) */}
-          <div style={{ flex: '6', height: '100%' }}>
-            <img src={project.images[2]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'clamp(20px, 3vw, 40px)' }} />
+          <div style={{ flex: isMobile ? '2' : '6', minHeight: 0 }}>
+            <img src={project.images[2]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'clamp(12px, 3vw, 40px)' }} />
           </div>
         </div>
 

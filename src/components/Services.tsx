@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Globe, Rocket, ShoppingBag, Search, Megaphone, Palette } from 'lucide-react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,13 +50,16 @@ export default function Services() {
     return () => ctx.revert();
   }, []);
 
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <section ref={sectionRef} id="services" style={{ 
       background: 'var(--black)', 
       height: 'auto', 
-      minHeight: '100vh', 
+      minHeight: isMobile ? 'auto' : '100vh', 
       position: 'relative', 
-      overflow: 'hidden' 
+      overflow: 'hidden',
+      paddingBottom: isMobile ? '6rem' : 0
     }}>
       {/* Background Video */}
       <video
@@ -76,10 +80,14 @@ export default function Services() {
         background: 'linear-gradient(to right, var(--black) 0%, transparent 15%, transparent 85%, var(--black) 100%), linear-gradient(to bottom, var(--black) 0%, transparent 20%, transparent 80%, var(--black) 100%)',
       }} />
 
-      {/* Intro Header Fixed Left */}
+      {/* Intro Header Fixed Left (Desktop) or Normal (Mobile) */}
       <div className="services-header" style={{
-        position: 'absolute', top: 'max(5%, 2rem)', left: 'max(5vw, 2rem)', zIndex: 3,
+        position: isMobile ? 'relative' : 'absolute', 
+        top: isMobile ? 0 : 'max(5%, 2rem)', 
+        left: isMobile ? 0 : 'max(5vw, 2rem)', 
+        zIndex: 3,
         pointerEvents: 'none',
+        padding: isMobile ? 'var(--pad-y) var(--pad-x) 2rem' : 0,
       }}>
         <h2 className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}>
           Our<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Services</span>
@@ -89,11 +97,18 @@ export default function Services() {
         </p>
       </div>
 
-      {/* Horizontal Track */}
+      {/* Horizontal Track (Desktop) or Vertical Stack (Mobile) */}
       <div ref={trackRef} className="services-track" style={{
-        display: 'flex', height: '100vh', alignItems: 'flex-end', paddingBottom: '12vh',
-        paddingLeft: 'max(40vw, 350px)', paddingRight: '15vw', width: 'fit-content',
-        position: 'relative', zIndex: 2, gap: '3rem',
+        display: 'flex', 
+        flexDirection: isMobile ? 'column' : 'row',
+        height: isMobile ? 'auto' : '100vh', 
+        alignItems: isMobile ? 'center' : 'flex-end', 
+        paddingBottom: isMobile ? '2rem' : '12vh',
+        paddingLeft: isMobile ? '1rem' : 'max(40vw, 350px)', 
+        paddingRight: isMobile ? '1rem' : '15vw', 
+        width: isMobile ? '100%' : 'fit-content',
+        position: 'relative', zIndex: 2, 
+        gap: isMobile ? '1.5rem' : '3rem',
       }}>
         {services.map((service, i) => (
           <motion.div 
@@ -103,7 +118,9 @@ export default function Services() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, delay: i * 0.1 }}
             className="liquid-glass" style={{
-              width: 'clamp(350px, 50vw, 650px)', height: 'clamp(300px, 48vh, 480px)',
+              width: isMobile ? '100%' : 'clamp(350px, 50vw, 650px)', 
+              height: isMobile ? 'auto' : 'clamp(300px, 48vh, 480px)',
+              minHeight: isMobile ? '380px' : 'auto',
               background: 'rgba(20, 20, 20, 0.65)', borderRadius: '24px',
               border: '1px solid var(--lime-border)',
               padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
