@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -179,36 +178,6 @@ export default function Hero() {
         position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
         background: 'radial-gradient(ellipse 60% 50% at 50% 60%, rgba(255,176,0,0.03) 0%, transparent 70%)',
       }} />
-
-      {/* Vertical Marquee on Right Edge */}
-      <div style={{
-        position: 'absolute', right: 0, top: 0, bottom: 0, width: '40px',
-        borderLeft: '1px solid var(--border)', background: 'var(--black-2)',
-        zIndex: 10, overflow: 'hidden'
-      }}>
-        <motion.div
-          animate={{ y: ['0%', '-50%'] }}
-          transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
-          style={{
-            writingMode: 'vertical-rl',
-            whiteSpace: 'nowrap',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.75rem',
-            letterSpacing: '0.2em',
-            color: 'var(--lime)',
-            opacity: 0.8,
-            height: '200%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            gap: '3rem'
-          }}
-        >
-          {Array.from({ length: 12 }).map((_, i) => (
-            <span key={i} style={{ display: 'inline-block' }}>FEATHER STUDIO — DIGITAL EXPERIENCES</span>
-          ))}
-        </motion.div>
-      </div>
 
       {/* Content */}
       <div style={{
