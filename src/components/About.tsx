@@ -46,12 +46,6 @@ export default function About() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 0%, var(--black) 100%)' }} />
       </div>
 
-      <style>
-        {`
-          .bento-large { grid-column: 1 / -1; }
-          @media (min-width: 1024px) { .bento-large { grid-column: span 2; } }
-        `}
-      </style>
       <div ref={ref} style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)' }}>
         
         {/* The Hook */}
@@ -176,33 +170,6 @@ export default function About() {
             </div>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '2rem', opacity: 0.3 }}>
               <NodeAnimation />
-            </div>
-          </motion.div>
-
-          {/* Tile 4: Transparent Pricing */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.8 }}
-            className="liquid-glass" 
-            style={{ 
-              borderRadius: 'clamp(20px, 4vw, 40px)', 
-              padding: 'clamp(2rem, 3vw, 3rem)', 
-              minHeight: '350px',
-              display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' 
-            }}
-          >
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
-                <Target size={24} />
-              </div>
-              <h3 className="display" style={{ fontSize: '2rem', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
-                Transparent Pricing.
-              </h3>
-              <p style={{ fontSize: '1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
-                Fixed quotes. Clear deliverables. Zero hidden fees. We believe in building trust through complete financial transparency.
-              </p>
-            </div>
-            <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '2rem', opacity: 0.4 }}>
-              <PricingAnimation />
             </div>
           </motion.div>
 
@@ -360,24 +327,6 @@ function NodeAnimation() {
       <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 3, delay: 1, repeat: Infinity }} style={{ position: 'absolute', left: '90px', top: '40px', width: 20, height: 20, borderRadius: '50%', background: 'var(--lime)' }} />
       <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 3, delay: 1.5, repeat: Infinity }} style={{ position: 'absolute', left: '90px', top: '140px', width: 20, height: 20, borderRadius: '50%', background: 'var(--lime)' }} />
       <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 3, delay: 2, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '90px', width: 20, height: 20, borderRadius: '50%', background: 'var(--white)' }} />
-    </div>
-  );
-}
-
-function PricingAnimation() {
-  return (
-    <div style={{ position: 'relative', width: '200px', height: '100px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-      {[1, 2, 3].map((i) => (
-        <div key={i} style={{ width: '100%', height: '15px', borderRadius: '10px', background: 'rgba(255,255,255,0.1)', overflow: 'hidden' }}>
-          <motion.div 
-            initial={{ width: '0%' }}
-            whileInView={{ width: `${Math.random() * 50 + 30}%` }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: i * 0.2, ease: 'easeOut' }}
-            style={{ height: '100%', background: i === 1 ? 'var(--lime)' : 'rgba(255,255,255,0.4)', borderRadius: '10px' }}
-          />
-        </div>
-      ))}
     </div>
   );
 }
