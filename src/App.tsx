@@ -43,7 +43,7 @@ export default function App() {
 
   return (
     <>
-      <div style={{ overflowX: 'hidden', width: '100%', position: 'relative' }}>
+      <div style={{ overflowX: 'clip', width: '100%', position: 'relative' }}>
         <Navbar />
         <main>
           <Hero />
