@@ -36,7 +36,7 @@ export default function Navbar() {
       <motion.div
         style={{
           position: 'fixed', top: 0, left: 0, height: 2,
-          background: '#BCFF4F', zIndex: 10001,
+          background: '#E64A19', zIndex: 10001,
           transformOrigin: 'left',
           scaleX: progress / 100,
         }}
@@ -53,12 +53,12 @@ export default function Navbar() {
           maxWidth: scrolled ? 1200 : '100%',
           zIndex: 10000, height: 'var(--nav-h)',
           transition: 'top 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease',
-          background: scrolled ? 'rgba(20,20,20,0.4)' : 'transparent',
+          background: scrolled ? 'rgba(255,255,255,0.7)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
           borderRadius: scrolled ? 100 : 0,
-          border: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)' : 'none',
+          border: scrolled ? '1px solid rgba(17,17,17,0.08)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 10px 40px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8)' : 'none',
         }}
       >
         <div style={{
@@ -71,7 +71,7 @@ export default function Navbar() {
             style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <div style={{
               width: 32, height: 32,
-              background: '#BCFF4F',
+              background: '#E64A19',
               borderRadius: 8,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>

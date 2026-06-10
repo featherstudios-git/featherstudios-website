@@ -7,16 +7,16 @@
 
 /* ── TOKENS ─────────────────────────────────── */
 :root {
-  --black: #0C0C0C;
-  --black-2: #141414;
-  --black-3: #1C1C1C;
-  --border: #272727;
-  --white: #F2F0EB;
-  --white-2: rgba(242, 240, 235, 0.55);
-  --white-3: rgba(242, 240, 235, 0.28);
-  --lime: #BCFF4F;
-  --lime-dim: rgba(188, 255, 79, 0.12);
-  --lime-border: rgba(188, 255, 79, 0.25);
+  --black: #FAF8F5;
+  --black-2: #F0EBE1;
+  --black-3: #E8E2D5;
+  --border: rgba(17, 17, 17, 0.15);
+  --white: #111111;
+  --white-2: rgba(17, 17, 17, 0.6);
+  --white-3: rgba(17, 17, 17, 0.4);
+  --lime: #E64A19;
+  --lime-dim: rgba(230, 74, 25, 0.12);
+  --lime-border: rgba(230, 74, 25, 0.25);
 
   --font-display: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
@@ -137,7 +137,7 @@ select {
   background-color: var(--lime);
   transition: width 0.3s var(--ease-out);
   border-radius: 2px;
-  box-shadow: 0 0 8px rgba(188,255,79,0.4);
+  box-shadow: 0 0 8px rgba(230,74,25,0.4);
 }
 
 .nav-link:hover::after {
@@ -568,6 +568,6 @@ select {
 }
 
 @keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 4px rgba(188,255,79,0.4); }
-  50% { box-shadow: 0 0 14px rgba(188,255,79,0.8); }
+  0%, 100% { box-shadow: 0 0 4px rgba(230,74,25,0.4); }
+  50% { box-shadow: 0 0 14px rgba(230,74,25,0.8); }
 }

@@ -31,7 +31,7 @@ export default function HeroBg3D() {
     keyLight.position.set(8, 8, 10);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0xBCFF4F, 2);
+    const fillLight = new THREE.DirectionalLight(0xE64A19, 2);
     fillLight.position.set(-6, -4, 8);
     scene.add(fillLight);
 
@@ -47,7 +47,7 @@ export default function HeroBg3D() {
           opacity: 0.5,
           roughness: 0.15,
           metalness: 0.9,
-          emissive: new THREE.Color('#BCFF4F'),
+          emissive: new THREE.Color('#E64A19'),
           emissiveIntensity: 0.15,
           side: THREE.DoubleSide,
         })
@@ -61,7 +61,7 @@ export default function HeroBg3D() {
           thickness: 0.5,
           specularIntensity: 1,
           clearcoat: 1,
-          emissive: new THREE.Color('#BCFF4F'),
+          emissive: new THREE.Color('#E64A19'),
           emissiveIntensity: 0.08,
           side: THREE.DoubleSide,
         });
@@ -180,7 +180,7 @@ export default function HeroBg3D() {
         position: 'absolute',
         inset: 0,
         zIndex: 0,
-        filter: isMobile ? 'none' : 'blur(0.5px) drop-shadow(0 0 30px rgba(188,255,79,0.2))',
+        filter: isMobile ? 'none' : 'blur(0.5px) drop-shadow(0 0 30px rgba(230,74,25,0.2))',
         opacity: isMobile ? 0.35 : 1,
         pointerEvents: 'none',
       }}
