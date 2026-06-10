@@ -77,17 +77,14 @@ export default function About() {
           className="label" style={{ marginBottom: '5rem', display: 'block' }}
         />
 
-        {/* Big statement */}
+        {/* Big statement / Header */}
         <motion.h2
           initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="display h2"
-          style={{ maxWidth: '18ch', marginBottom: '5rem' }}
+          className="display"
+          style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1, marginBottom: '5rem' }}
         >
-          <span className="label" style={{ display: 'block', marginBottom: '1rem' }}>— Who We Are</span>
-          A studio built by people who{' '}
-          <em style={{ fontStyle: 'normal', color: 'var(--lime)' }}>actually care</em>{' '}
-          about your results.
+          Who We<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Are</span>
         </motion.h2>
 
         {/* Two column */}

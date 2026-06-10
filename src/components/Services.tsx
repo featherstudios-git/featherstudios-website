@@ -91,7 +91,7 @@ export default function Services() {
 
       {/* Horizontal Track */}
       <div ref={trackRef} className="services-track" style={{
-        display: 'flex', height: '100vh', alignItems: 'center',
+        display: 'flex', height: '100vh', alignItems: 'center', paddingTop: '15vh',
         paddingLeft: 'max(35vw, 300px)', paddingRight: '15vw', width: 'fit-content',
         position: 'relative', zIndex: 2, gap: '4rem',
       }}>

@@ -46,9 +46,8 @@ export default function Contact() {
 
           {/* Left */}
           <div>
-            <motion.span initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} className="label" style={{ display: 'block', marginBottom: '1rem' }}>— Get In Touch</motion.span>
-            <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="display h2" style={{ marginBottom: '1.5rem' }}>
-              Let's Build<br />Something<br /><span style={{ color: 'var(--lime)' }}>Amazing.</span>
+            <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1, marginBottom: '1.5rem' }}>
+              Let's<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Talk.</span>
             </motion.h2>
             <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.3 }} style={{ color: 'var(--white-2)', lineHeight: 1.75, marginBottom: '3rem', maxWidth: 380, fontSize: '0.95rem' }}>
               Got a project in mind? Custom work is always welcome — all prices are{' '}

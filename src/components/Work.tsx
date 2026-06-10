@@ -45,10 +45,9 @@ export default function Work() {
           marginBottom: '6rem', flexWrap: 'wrap', gap: '2rem',
         }}>
           <div>
-            <span className="label" style={{ display: 'block', marginBottom: '1rem' }}>— Selected Work</span>
-            <h2 className="display h2" style={{ lineHeight: 1.1 }}>
-              Projects That<br />
-              <span style={{ color: 'var(--lime)' }}>Speak for Themselves</span>
+            <h2 className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}>
+              Selected<br />
+              <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Work</span>
             </h2>
           </div>
           <a

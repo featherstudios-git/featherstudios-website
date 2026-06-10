@@ -83,19 +83,12 @@ function ProcessInner() {
     <div ref={ref} style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
 
       <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <motion.span
-          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-          className="label" style={{ display: 'block', marginBottom: '1rem' }}
-        >
-          — How We Work
-        </motion.span>
         <motion.h2
           initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="display h2"
+          className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}
         >
-          Idea to Live —{' '}
-          <span style={{ color: 'var(--lime)' }}>4 Clear Steps</span>
+          Our<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Process</span>
         </motion.h2>
       </div>
 

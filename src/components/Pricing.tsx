@@ -64,18 +64,12 @@ export default function Pricing() {
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
 
         <div ref={ref} style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <motion.span
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            className="label" style={{ display: 'block', marginBottom: '1rem' }}
-          >
-            — Transparent Pricing
-          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="display h2" style={{ marginBottom: '1.5rem' }}
+            className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1, marginBottom: '1.5rem' }}
           >
-            Plans for Every Stage
+            Pricing<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Plans</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
