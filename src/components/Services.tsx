@@ -78,7 +78,7 @@ export default function Services() {
 
       {/* Intro Header Fixed Left */}
       <div className="services-header" style={{
-        position: 'absolute', top: '10%', left: 'max(5vw, 2rem)', zIndex: 3,
+        position: 'absolute', top: 'max(5%, 2rem)', left: 'max(5vw, 2rem)', zIndex: 3,
         pointerEvents: 'none',
       }}>
         <h2 className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}>
@@ -91,9 +91,9 @@ export default function Services() {
 
       {/* Horizontal Track */}
       <div ref={trackRef} className="services-track" style={{
-        display: 'flex', height: '100vh', alignItems: 'center', paddingTop: '15vh',
-        paddingLeft: 'max(35vw, 300px)', paddingRight: '15vw', width: 'fit-content',
-        position: 'relative', zIndex: 2, gap: '4rem',
+        display: 'flex', height: '100vh', alignItems: 'flex-end', paddingBottom: '12vh',
+        paddingLeft: 'max(40vw, 350px)', paddingRight: '15vw', width: 'fit-content',
+        position: 'relative', zIndex: 2, gap: '3rem',
       }}>
         {services.map((service, i) => (
           <motion.div 
@@ -103,10 +103,10 @@ export default function Services() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, delay: i * 0.1 }}
             className="service-card-massive" style={{
-              width: 'clamp(400px, 60vw, 800px)', height: 'clamp(400px, 60vh, 600px)',
+              width: 'clamp(350px, 50vw, 650px)', height: 'clamp(300px, 48vh, 480px)',
               background: 'var(--black-2)', borderRadius: '24px',
               border: '1px solid var(--border)',
-              padding: '4rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+              padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
               position: 'relative', overflow: 'hidden',
               boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
           }}>
@@ -121,25 +121,25 @@ export default function Services() {
 
             <div style={{ position: 'relative', zIndex: 2 }}>
               <div style={{
-                width: 60, height: 60, borderRadius: '50%', background: 'var(--black)',
+                width: 50, height: 50, borderRadius: '50%', background: 'var(--black)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                border: `1px solid ${service.accent}`, marginBottom: '2rem',
+                border: `1px solid ${service.accent}`, marginBottom: '1.5rem',
                 boxShadow: `0 0 20px ${service.accent}40`
               }}>
-                <service.icon size={28} color={service.accent} />
+                <service.icon size={24} color={service.accent} />
               </div>
-              <h3 className="display" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.5rem)', marginBottom: '1rem', color: 'var(--white)', lineHeight: 1.1 }}>
+              <h3 className="display" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', marginBottom: '0.75rem', color: 'var(--white)', lineHeight: 1.1 }}>
                 {service.name}
               </h3>
-              <p style={{ fontSize: '1.1rem', color: 'var(--white-2)', maxWidth: '500px', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '1rem', color: 'var(--white-2)', maxWidth: '500px', lineHeight: 1.5 }}>
                 {service.desc}
               </p>
               
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
                 {service.tags.map(tag => (
                   <span key={tag} style={{
-                    padding: '0.5rem 1rem', background: 'var(--black-3)',
-                    borderRadius: '100px', fontSize: '0.85rem', color: 'var(--white-2)',
+                    padding: '0.4rem 0.8rem', background: 'var(--black-3)',
+                    borderRadius: '100px', fontSize: '0.8rem', color: 'var(--white-2)',
                     border: '1px solid var(--border)', fontWeight: 500
                   }}>
                     {tag}
