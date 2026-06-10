@@ -56,15 +56,35 @@ export default function About() {
         
         {/* The Hook */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }} 
-          animate={inView ? { opacity: 1, y: 0 } : {}} 
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} 
           style={{ textAlign: 'center', maxWidth: '1000px', margin: '0 auto clamp(4rem, 8vw, 8rem) auto' }}
         >
-          <h2 className="display" style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', color: 'var(--white)', lineHeight: 1.1, margin: 0, letterSpacing: '-0.02em' }}>
-            Most of the internet is noise. It looks the same and feels the same. We design experiences that are <br/>
-            <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>impossible to ignore.</span>
-          </h2>
+          <motion.h2 
+            initial="hidden" 
+            animate={inView ? "visible" : "hidden"} 
+            variants={{
+              visible: { transition: { staggerChildren: 0.05 } },
+              hidden: {}
+            }}
+            className="display" style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', color: 'var(--white)', lineHeight: 1.1, margin: 0, letterSpacing: '-0.02em' }}
+          >
+            {"Most of the internet is noise. It looks the same and feels the same. We design experiences that are impossible to ignore.".split(" ").map((word, i, arr) => (
+              <motion.span 
+                key={i} 
+                variants={{
+                  hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
+                  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                }}
+                style={{ 
+                  display: 'inline-block', 
+                  marginRight: '0.25em',
+                  color: i >= arr.length - 3 ? 'var(--lime)' : 'inherit',
+                  fontStyle: i >= arr.length - 3 ? 'italic' : 'normal'
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h2>
         </motion.div>
 
         {/* Bento Grid */}
@@ -75,14 +95,14 @@ export default function About() {
           marginBottom: 'clamp(4rem, 10vw, 8rem)' 
         }}>
           
-          {/* Tile 1: No Templates */}
+          {/* Tile 1: Bespoke Strategy */}
           <motion.div 
             initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}
-            className="liquid-glass bento-large" 
+            className="liquid-glass" 
             style={{ 
               borderRadius: 'clamp(20px, 4vw, 40px)', 
               padding: 'clamp(2rem, 4vw, 4rem)', 
-              minHeight: 'clamp(350px, 40vh, 500px)', 
+              minHeight: 'clamp(350px, 40vh, 450px)', 
               display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
               position: 'relative', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' 
             }}
@@ -92,10 +112,10 @@ export default function About() {
                 <Code2 size={24} />
               </div>
               <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3rem)', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
-                No Templates.
+                Bespoke Strategy.
               </h3>
               <p style={{ fontSize: '1.1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
-                Every design is built from scratch to match your brand. No shortcuts, no unnecessary complexity. Just thoughtful design and clean execution.
+                Every brand has a story worth telling. We don't use templates. We craft custom digital architectures that perfectly align with your vision.
               </p>
             </div>
             
@@ -156,6 +176,33 @@ export default function About() {
             </div>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '2rem', opacity: 0.3 }}>
               <NodeAnimation />
+            </div>
+          </motion.div>
+
+          {/* Tile 4: Transparent Pricing */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.8 }}
+            className="liquid-glass" 
+            style={{ 
+              borderRadius: 'clamp(20px, 4vw, 40px)', 
+              padding: 'clamp(2rem, 3vw, 3rem)', 
+              minHeight: '350px',
+              display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' 
+            }}
+          >
+            <div style={{ position: 'relative', zIndex: 2 }}>
+              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
+                <Target size={24} />
+              </div>
+              <h3 className="display" style={{ fontSize: '2rem', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
+                Transparent Pricing.
+              </h3>
+              <p style={{ fontSize: '1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
+                Fixed quotes. Clear deliverables. Zero hidden fees. We believe in building trust through complete financial transparency.
+              </p>
+            </div>
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '2rem', opacity: 0.4 }}>
+              <PricingAnimation />
             </div>
           </motion.div>
 
@@ -313,6 +360,24 @@ function NodeAnimation() {
       <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 3, delay: 1, repeat: Infinity }} style={{ position: 'absolute', left: '90px', top: '40px', width: 20, height: 20, borderRadius: '50%', background: 'var(--lime)' }} />
       <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 3, delay: 1.5, repeat: Infinity }} style={{ position: 'absolute', left: '90px', top: '140px', width: 20, height: 20, borderRadius: '50%', background: 'var(--lime)' }} />
       <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 3, delay: 2, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '90px', width: 20, height: 20, borderRadius: '50%', background: 'var(--white)' }} />
+    </div>
+  );
+}
+
+function PricingAnimation() {
+  return (
+    <div style={{ position: 'relative', width: '200px', height: '100px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      {[1, 2, 3].map((i) => (
+        <div key={i} style={{ width: '100%', height: '15px', borderRadius: '10px', background: 'rgba(255,255,255,0.1)', overflow: 'hidden' }}>
+          <motion.div 
+            initial={{ width: '0%' }}
+            whileInView={{ width: `${Math.random() * 50 + 30}%` }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: i * 0.2, ease: 'easeOut' }}
+            style={{ height: '100%', background: i === 1 ? 'var(--lime)' : 'rgba(255,255,255,0.4)', borderRadius: '10px' }}
+          />
+        </div>
+      ))}
     </div>
   );
 }
