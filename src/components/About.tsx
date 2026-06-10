@@ -18,8 +18,6 @@ const founders = [
     twitter: 'https://x.com/',
     linkedin: 'https://linkedin.com/',
     email: 'suyash@featherstudios.co',
-    accentBg: 'var(--lime)',
-    accentText: 'var(--black)',
   },
   {
     initials: 'AN',
@@ -29,8 +27,6 @@ const founders = [
     twitter: 'https://x.com/',
     linkedin: 'https://linkedin.com/',
     email: 'arindam@featherstudios.co',
-    accentBg: 'var(--border)',
-    accentText: 'var(--white)',
   },
 ];
 
@@ -41,231 +37,178 @@ export default function About() {
   return (
     <section id="about" style={{
       position: 'relative',
-      background: 'var(--black-2)',
-      borderTop: '1px solid var(--border)',
-      borderBottom: '1px solid var(--border)',
-      padding: 'var(--pad-y) var(--pad-x)',
-      overflow: 'hidden',
+      background: 'var(--black)',
+      paddingTop: 'calc(var(--pad-y) * 2)',
+      paddingBottom: 'calc(var(--pad-y) * 2)',
+      zIndex: 10,
     }}>
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          objectFit: 'cover', zIndex: 0, opacity: 0.35,
-        }}
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_132944_a0d124bb-eaa1-4082-aa30-2310efb42b4b.mp4"
-      />
-      {/* Dark Overlays for Readability */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to bottom, var(--black-2) 0%, transparent 20%, transparent 80%, var(--black-2) 100%)',
-      }} />
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'radial-gradient(circle at center, transparent 0%, var(--black-2) 90%)',
-      }} />
-
-      <div ref={ref} style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-
-        {/* Label */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-          className="label" style={{ marginBottom: '5rem', display: 'block' }}
+      {/* Cinematic Ambient Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden' }}>
+        <video
+          autoPlay loop muted playsInline
+          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25, filter: 'blur(10px)' }}
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_132944_a0d124bb-eaa1-4082-aa30-2310efb42b4b.mp4"
         />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, var(--black), transparent 20%, transparent 80%, var(--black))' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 0%, var(--black) 100%)' }} />
+      </div>
 
-        {/* Big statement / Header */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="display"
-          style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1, marginBottom: '5rem' }}
-        >
-          Who We<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Are</span>
-        </motion.h2>
+      <div ref={ref} style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)' }}>
+        
+        {/* Sticky Layout for Philosophy & Values */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+          
+          {/* Responsive Layout Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', 
+            gap: 'clamp(3rem, 6vw, 6rem)', 
+            alignItems: 'start' 
+          }}>
+            
+            {/* Left: Sticky Editorial Heading */}
+            <div style={{ position: 'sticky', top: '20vh' }}>
+              <motion.h2
+                initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="display"
+                style={{ fontSize: 'clamp(3.5rem, 7vw, 6rem)', color: 'var(--white)', margin: 0, lineHeight: 0.9, marginBottom: '2rem' }}
+              >
+                Our<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Philosophy</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+                transition={{ duration: 1, delay: 0.3 }}
+                style={{ fontSize: '1.2rem', color: 'var(--white-2)', lineHeight: 1.6, maxWidth: '400px' }}
+              >
+                We're a boutique digital agency obsessed with craft. No bloated teams, no generic templates. Just two founders building digital experiences that demand attention.
+              </motion.p>
+            </div>
 
-        {/* Two column */}
-        <div className="about-grid" style={{ marginBottom: '5rem' }}>
-          {/* Left */}
+            {/* Right: Scrolling Liquid-Glass Value Cards */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+              {values.map((v, i) => {
+                const Icon = v.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-10% 0px' }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+                    className="liquid-glass"
+                    style={{
+                      padding: 'clamp(2rem, 4vw, 3rem)',
+                      borderRadius: 'clamp(20px, 3vw, 30px)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '1.5rem',
+                      background: 'rgba(255,255,255,0.02)',
+                    }}
+                  >
+                    <div style={{ 
+                      width: 56, height: 56, borderRadius: '50%', background: 'var(--lime)', 
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)' 
+                    }}>
+                      <Icon size={24} />
+                    </div>
+                    <div>
+                      <h3 className="display" style={{ fontSize: '2rem', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic', letterSpacing: '-0.02em' }}>
+                        {v.title}
+                      </h3>
+                      <p style={{ fontSize: '1.05rem', color: 'var(--white-2)', lineHeight: 1.6, margin: 0 }}>
+                        {v.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Spacer */}
+          <div style={{ height: 'clamp(4rem, 10vw, 8rem)' }} />
+
+          {/* Founders Cinematic Showcase */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-10% 0px' }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p style={{ fontSize: '1.1rem', color: 'var(--white-2)', lineHeight: 1.8, marginBottom: '2rem' }}>
-              We're <strong style={{ color: 'var(--white)' }}>Feather Studios</strong> — a boutique digital agency run by two founders
-              obsessed with design, code, and real results. No bloated teams. No generic templates.
-              Just craft.
-            </p>
-            <p style={{ fontSize: '0.95rem', color: 'var(--white-3)', lineHeight: 1.8 }}>
-              We work with businesses, social media creators, music artists, and anyone who
-              wants to show up online in a way that reflects their true ambition.
-              Every project is custom — because cookie-cutter doesn't cut it.
-            </p>
-          </motion.div>
-
-          {/* Right — values */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.35 }}
-          >
-            {values.map((v, i) => {
-              const Icon = v.icon;
-              return (
-                <motion.div
-                  key={v.title}
-                  initial={{ opacity: 0, x: 20 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
-                  style={{
-                    display: 'flex', gap: '1rem', paddingBottom: '1.5rem',
-                    borderBottom: i < values.length - 1 ? '1px solid var(--border)' : 'none',
-                    marginBottom: i < values.length - 1 ? '1.5rem' : 0,
-                  }}
-                >
+            <h2 className="display" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--white)', textAlign: 'center', marginBottom: '3rem', lineHeight: 1 }}>
+              Meet the <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Founders</span>
+            </h2>
+            
+            <div className="liquid-glass" style={{
+              borderRadius: 'clamp(30px, 4vw, 40px)',
+              padding: 'clamp(2rem, 5vw, 5rem)',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+              gap: 'clamp(3rem, 6vw, 6rem)',
+              background: 'rgba(255,255,255,0.02)'
+            }}>
+              {founders.map((f, i) => (
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                  {/* Avatar Circle */}
                   <div style={{
-                    width: 36, height: 36, borderRadius: 10, flexShrink: 0,
-                    background: 'rgba(255,176,0,0.08)', border: '1px solid rgba(255,176,0,0.15)',
+                    width: 'clamp(100px, 12vw, 140px)',
+                    aspectRatio: '1/1',
+                    borderRadius: '50%',
+                    background: 'var(--black-2)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    marginTop: 2,
+                    fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem',
+                    color: 'var(--lime)', border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: 'inset 0 0 30px rgba(0,0,0,0.8)'
                   }}>
-                    <Icon size={16} color="var(--lime)" />
+                    {f.initials}
                   </div>
                   <div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', marginBottom: '0.35rem', letterSpacing: '-0.01em' }}>
-                      {v.title}
-                    </div>
-                    <div style={{ fontSize: '0.87rem', color: 'var(--white-3)', lineHeight: 1.65 }}>
-                      {v.desc}
+                    <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 2.5rem)', color: 'var(--white)', margin: 0, letterSpacing: '-0.02em' }}>
+                      {f.name}
+                    </h3>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--lime)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
+                      {f.role}
+                    </p>
+                    <p style={{ fontSize: '1.05rem', color: 'var(--white-2)', lineHeight: 1.6, marginBottom: '2rem' }}>
+                      {f.bio}
+                    </p>
+                    {/* Socials */}
+                    <div style={{ display: 'flex', gap: '1rem' }}>
+                      <SocialBtn href={f.twitter} label="X (Twitter)" icon={<X size={18} />} />
+                      <SocialBtn href={f.linkedin} label="LinkedIn" icon={<Link2 size={18} />} />
+                      <SocialBtn href={`mailto:${f.email}`} label="Email" icon={<Mail size={18} />} />
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+              ))}
+            </div>
           </motion.div>
+
         </div>
-
-        {/* Founders */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.6 }}
-        >
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.15em', color: 'var(--white-3)', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-            — Meet the Founders
-          </div>
-          <div className="founders-grid">
-            {founders.map((f, i) => (
-              <FounderCard key={f.name} founder={f} index={i} inView={inView} />
-            ))}
-          </div>
-        </motion.div>
-
       </div>
     </section>
   );
 }
 
-function FounderCard({ founder, index, inView }: { founder: typeof founders[0]; index: number; inView: boolean }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.7 + index * 0.12 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'relative',
-        borderRadius: 20,
-        padding: '2rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1.25rem',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Sliding Gradient Border */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%', width: '200%', height: '200%',
-        background: `conic-gradient(from 0deg, transparent 70%, var(--lime) 100%)`,
-        animation: 'spin-gradient 2.5s linear infinite',
-        transformOrigin: '0 0', zIndex: 0,
-        opacity: hovered ? 1 : 0, transition: 'opacity 0.4s'
-      }} />
-
-      {/* Inner Mask (Solid Background) */}
-      <div style={{
-        position: 'absolute', inset: 1,
-        background: hovered ? 'var(--black-3)' : 'var(--black)',
-        borderRadius: 19, zIndex: 1, transition: 'background 0.4s',
-        border: hovered ? 'none' : '1px solid var(--border)'
-      }} />
-
-      {/* Content */}
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '100%' }}>
-        {/* Avatar + name */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{
-            width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
-            background: founder.accentBg,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--font-display)', fontWeight: 800,
-            fontSize: '1.1rem', color: founder.accentText,
-            border: '2px solid var(--border)',
-            transition: 'transform 0.4s',
-            transform: hovered ? 'scale(1.05)' : 'scale(1)'
-          }}>
-            {founder.initials}
-          </div>
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '-0.02em', color: hovered ? 'var(--white)' : 'var(--white)' }}>
-              {founder.name}
-            </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: hovered ? 'var(--lime)' : 'var(--white-3)', transition: 'color 0.4s', letterSpacing: '0.08em', marginTop: 3 }}>
-              {founder.role}
-            </div>
-          </div>
-        </div>
-
-        {/* Bio */}
-        <p style={{ fontSize: '0.88rem', color: 'var(--white-2)', lineHeight: 1.7, margin: 0 }}>
-          {founder.bio}
-        </p>
-
-        {/* Social links */}
-        <div style={{ display: 'flex', gap: '0.6rem', paddingTop: '0.25rem', marginTop: 'auto' }}>
-          <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={15} />} />
-          <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<Link2 size={15} />} />
-          <SocialBtn href={`mailto:${founder.email}`} label="Email" icon={<Mail size={15} />} />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 function SocialBtn({ href, label, icon }: { href: string; label: string; icon: React.ReactNode }) {
+  const [hovered, setHovered] = useState(false);
   return (
     <a
       href={href}
       aria-label={label}
       target={href.startsWith('mailto') ? undefined : '_blank'}
       rel="noopener noreferrer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        width: 36, height: 36, borderRadius: 10,
-        background: 'var(--black-2)', border: '1px solid var(--border)',
+        width: 48, height: 48, borderRadius: '50%',
+        background: hovered ? 'var(--lime)' : 'rgba(255,255,255,0.03)',
+        border: '1px solid',
+        borderColor: hovered ? 'var(--lime)' : 'rgba(255,255,255,0.1)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: 'var(--white-3)', transition: 'all 0.25s',
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,176,0,0.4)';
-        (e.currentTarget as HTMLElement).style.color = 'var(--lime)';
-        (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-        (e.currentTarget as HTMLElement).style.color = 'var(--white-3)';
-        (e.currentTarget as HTMLElement).style.transform = '';
+        color: hovered ? 'var(--black)' : 'var(--white)',
+        transition: 'all 0.3s ease',
       }}
     >
       {icon}
