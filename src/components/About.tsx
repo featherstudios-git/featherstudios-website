@@ -86,7 +86,7 @@ export default function About() {
             </div>
 
             {/* Right: Scrolling Liquid-Glass Value Cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1.5rem, 3vw, 2.5rem)', paddingTop: 'clamp(2rem, 15vw, 15rem)' }}>
               {values.map((v, i) => {
                 const Icon = v.icon;
                 return (
