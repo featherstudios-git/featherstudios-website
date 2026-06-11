@@ -4,9 +4,7 @@ import { Play, ArrowUpRight } from 'lucide-react';
 import { FadingVideo } from './ui/FadingVideo';
 import { BlurText } from './ui/BlurText';
 import { useMediaQuery } from '../hooks/useMediaQuery';
-
-const VIDEO_SRC = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
-
+const VIDEO_SRC = '/hero_feat.mp4';
 export default function Hero() {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
