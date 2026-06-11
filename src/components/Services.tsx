@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Globe, Rocket, ShoppingBag, Search, Megaphone, Palette } from 'lucide-react';
+import { Globe, Rocket, ShoppingBag, Search, Megaphone, Palette, Video } from 'lucide-react';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +14,7 @@ const services = [
   { id: 'seo', num: '04', icon: Search, name: 'Google SEO Optimization', desc: 'Get found. We handle keyword strategy, technical audits, and content optimization to own your search rankings.', tags: ['On-Page SEO', 'Technical Audit'], accent: '#34d399' },
   { id: 'social', num: '05', icon: Megaphone, name: 'Social Media Ads', desc: 'Campaigns that actually perform. Meta, TikTok, and Google Ads built around your goals and your audience.', tags: ['Meta Ads', 'TikTok Ads'], accent: '#f472b6' },
   { id: 'brand', num: '06', icon: Palette, name: 'Brand Identity & Design', desc: 'Logos, typography, color systems, brand guidelines — everything to make you completely unmistakable.', tags: ['Logo Design', 'Brand Kit'], accent: '#a78bfa' },
+  { id: 'content', num: '07', icon: Video, name: 'Social Media Content Creation', desc: 'Engaging, viral-ready video and static content tailored for Instagram, TikTok, and LinkedIn to build your audience.', tags: ['Short-form Video', 'Reels/TikTok'], accent: '#eab308' },
 ];
 
 export default function Services() {

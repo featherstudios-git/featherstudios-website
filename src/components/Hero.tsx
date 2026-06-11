@@ -3,10 +3,13 @@ import { motion } from 'framer-motion';
 import { Play, ArrowUpRight } from 'lucide-react';
 import { FadingVideo } from './ui/FadingVideo';
 import { BlurText } from './ui/BlurText';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const VIDEO_SRC = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
 export default function Hero() {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <section className="hero-section" style={{
       position: 'relative', width: '100%', minHeight: '100vh',
@@ -28,6 +31,9 @@ export default function Hero() {
           zIndex: 0
         }}
       />
+      
+      {/* Floating Gallery */}
+      {!isMobile && <FloatingGallery />}
 
       {/* Hero Content Wrapper */}
       <div style={{
@@ -103,5 +109,59 @@ export default function Hero() {
 
       </div>
     </section>
+  );
+}
+
+const galleryItems = [
+  { id: 1, title: 'Brand Identity', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85', top: '15%', left: '8%', delay: 0 },
+  { id: 2, title: 'Web Design', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85', top: '60%', right: '10%', delay: 2 },
+  { id: 3, title: 'Content Creation', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85', top: '20%', right: '5%', delay: 4 },
+  { id: 4, title: 'E-Commerce', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85', bottom: '15%', left: '12%', delay: 6 },
+];
+
+function FloatingGallery() {
+  return (
+    <div style={{ position: 'absolute', inset: 0, zIndex: 5, pointerEvents: 'none' }}>
+      {galleryItems.map((item) => (
+        <motion.div
+          key={item.id}
+          className="liquid-glass"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{
+            opacity: [0, 1, 1, 0],
+            y: [30, 0, -20, -50]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            delay: item.delay,
+            ease: "easeInOut"
+          }}
+          style={{
+            position: 'absolute',
+            top: item.top,
+            bottom: item.bottom,
+            left: item.left,
+            right: item.right,
+            width: '200px',
+            padding: '0.75rem',
+            borderRadius: '16px',
+            border: '1px solid var(--lime-border)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem'
+          }}
+        >
+          <img 
+            src={item.image} 
+            alt={item.title} 
+            style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '10px' }} 
+          />
+          <div style={{ fontSize: '0.8rem', color: 'var(--white)', fontWeight: 500, textAlign: 'center' }}>
+            {item.title}
+          </div>
+        </motion.div>
+      ))}
+    </div>
   );
 }
