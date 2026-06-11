@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Twitter, Linkedin, Instagram, ArrowUpRight } from 'lucide-react';
 
 const links = [
   { label: 'Services', href: '#services' },
@@ -116,12 +117,13 @@ export default function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               style={{
                 display: 'none', flexDirection: 'column', gap: 5,
-                padding: 6, background: 'none', border: 'none',
+                padding: 6, background: 'none', border: 'none', cursor: 'pointer',
+                zIndex: 10001
               }}
               aria-label="Toggle menu"
             >
               <motion.span
-                animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                animate={mobileOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
                 style={{ display: 'block', width: 22, height: 1.5, background: 'var(--white)', borderRadius: 2 }}
               />
               <motion.span
@@ -129,7 +131,7 @@ export default function Navbar() {
                 style={{ display: 'block', width: 22, height: 1.5, background: 'var(--white)', borderRadius: 2 }}
               />
               <motion.span
-                animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                animate={mobileOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
                 style={{ display: 'block', width: 22, height: 1.5, background: 'var(--white)', borderRadius: 2 }}
               />
             </button>
@@ -141,39 +143,64 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="nav-mobile-menu"
             style={{
-              position: 'fixed', top: 'var(--nav-h)', left: 0, right: 0, bottom: 0,
-              background: 'rgba(12,12,12,0.97)', backdropFilter: 'blur(20px)',
-              zIndex: 9999, padding: '3rem var(--pad-x)',
-              display: 'flex', flexDirection: 'column', gap: '1.5rem',
+              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+              background: 'linear-gradient(180deg, rgba(10,10,12,0.95) 0%, rgba(5,5,5,0.98) 100%)', 
+              backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)',
+              zIndex: 9998, padding: 'calc(var(--nav-h) + 3rem) var(--pad-x) 3rem',
+              display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
             }}
           >
-            {links.map((link, i) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
-                onClick={(e) => { e.preventDefault(); handleNav(link.href); }}
+            {/* Nav Links */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              {links.map((link, i) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + (i * 0.05), duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={(e) => { e.preventDefault(); handleNav(link.href); }}
+                  style={{
+                    fontFamily: 'var(--font-display)', fontWeight: 700,
+                    fontSize: 'clamp(2.5rem, 10vw, 4rem)',
+                    color: 'var(--white)', letterSpacing: '-0.03em',
+                    textDecoration: 'none'
+                  }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </div>
+
+            {/* Bottom Actions */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginTop: '4rem' }}
+            >
+              {/* Massive CTA */}
+              <a href="#contact" onClick={(e) => { e.preventDefault(); handleNav('#contact'); }}
                 style={{
-                  fontFamily: 'var(--font-display)', fontWeight: 700,
-                  fontSize: 'clamp(2rem, 8vw, 3rem)',
-                  color: 'var(--white)', letterSpacing: '-0.02em',
-                }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
-            <a href="#contact" onClick={(e) => { e.preventDefault(); handleNav('#contact'); }}
-              className="btn btn-lime" style={{ marginTop: '2rem', width: 'fit-content' }}>
-              Start a Project →
-            </a>
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '1.25rem 2rem', background: 'var(--lime)', borderRadius: '100px',
+                  color: 'var(--black)', fontSize: '1.2rem', fontWeight: 600, textDecoration: 'none'
+                }}>
+                Start Your Project <ArrowUpRight size={24} strokeWidth={2.5} />
+              </a>
+
+              {/* Socials */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                <a href="#" style={{ color: 'var(--white-2)' }}><Twitter size={24} /></a>
+                <a href="#" style={{ color: 'var(--white-2)' }}><Linkedin size={24} /></a>
+                <a href="#" style={{ color: 'var(--white-2)' }}><Instagram size={24} /></a>
+              </div>
+            </motion.div>
+
           </motion.div>
         )}
       </AnimatePresence>

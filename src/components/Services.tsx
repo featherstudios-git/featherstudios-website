@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Globe, Rocket, ShoppingBag, Search, Megaphone, Palette, Video } from 'lucide-react';
@@ -9,7 +9,6 @@ import {
   SeoAnimation, SocialAdsAnimation, BrandAnimation, ContentAnimation 
 } from './ServiceAnimations';
 
-import { useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -155,6 +154,12 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const mobileContainerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: mobileContainerRef,
+    offset: ['start start', 'end end']
+  });
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -234,22 +239,47 @@ export default function Services() {
       </div>
 
       {/* Horizontal Track (Desktop) or Vertical Stack (Mobile) */}
-      <div ref={trackRef} className="services-track" style={{
-        display: 'flex', 
-        flexDirection: isMobile ? 'column' : 'row',
-        height: isMobile ? 'auto' : '100vh', 
-        alignItems: isMobile ? 'center' : 'flex-end', 
-        paddingBottom: isMobile ? '2rem' : '12vh',
-        paddingLeft: isMobile ? '1rem' : 'max(40vw, 350px)', 
-        paddingRight: isMobile ? '1rem' : '15vw', 
-        width: isMobile ? '100%' : 'fit-content',
-        position: 'relative', zIndex: 2, 
-        gap: isMobile ? '1.5rem' : '3rem',
-      }}>
-        {services.map((service, i) => (
-          <ServiceFlipCard key={service.id} service={service} isMobile={isMobile} index={i} />
-        ))}
-      </div>
+      {!isMobile ? (
+        <div ref={trackRef} className="services-track" style={{
+          display: 'flex', 
+          flexDirection: 'row',
+          height: '100vh', 
+          alignItems: 'flex-end', 
+          paddingBottom: '12vh',
+          paddingLeft: 'max(40vw, 350px)', 
+          paddingRight: '15vw', 
+          width: 'fit-content',
+          position: 'relative', zIndex: 2, 
+          gap: '3rem',
+        }}>
+          {services.map((service, i) => (
+            <ServiceFlipCard key={service.id} service={service} isMobile={false} index={i} />
+          ))}
+        </div>
+      ) : (
+        <div ref={mobileContainerRef} style={{ position: 'relative', zIndex: 2, padding: '0 var(--pad-x)' }}>
+          {services.map((service, i) => {
+            const totalCards = services.length;
+            const targetScale = 1 - (totalCards - 1 - i) * 0.04;
+            const scale = useTransform(scrollYProgress, [i / totalCards, 1], [1, targetScale]);
+
+            return (
+              <div key={service.id} style={{
+                height: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'sticky',
+                top: 0
+              }}>
+                <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `calc(15vh + ${i * 20}px)`, position: 'relative' }}>
+                  <ServiceFlipCard service={service} isMobile={true} index={i} />
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }
