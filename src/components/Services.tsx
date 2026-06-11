@@ -136,13 +136,15 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
 
           <AbstractAnimation />
 
-          <h3 className="display" style={{
+          <motion.h3 className="display" style={{
              fontSize: 'clamp(2rem, 3.5vw, 3rem)', color: 'var(--white)', 
              textAlign: 'center', lineHeight: 1.1, zIndex: 2 
           }}>
-            {service.sloganParts[0]} <span style={{ color: service.accent, fontStyle: 'italic' }}>{service.sloganParts[1]}</span><br/>
-            {service.sloganParts[2]} <span style={{ color: service.accent, fontStyle: 'italic' }}>{service.sloganParts[3]}</span>
-          </h3>
+            <motion.span animate={isFlipped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: 0.4, delay: 0.3 }} style={{ display: 'inline-block' }}>{service.sloganParts[0]}&nbsp;</motion.span>
+            <motion.span animate={isFlipped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: 0.4, delay: 0.4 }} style={{ color: service.accent, fontStyle: 'italic', display: 'inline-block' }}>{service.sloganParts[1]}</motion.span><br/>
+            <motion.span animate={isFlipped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: 0.4, delay: 0.5 }} style={{ display: 'inline-block' }}>{service.sloganParts[2]}&nbsp;</motion.span>
+            <motion.span animate={isFlipped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: 0.4, delay: 0.6 }} style={{ color: service.accent, fontStyle: 'italic', display: 'inline-block' }}>{service.sloganParts[3]}</motion.span>
+          </motion.h3>
         </div>
       </motion.div>
     </motion.div>

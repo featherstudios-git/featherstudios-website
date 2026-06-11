@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Heart, Share2, CheckCircle, Search, MousePointer2, ShoppingCart } from 'lucide-react';
 
 export const WebDevAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ width: '220px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+  <div style={{ width: '220px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', transform: 'scale(1.4)', transformOrigin: 'center' }}>
     {/* Mac Window Header */}
     <div style={{ height: '20px', background: 'var(--black-2)', display: 'flex', alignItems: 'center', padding: '0 8px', gap: '4px', borderBottom: '1px solid var(--border)' }}>
       <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ff5f56' }} />
@@ -44,7 +44,7 @@ export const WebDevAnimation = ({ accent }: { accent: string }) => (
 );
 
 export const LandingPageAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ position: 'relative', width: '180px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', overflow: 'hidden' }}>
+  <div style={{ position: 'relative', width: '180px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', overflow: 'hidden', transform: 'scale(1.4)', transformOrigin: 'center' }}>
     <div style={{ width: '80%', height: '8px', background: 'var(--white-2)', borderRadius: '4px' }} />
     <div style={{ width: '60%', height: '6px', background: 'var(--black-3)', borderRadius: '4px' }} />
     
@@ -76,7 +76,7 @@ export const LandingPageAnimation = ({ accent }: { accent: string }) => (
 );
 
 export const EcomAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ position: 'relative', width: '200px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '10px' }}>
+  <div style={{ position: 'relative', width: '200px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '10px', transform: 'scale(1.4)', transformOrigin: 'center' }}>
     {/* Nav / Cart */}
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '8px', marginBottom: '8px' }}>
       <div style={{ width: '40px', height: '6px', background: 'var(--white)', borderRadius: '4px' }} />
@@ -119,7 +119,7 @@ export const EcomAnimation = ({ accent }: { accent: string }) => (
 );
 
 export const SeoAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ width: '200px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '10px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+  <div style={{ width: '200px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '10px', display: 'flex', flexDirection: 'column', gap: '10px', transform: 'scale(1.4)', transformOrigin: 'center' }}>
     {/* Search Bar */}
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--black-2)', padding: '6px 10px', borderRadius: '100px', border: '1px solid var(--border)' }}>
       <Search size={12} color="var(--white-2)" />
@@ -158,7 +158,7 @@ export const SeoAnimation = ({ accent }: { accent: string }) => (
 );
 
 export const SocialAdsAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ width: '200px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '10px', display: 'flex', flexDirection: 'column' }}>
+  <div style={{ width: '200px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '10px', display: 'flex', flexDirection: 'column', transform: 'scale(1.4)', transformOrigin: 'center' }}>
     {/* Dashboard Header */}
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
       <div style={{ width: '40px', height: '6px', background: 'var(--white)', borderRadius: '4px' }} />
@@ -221,7 +221,7 @@ export const SocialAdsAnimation = ({ accent }: { accent: string }) => (
 );
 
 export const BrandAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ width: '180px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
+  <div style={{ width: '180px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '15px', transform: 'scale(1.4)', transformOrigin: 'center' }}>
     
     {/* Color Palette dropping in */}
     <div style={{ display: 'flex', gap: '8px' }}>
@@ -263,7 +263,7 @@ export const BrandAnimation = ({ accent }: { accent: string }) => (
 );
 
 export const ContentAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ width: '80px', height: '150px', background: 'var(--black)', borderRadius: '12px', border: '2px solid var(--white)', overflow: 'hidden', position: 'relative' }}>
+  <div style={{ width: '80px', height: '150px', background: 'var(--black)', borderRadius: '12px', border: '2px solid var(--white)', overflow: 'hidden', position: 'relative', transform: 'scale(1.4)', transformOrigin: 'center' }}>
     {/* Video Feed Scrolling */}
     <motion.div 
       animate={{ y: ['0%', '-100%', '-100%', '-200%', '-200%'] }}
