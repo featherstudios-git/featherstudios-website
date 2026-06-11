@@ -206,7 +206,7 @@ export default function About() {
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 style={{ display: 'flex', flexDirection: 'column', gap: '2rem', padding: '1rem', borderRadius: '24px' }}
               >
-                {/* Better Avatar Circle */}
+                {/* Professional Avatar Circle */}
                 <div style={{
                   width: 'clamp(100px, 12vw, 140px)',
                   aspectRatio: '1/1',
@@ -216,16 +216,17 @@ export default function About() {
                   fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem',
                   color: 'var(--white)',
                   overflow: 'hidden',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.2)'
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
                 }}>
-                  {/* Animated Fluid Background */}
+                  {/* Subtle Premium Sweep */}
                   <motion.div 
-                    animate={{ rotate: 360, scale: [1, 1.2, 1] }} 
-                    transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-                    style={{ position: 'absolute', inset: '-50%', background: i === 0 ? 'conic-gradient(from 0deg, var(--lime), #10b981, #3b82f6, var(--lime))' : 'conic-gradient(from 0deg, #a855f7, #ec4899, #f59e0b, #a855f7)', filter: 'blur(15px)', zIndex: 0 }}
+                    animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                    style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent)', backgroundSize: '200% 100%', zIndex: 1 }}
                   />
-                  <div style={{ position: 'absolute', inset: '4px', background: 'rgba(0,0,0,0.6)', borderRadius: '50%', backdropFilter: 'blur(10px)', zIndex: 1 }} />
-                  <span style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, var(--white), rgba(255,255,255,0.7))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                  <span style={{ position: 'relative', zIndex: 2 }}>
                     {f.initials}
                   </span>
                 </div>
@@ -371,76 +372,87 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
       
       {/* Backdrop */}
       <motion.div 
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
         onClick={onClose}
-        style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', cursor: 'pointer' }} 
+        style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(15px)', WebkitBackdropFilter: 'blur(15px)', cursor: 'pointer' }} 
       />
 
-      {/* Modal Card */}
+      {/* Modal Card - High-End Editorial Design */}
       <motion.div 
-        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        initial={{ opacity: 0, y: 50, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 20, scale: 0.95 }}
-        transition={{ duration: 0.4, type: 'spring', bounce: 0.2 }}
-        className="liquid-glass"
+        exit={{ opacity: 0, y: 20, scale: 0.98 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         style={{ 
           position: 'relative', zIndex: 1, 
-          width: '100%', maxWidth: '800px', 
-          borderRadius: '32px', 
-          padding: 'clamp(2rem, 5vw, 4rem)',
-          display: 'flex', gap: '3rem', flexWrap: 'wrap', alignItems: 'center',
-          boxShadow: '0 40px 100px rgba(0,0,0,0.8)',
-          border: '1px solid rgba(255,255,255,0.1)'
+          width: '100%', maxWidth: '900px', 
+          background: 'var(--black)',
+          borderRadius: '24px', 
+          overflow: 'hidden',
+          display: 'flex', flexDirection: 'row', flexWrap: 'wrap',
+          boxShadow: '0 40px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.05)'
         }}
       >
         {/* Close Button */}
         <button 
           onClick={onClose}
-          style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '50%', width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', cursor: 'pointer', transition: 'background 0.3s' }}
-          onMouseEnter={(e) => e.currentTarget.style.background = 'var(--lime)'}
-          onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+          style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', cursor: 'pointer', transition: 'all 0.3s ease', zIndex: 10 }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--white)'; e.currentTarget.style.color = 'var(--black)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'var(--white)'; }}
         >
-          <CloseIcon size={20} />
+          <CloseIcon size={18} />
         </button>
 
-        {/* Modal Avatar */}
-        <div style={{ flex: '1 1 200px', display: 'flex', justifyContent: 'center' }}>
+        {/* Left Side: Avatar Panel */}
+        <div style={{ flex: '1 1 300px', background: 'var(--black-2)', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.05)' }}>
           <motion.div 
-            initial={{ rotate: -10, scale: 0.8 }} animate={{ rotate: 0, scale: 1 }} transition={{ delay: 0.2, type: 'spring' }}
+            initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, duration: 0.5 }}
             style={{
-              width: '180px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative',
+              width: '160px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '4rem', color: 'var(--white)',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.2)', overflow: 'hidden'
+              fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '3.5rem', color: 'var(--white)',
+              background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.5)', marginBottom: '2.5rem', overflow: 'hidden'
             }}
           >
+            {/* Subtle Premium Sweep */}
             <motion.div 
-              animate={{ rotate: -360 }} transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-              style={{ position: 'absolute', inset: '-50%', background: founder.name.includes('Suyash') ? 'conic-gradient(from 0deg, var(--lime), #10b981, #3b82f6, var(--lime))' : 'conic-gradient(from 0deg, #a855f7, #ec4899, #f59e0b, #a855f7)', filter: 'blur(20px)', zIndex: 0 }}
+              animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+              style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent)', backgroundSize: '200% 100%', zIndex: 1 }}
             />
-            <div style={{ position: 'absolute', inset: '6px', background: 'rgba(0,0,0,0.6)', borderRadius: '50%', backdropFilter: 'blur(10px)', zIndex: 1 }} />
             <span style={{ position: 'relative', zIndex: 2 }}>{founder.initials}</span>
+          </motion.div>
+          
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ display: 'flex', gap: '0.8rem' }}>
+             <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={16} />} />
+             <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<LinkedinIcon />} />
+             <SocialBtn href={founder.instagram} label="Instagram" icon={<InstagramIcon />} />
           </motion.div>
         </div>
 
-        {/* Modal Content */}
-        <div style={{ flex: '2 1 300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <div>
-            <motion.h3 initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="display" style={{ fontSize: '2.5rem', color: 'var(--white)', margin: '0 0 0.5rem 0' }}>
+        {/* Right Side: Editorial Content */}
+        <div style={{ flex: '2 1 400px', padding: 'clamp(2.5rem, 5vw, 4rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+            <h3 className="display" style={{ fontSize: 'clamp(2.5rem, 4vw, 3rem)', color: 'var(--white)', margin: '0 0 0.8rem 0', letterSpacing: '-0.02em', lineHeight: 1 }}>
               {founder.name}
-            </motion.h3>
-            <motion.p initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: 'var(--lime)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            </h3>
+            <div style={{ display: 'inline-block', padding: '0.4rem 1rem', background: 'rgba(191,255,0,0.1)', border: '1px solid rgba(191,255,0,0.2)', borderRadius: '100px', color: 'var(--lime)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '2.5rem' }}>
               {founder.role}
-            </motion.p>
-          </div>
+            </div>
+          </motion.div>
           
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', borderLeft: '4px solid var(--lime)' }}>
-            <p style={{ fontSize: '1.2rem', color: 'var(--white)', fontStyle: 'italic', margin: 0, lineHeight: 1.6 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ marginBottom: '2rem', position: 'relative' }}>
+            <span style={{ position: 'absolute', left: '-1rem', top: '-1rem', color: 'rgba(255,255,255,0.05)', fontSize: '5rem', fontFamily: 'serif', lineHeight: 1, pointerEvents: 'none' }}>"</span>
+            <p style={{ fontSize: '1.4rem', color: 'var(--white)', fontStyle: 'italic', margin: 0, lineHeight: 1.5, position: 'relative', zIndex: 1 }}>
               {founder.quote}
             </p>
           </motion.div>
 
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ color: 'var(--white-2)', lineHeight: 1.6 }}>
+          <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.3 }} style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.2)', marginBottom: '2rem', transformOrigin: 'left' }} />
+
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ color: 'var(--white-2)', lineHeight: 1.7, fontSize: '1.05rem', margin: 0, maxWidth: '95%' }}>
             {founder.bio}
           </motion.p>
         </div>
