@@ -160,16 +160,30 @@ function FloatingGallery() {
           }}
         >
           <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--lime)', boxShadow: '0 0 10px var(--lime)' }} />
-          <div style={{ 
-            fontFamily: 'var(--font-mono)', 
-            fontSize: '0.75rem', 
-            color: 'var(--white)', 
-            fontWeight: 500, 
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase'
-          }}>
+          <motion.div 
+            animate={{
+              opacity: [0, 0, 1, 1, 0],
+              letterSpacing: ['-0.1em', '-0.1em', '0.1em', '0.1em', '0.1em'],
+              filter: ['blur(8px)', 'blur(8px)', 'blur(0px)', 'blur(0px)', 'blur(8px)'],
+              x: [-10, -10, 0, 0, 10]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              delay: item.delay,
+              times: [0, 0.15, 0.22, 0.85, 1],
+              ease: 'easeOut'
+            }}
+            style={{ 
+              fontFamily: 'var(--font-mono)', 
+              fontSize: '0.75rem', 
+              color: 'var(--white)', 
+              fontWeight: 500, 
+              textTransform: 'uppercase'
+            }}
+          >
             {item.title}
-          </div>
+          </motion.div>
         </motion.div>
       ))}
     </div>
