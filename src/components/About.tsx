@@ -173,7 +173,7 @@ export default function About() {
                 Design, dev, SEO, branding — we handle the entire ecosystem so you don't have to piece it together.
               </motion.p>
             </motion.div>
-            <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '2rem', opacity: 0.3 }}>
+            <div style={{ position: 'absolute', right: '-15%', bottom: '-20%', zIndex: 1, opacity: 0.5 }}>
               <NodeAnimation />
             </div>
           </motion.div>
