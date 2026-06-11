@@ -19,13 +19,11 @@ export default function Hero() {
         src={VIDEO_SRC}
         style={{
           position: 'absolute',
-          left: '50%',
-          top: 0,
-          transform: 'translateX(-50%)',
-          width: '120%',
-          height: '120%',
+          inset: 0,
+          width: '100%',
+          height: '100%',
           objectFit: 'cover',
-          objectPosition: 'top',
+          objectPosition: 'center',
           zIndex: 0
         }}
       />
@@ -146,15 +144,10 @@ function FloatingGallery() {
             right: item.right,
             width: 'max-content',
             padding: '0.6rem 1.2rem',
-            borderRadius: '100px',
-            border: '1px solid rgba(255,255,255,0.08)',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            background: 'rgba(255,255,255,0.03)',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)'
+            textShadow: '0 2px 10px rgba(0,0,0,0.5)'
           }}
         >
           <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--lime)', boxShadow: '0 0 10px var(--lime)' }} />
