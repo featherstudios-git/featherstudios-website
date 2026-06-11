@@ -173,8 +173,8 @@ export default function About() {
                 Design, dev, SEO, branding — we handle the entire ecosystem so you don't have to piece it together.
               </motion.p>
             </motion.div>
-            <div style={{ position: 'absolute', right: '-15%', bottom: '-20%', zIndex: 1, opacity: 0.5 }}>
-              <NodeAnimation />
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+              <EndToEndAnimation />
             </div>
           </motion.div>
 
@@ -364,51 +364,42 @@ function SpeedMetric() {
   );
 }
 
-function NodeAnimation() {
+function EndToEndAnimation() {
   return (
-    <div style={{ position: 'relative', width: '250px', height: '250px' }}>
-      {/* Central Hub */}
-      <motion.div animate={{ scale: [1, 1.2, 1], boxShadow: ['0 0 0px var(--lime)', '0 0 30px var(--lime)', '0 0 0px var(--lime)'] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: 'absolute', left: '50%', top: '50%', width: 24, height: 24, margin: '-12px 0 0 -12px', borderRadius: '50%', background: 'var(--lime)', zIndex: 2 }} />
+    <div style={{ position: 'absolute', bottom: '3.5rem', left: '3rem', right: '3rem', height: '40px' }}>
       
-      {/* Orbiting nodes */}
-      {[0, 1, 2].map((i) => {
-        const radius = 80;
-        return (
-          <motion.div 
-            key={i}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10 + i * 2, repeat: Infinity, ease: 'linear' }}
-            style={{ position: 'absolute', left: '50%', top: '50%', width: radius * 2, height: radius * 2, margin: `-${radius}px 0 0 -${radius}px`, border: '1px dashed rgba(255,255,255,0.1)', borderRadius: '50%' }}
+      {/* Progress Track */}
+      <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '2px', background: 'rgba(255,255,255,0.05)', marginTop: '-1px' }} />
+      
+      {/* Traveling Laser */}
+      <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '2px', marginTop: '-1px', overflow: 'hidden' }}>
+        <motion.div 
+          animate={{ x: ['-100%', '200%'] }} 
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
+          style={{ width: '50%', height: '100%', background: 'linear-gradient(90deg, transparent, var(--lime), transparent)' }} 
+        />
+      </div>
+
+      {/* Pipeline Nodes */}
+      {[0, 1, 2, 3].map((i) => (
+        <div key={i} style={{ position: 'absolute', left: `${i * 33.33}%`, top: '50%', transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <motion.div
+            animate={{ scale: [1, 1.4, 1], boxShadow: ['0 0 0px var(--lime)', '0 0 20px var(--lime)', '0 0 0px var(--lime)'] }}
+            transition={{ duration: 2.5, delay: i * (2.5 / 4), repeat: Infinity, ease: 'easeInOut' }}
+            style={{ 
+              width: 14, height: 14, borderRadius: '50%', 
+              background: 'var(--black)', border: '2px solid var(--lime)',
+              position: 'relative', zIndex: 2
+            }}
           >
-            <motion.div 
-              animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 2 + i, repeat: Infinity }}
-              style={{ position: 'absolute', top: -5, left: '50%', marginLeft: -5, width: 10, height: 10, borderRadius: '50%', background: 'var(--white)', boxShadow: '0 0 10px rgba(255,255,255,0.5)' }} 
-            />
+            <motion.div animate={{ opacity: [0, 1, 0] }} transition={{ duration: 2.5, delay: i * (2.5 / 4), repeat: Infinity }} style={{ position: 'absolute', inset: 2, background: 'var(--lime)', borderRadius: '50%' }} />
           </motion.div>
-        )
-      })}
-      
-      {/* Data packets travelling to center */}
-      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }}>
-        <motion.path 
-          d="M 125,125 L 200,45" 
-          fill="transparent" stroke="var(--lime)" strokeWidth="1" strokeDasharray="4,4" 
-          animate={{ strokeDashoffset: [20, 0] }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          opacity={0.5}
-        />
-        <motion.path 
-          d="M 125,125 L 45,200" 
-          fill="transparent" stroke="var(--lime)" strokeWidth="1" strokeDasharray="4,4" 
-          animate={{ strokeDashoffset: [20, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-          opacity={0.5}
-        />
-        <motion.path 
-          d="M 125,125 L 45,45" 
-          fill="transparent" stroke="var(--lime)" strokeWidth="1" strokeDasharray="4,4" 
-          animate={{ strokeDashoffset: [20, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
-          opacity={0.5}
-        />
-      </svg>
+          {/* Stage Labels */}
+          <span style={{ position: 'absolute', top: '22px', fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--white-3)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            {['Idea', 'Design', 'Code', 'Scale'][i]}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
