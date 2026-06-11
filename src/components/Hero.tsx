@@ -28,6 +28,9 @@ export default function Hero() {
         }}
       />
       
+      {/* Cinematic Dark Overlay */}
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 1, pointerEvents: 'none' }} />
+      
       {/* Floating Gallery */}
       {!isMobile && <FloatingGallery />}
 
@@ -144,6 +147,8 @@ function FloatingGallery() {
             right: item.right,
             width: 'max-content',
             padding: '0.6rem 1.2rem',
+            borderRadius: '100px',
+            border: '1px solid rgba(255,255,255,0.15)',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
