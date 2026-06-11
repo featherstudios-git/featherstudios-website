@@ -8,7 +8,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery';
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  { id: 'web', num: '01', icon: Globe, name: 'Website Design & Development', desc: 'Custom-built from scratch. Pixel-perfect, performance-first, and designed to make your competitors jealous.', tags: ['HTML/CSS', 'React', 'Next.js'], accent: '#FFB000' },
+  { id: 'web', num: '01', icon: Globe, name: 'Website Design & Development', desc: 'Custom-built from scratch. Pixel-perfect, performance-first, and designed to make your competitors jealous.', tags: ['HTML/CSS', 'React', 'Next.js'], accent: 'var(--lime)' },
   { id: 'landing', num: '02', icon: Rocket, name: 'Landing Pages', desc: 'Conversion machines. Every element is intentional — built to turn traffic into customers and inquiries into revenue.', tags: ['CRO', 'A/B Testing'], accent: '#60a5fa' },
   { id: 'ecom', num: '03', icon: ShoppingBag, name: 'E-Commerce Stores', desc: 'Full online stores with seamless checkout, product showcases, and payment integrations ready on day one.', tags: ['Shopify', 'WooCommerce'], accent: '#fb923c' },
   { id: 'seo', num: '04', icon: Search, name: 'Google SEO Optimization', desc: 'Get found. We handle keyword strategy, technical audits, and content optimization to own your search rankings.', tags: ['On-Page SEO', 'Technical Audit'], accent: '#34d399' },

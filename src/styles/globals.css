@@ -14,9 +14,9 @@
   --white: #F4F4F5;
   --white-2: rgba(244, 244, 245, 0.6);
   --white-3: rgba(244, 244, 245, 0.4);
-  --lime: #FFB000;
-  --lime-dim: rgba(255, 176, 0, 0.12);
-  --lime-border: rgba(255, 176, 0, 0.25);
+  --lime: #38bdf8;
+  --lime-dim: rgba(56, 189, 248, 0.12);
+  --lime-border: rgba(56, 189, 248, 0.25);
 
   --font-display: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
