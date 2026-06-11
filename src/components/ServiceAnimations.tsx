@@ -2,44 +2,48 @@ import { motion } from 'framer-motion';
 import { Heart, Share2, CheckCircle, Search, MousePointer2, ShoppingCart } from 'lucide-react';
 
 export const WebDevAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ width: '220px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', transform: 'scale(1.4)', transformOrigin: 'center' }}>
-    {/* Mac Window Header */}
-    <div style={{ height: '20px', background: 'var(--black-2)', display: 'flex', alignItems: 'center', padding: '0 8px', gap: '4px', borderBottom: '1px solid var(--border)' }}>
-      <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ff5f56' }} />
-      <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ffbd2e' }} />
-      <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#27c93f' }} />
-    </div>
-    
-    <div style={{ display: 'flex', flex: 1 }}>
-      {/* Left: Code Editor */}
-      <div style={{ flex: 1, padding: '10px', borderRight: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        {[40, 80, 60, 90, 50, 70].map((w, i) => (
-          <motion.div 
-            key={i}
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: `${w}%`, opacity: 1 }}
-            transition={{ duration: 0.5, delay: i * 0.2, repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }}
-            style={{ height: '4px', background: i % 2 === 0 ? accent : 'var(--white-2)', borderRadius: '2px' }}
-          />
-        ))}
+  <div style={{ position: 'relative', width: '220px', height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'scale(1.4)', transformOrigin: 'center', perspective: '1000px' }}>
+    {/* Base Browser Window (Isometric) */}
+    <motion.div 
+      initial={{ rotateX: 55, rotateZ: -40, y: 10 }}
+      animate={{ y: [10, 0, 10] }}
+      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      style={{ position: 'absolute', width: '140px', height: '100px', background: 'var(--black-2)', borderRadius: '6px', border: '1px solid var(--border)', boxShadow: `0 20px 40px rgba(0,0,0,0.8), inset 0 0 0 1px ${accent}40`, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
+    >
+      <div style={{ height: '12px', background: 'var(--black-3)', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', padding: '0 4px', gap: '2px' }}>
+        <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#ff5f56' }} />
+        <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#ffbd2e' }} />
+        <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#27c93f' }} />
       </div>
-      
-      {/* Right: Live Website Output */}
-      <div style={{ flex: 1, background: 'var(--black-2)', padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <motion.div 
-          animate={{ opacity: [0, 1], y: [10, 0] }} transition={{ duration: 0.5, delay: 1.2, repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }}
-          style={{ height: '6px', width: '100%', background: 'var(--white-2)', borderRadius: '2px' }} 
-        />
-        <motion.div 
-          animate={{ opacity: [0, 1], scale: [0.9, 1] }} transition={{ duration: 0.5, delay: 1.4, repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }}
-          style={{ height: '30px', width: '100%', background: accent, borderRadius: '4px', opacity: 0.8 }} 
-        />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
-          <motion.div animate={{ opacity: [0, 1], y: [10, 0] }} transition={{ duration: 0.5, delay: 1.6, repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }} style={{ height: '20px', background: 'var(--black-3)', borderRadius: '4px' }} />
-          <motion.div animate={{ opacity: [0, 1], y: [10, 0] }} transition={{ duration: 0.5, delay: 1.8, repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }} style={{ height: '20px', background: 'var(--black-3)', borderRadius: '4px' }} />
+      <div style={{ padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        <div style={{ width: '100%', height: '20px', background: 'var(--black-3)', borderRadius: '4px' }} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+          <div style={{ height: '20px', background: 'var(--black-3)', borderRadius: '4px' }} />
+          <div style={{ height: '20px', background: 'var(--black-3)', borderRadius: '4px' }} />
         </div>
       </div>
-    </div>
+    </motion.div>
+
+    {/* Floating UI Card 1 */}
+    <motion.div
+      initial={{ rotateX: 55, rotateZ: -40, z: 0, opacity: 0 }}
+      animate={{ z: [0, 40, 40, 0], opacity: [0, 1, 1, 0] }}
+      transition={{ duration: 4, repeat: Infinity, ease: 'easeOut', times: [0, 0.2, 0.8, 1] }}
+      style={{ position: 'absolute', width: '100px', height: '30px', background: accent, borderRadius: '4px', top: '40px', left: '60px', boxShadow: `0 10px 20px ${accent}40`, display: 'flex', alignItems: 'center', padding: '0 8px', gap: '6px' }}
+    >
+      <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: 'var(--black-2)' }} />
+      <div style={{ width: '40px', height: '4px', background: 'var(--black-2)', borderRadius: '2px' }} />
+    </motion.div>
+
+    {/* Floating UI Card 2 */}
+    <motion.div
+      initial={{ rotateX: 55, rotateZ: -40, z: 0, opacity: 0 }}
+      animate={{ z: [0, 60, 60, 0], opacity: [0, 1, 1, 0] }}
+      transition={{ duration: 4, repeat: Infinity, ease: 'easeOut', delay: 0.3, times: [0, 0.2, 0.8, 1] }}
+      style={{ position: 'absolute', width: '80px', height: '20px', background: 'var(--white)', borderRadius: '4px', top: '70px', left: '40px', boxShadow: '0 10px 20px rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', padding: '0 8px' }}
+    >
+      <div style={{ width: '30px', height: '4px', background: 'var(--black)', borderRadius: '2px' }} />
+    </motion.div>
   </div>
 );
 
@@ -158,65 +162,47 @@ export const SeoAnimation = ({ accent }: { accent: string }) => (
 );
 
 export const SocialAdsAnimation = ({ accent }: { accent: string }) => (
-  <div style={{ width: '200px', height: '140px', background: 'var(--black)', borderRadius: '8px', border: '1px solid var(--border)', padding: '10px', display: 'flex', flexDirection: 'column', transform: 'scale(1.4)', transformOrigin: 'center' }}>
-    {/* Dashboard Header */}
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-      <div style={{ width: '40px', height: '6px', background: 'var(--white)', borderRadius: '4px' }} />
-      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--black-2)', padding: '2px 6px', borderRadius: '100px' }}>
-        <div style={{ fontSize: '8px', color: 'var(--white)' }}>Ads</div>
-        <motion.div 
-          animate={{ backgroundColor: ['var(--black-3)', accent, accent, 'var(--black-3)'] }}
-          transition={{ duration: 4, repeat: Infinity, times: [0, 0.2, 0.8, 1] }}
-          style={{ width: '20px', height: '10px', borderRadius: '10px', position: 'relative' }}
-        >
-          <motion.div 
-            animate={{ x: [2, 10, 10, 2] }}
-            transition={{ duration: 4, repeat: Infinity, times: [0, 0.2, 0.8, 1] }}
-            style={{ width: '6px', height: '6px', background: 'var(--white)', borderRadius: '50%', position: 'absolute', top: '2px' }}
-          />
-        </motion.div>
-      </div>
-    </div>
+  <div style={{ position: 'relative', width: '200px', height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'scale(1.4)', transformOrigin: 'center' }}>
+    {/* Target Grid BG */}
+    <div style={{ position: 'absolute', inset: '10px', backgroundImage: 'radial-gradient(circle at center, var(--white-2) 1px, transparent 1px)', backgroundSize: '10px 10px', opacity: 0.1 }} />
 
-    {/* Graph */}
-    <div style={{ flex: 1, position: 'relative', borderBottom: '1px solid var(--border)', borderLeft: '1px solid var(--border)' }}>
-      <motion.svg width="100%" height="100%" viewBox="0 0 100 50" preserveAspectRatio="none" style={{ position: 'absolute', bottom: 0, overflow: 'visible' }}>
-        {/* Flat line initially, then skyrockets */}
-        <motion.path 
-          d="M 0 45 L 30 45 L 50 35 L 70 10 L 100 0" 
-          fill="none" 
-          stroke={accent} 
-          strokeWidth="3" 
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0.3, 0.3, 1, 1, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, times: [0, 0.2, 0.5, 0.9, 1] }}
-        />
-        <motion.path 
-          d="M 0 45 L 30 45 L 50 35 L 70 10 L 100 0 L 100 50 L 0 50 Z" 
-          fill={`url(#gradient-${accent})`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0, 0.5, 0.5, 0] }}
-          transition={{ duration: 4, repeat: Infinity, times: [0, 0.2, 0.5, 0.9, 1] }}
-        />
-        <defs>
-          <linearGradient id={`gradient-${accent}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={accent} />
-            <stop offset="100%" stopColor="transparent" />
-          </linearGradient>
-        </defs>
-      </motion.svg>
-      
-      {/* Metrics pop up */}
-      <motion.div 
-        animate={{ opacity: [0, 0, 1, 1, 0], y: [10, 0, 0, 0, 10] }}
-        transition={{ duration: 4, repeat: Infinity, times: [0, 0.6, 0.7, 0.9, 1] }}
-        style={{ position: 'absolute', top: '-10px', right: '-10px', background: 'var(--white)', color: 'var(--black)', fontSize: '10px', fontWeight: 'bold', padding: '2px 6px', borderRadius: '10px', boxShadow: `0 0 10px ${accent}80` }}
-      >
-        +340%
-      </motion.div>
-    </div>
+    {/* Mobile Frame */}
+    <motion.div
+      animate={{ y: [0, -5, 0], scale: [1, 1.05, 1] }}
+      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      style={{ width: '60px', height: '100px', background: 'var(--black-2)', borderRadius: '10px', border: `2px solid ${accent}`, display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 5, boxShadow: `0 0 20px ${accent}40` }}
+    >
+      <div style={{ width: '100%', height: '40px', background: 'var(--black-3)' }} />
+      <div style={{ padding: '6px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <div style={{ width: '100%', height: '15px', background: accent, borderRadius: '2px' }} />
+        <div style={{ width: '80%', height: '4px', background: 'var(--white-2)', borderRadius: '2px' }} />
+      </div>
+    </motion.div>
+
+    {/* Bursting Notifications */}
+    <motion.div
+      animate={{ x: [0, 40], y: [0, -30], opacity: [0, 1, 0], scale: [0, 1, 0] }}
+      transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+      style={{ position: 'absolute', background: 'var(--white)', padding: '4px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}
+    >
+      <Heart size={12} color="#ef4444" fill="#ef4444" />
+    </motion.div>
+
+    <motion.div
+      animate={{ x: [0, -40], y: [0, -20], opacity: [0, 1, 0], scale: [0, 1, 0] }}
+      transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
+      style={{ position: 'absolute', background: 'var(--white)', padding: '4px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}
+    >
+      <MousePointer2 size={12} color="#3b82f6" fill="#3b82f6" />
+    </motion.div>
+
+    <motion.div
+      animate={{ x: [0, 20], y: [0, 40], opacity: [0, 1, 0], scale: [0, 1, 0] }}
+      transition={{ duration: 2, repeat: Infinity, delay: 1.4 }}
+      style={{ position: 'absolute', background: 'var(--white)', padding: '4px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}
+    >
+      <Share2 size={12} color="#10b981" />
+    </motion.div>
   </div>
 );
 

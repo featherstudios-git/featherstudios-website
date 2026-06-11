@@ -8,21 +8,25 @@ const steps = [
   {
     num: '01',
     title: 'Discover',
+    tags: ['Research', 'Strategy', 'Audits'],
     desc: "Every journey starts with an idea. Whether you're an individual, creator, startup, business, or organization, we begin by understanding where you are today and where you want to go tomorrow.",
   },
   {
     num: '02',
     title: 'Build',
+    tags: ['Design', 'Development', 'Copywriting'],
     desc: "The right foundation changes everything. From branding and websites to digital systems, content, and strategy, we create the tools you need to launch with confidence.",
   },
   {
     num: '03',
     title: 'Grow',
+    tags: ['Marketing', 'SEO', 'Ad Campaigns'],
     desc: "Launching is only the beginning. We help you attract attention, build trust, reach the right audience, and create momentum that turns ideas into opportunities.",
   },
   {
     num: '04',
     title: 'Sustain',
+    tags: ['Optimization', 'Maintenance', 'Support'],
     desc: "Great brands aren't built overnight. As you evolve, we continue refining, improving, and supporting your digital presence so it grows with your ambitions.",
   }
 ];
@@ -166,6 +170,18 @@ function ProcessInner() {
                     }}
                   >
                     <div style={{ flex: 1, zIndex: 2 }}>
+                      <motion.div style={{ display: 'flex', gap: '8px', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                        {step.tags.map((tag, tIdx) => (
+                          <motion.span 
+                            key={tIdx} 
+                            variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                            className="liquid-glass"
+                            style={{ padding: '4px 12px', fontSize: '0.85rem', color: 'var(--white)', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.1)' }}
+                          >
+                            {tag}
+                          </motion.span>
+                        ))}
+                      </motion.div>
                       <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--lime)', fontStyle: 'italic', marginBottom: '1rem', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                         {step.title.split(' ').map((word, wIdx) => (
                           <motion.span key={wIdx} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
