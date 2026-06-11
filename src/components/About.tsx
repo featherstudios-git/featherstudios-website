@@ -106,17 +106,17 @@ export default function About() {
               position: 'relative', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' 
             }}
           >
-            <div style={{ position: 'relative', zIndex: 2, maxWidth: '500px' }}>
-              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
+            <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={{ visible: { transition: { staggerChildren: 0.1 } } }} style={{ position: 'relative', zIndex: 2, maxWidth: '500px' }}>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
                 <Code2 size={24} />
-              </div>
-              <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3rem)', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
+              </motion.div>
+              <motion.h3 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3rem)', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
                 Bespoke Strategy.
-              </h3>
-              <p style={{ fontSize: '1.1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
+              </motion.h3>
+              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} style={{ fontSize: '1.1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
                 Every brand has a story worth telling. We don't use templates. We craft custom digital architectures that perfectly align with your vision.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
             
             {/* Ambient Animation Container */}
             <div style={{ position: 'absolute', right: '-10%', bottom: '-20%', width: '60%', height: '120%', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.4 }}>
@@ -135,17 +135,17 @@ export default function About() {
               display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' 
             }}
           >
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
+            <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }} style={{ position: 'relative', zIndex: 2 }}>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
                 <Zap size={24} />
-              </div>
-              <h3 className="display" style={{ fontSize: '2rem', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
+              </motion.div>
+              <motion.h3 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} className="display" style={{ fontSize: '2rem', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
                 Performance First.
-              </h3>
-              <p style={{ fontSize: '1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
+              </motion.h3>
+              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} style={{ fontSize: '1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
                 Every site is engineered for speed, accessibility, and Core Web Vitals from day one. Because speed is revenue.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'flex-end', padding: '2rem', opacity: 0.5 }}>
               <SpeedMetric />
             </div>
@@ -162,17 +162,17 @@ export default function About() {
               display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' 
             }}
           >
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
+            <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.4 } } }} style={{ position: 'relative', zIndex: 2 }}>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--black)', marginBottom: '1.5rem' }}>
                 <Target size={24} />
-              </div>
-              <h3 className="display" style={{ fontSize: '2rem', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
+              </motion.div>
+              <motion.h3 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} className="display" style={{ fontSize: '2rem', color: 'var(--white)', marginBottom: '1rem', fontStyle: 'italic' }}>
                 End-to-End.
-              </h3>
-              <p style={{ fontSize: '1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
+              </motion.h3>
+              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }} style={{ fontSize: '1rem', color: 'var(--white-2)', lineHeight: 1.6 }}>
                 Design, dev, SEO, branding — we handle the entire ecosystem so you don't have to piece it together.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '2rem', opacity: 0.3 }}>
               <NodeAnimation />
             </div>
@@ -300,41 +300,65 @@ function SocialBtn({ href, label, icon }: { href: string; label: string; icon: R
 function WireframeAnimation() {
   return (
     <div style={{ position: 'relative', width: '300px', height: '300px' }}>
-      {[0, 1, 2].map((i) => (
+      {/* Concentric rotating glowing rings */}
+      {[0, 1, 2, 3].map((i) => (
         <motion.div
           key={i}
-          animate={{ rotate: [0, 90, 180, 270, 360], scale: [1, 1.1, 1] }}
-          transition={{ duration: 20 + i * 5, repeat: Infinity, ease: 'linear' }}
+          animate={{ rotate: i % 2 === 0 ? 360 : -360, scale: [1, 1.05, 1] }}
+          transition={{ rotate: { duration: 20 + i * 10, repeat: Infinity, ease: 'linear' }, scale: { duration: 3 + i, repeat: Infinity, ease: 'easeInOut' } }}
           style={{
-            position: 'absolute', inset: 0,
-            border: '1px solid var(--lime)',
-            borderRadius: '40px',
-            opacity: 0.3 - i * 0.1,
-            transform: `rotate(${i * 15}deg)`
+            position: 'absolute',
+            inset: `${i * 15}%`,
+            border: `1px solid rgba(56,189,248,${0.3 - i * 0.05})`,
+            borderRadius: i % 2 === 0 ? '50%' : '40%',
+            borderStyle: i % 2 === 0 ? 'dashed' : 'solid',
           }}
         />
       ))}
       <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.5, 0.2] }} 
+        animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0.4, 0.1] }} 
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ position: 'absolute', inset: '25%', background: 'radial-gradient(circle, var(--lime) 0%, transparent 70%)' }} 
+        style={{ position: 'absolute', inset: '35%', background: 'radial-gradient(circle, var(--lime) 0%, transparent 70%)', filter: 'blur(10px)' }} 
       />
     </div>
   );
 }
 
 function SpeedMetric() {
+  const bars = [40, 70, 45, 90, 60, 100];
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', height: '100px', width: '100%' }}>
-      {[40, 70, 45, 90, 60, 100].map((h, i) => (
-        <motion.div
-          key={i}
-          initial={{ height: '0%' }}
-          whileInView={{ height: `${h}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: i * 0.1, ease: 'easeOut' }}
-          style={{ flex: 1, background: i === 5 ? 'var(--lime)' : 'rgba(255,255,255,0.1)', borderRadius: '4px 4px 0 0' }}
-        />
+    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', height: '120px', width: '100%', position: 'relative' }}>
+      {/* Scanning Laser */}
+      <motion.div 
+        animate={{ x: ['-10%', '110%', '-10%'] }} 
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ position: 'absolute', top: '10px', bottom: 0, width: '2px', background: 'var(--lime)', boxShadow: '0 0 10px var(--lime)', zIndex: 10 }}
+      />
+      {bars.map((h, i) => (
+        <div key={i} style={{ flex: 1, height: '100%', display: 'flex', alignItems: 'flex-end', position: 'relative' }}>
+          <motion.div
+            initial={{ height: '0%' }}
+            whileInView={{ height: `${h}%` }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ 
+              width: '100%', 
+              background: i === 5 ? 'linear-gradient(to top, rgba(56,189,248,0.2), var(--lime))' : 'linear-gradient(to top, rgba(255,255,255,0.02), rgba(255,255,255,0.1))', 
+              borderRadius: '4px 4px 0 0',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            {/* Inner pulse for the highest bar */}
+            {i === 5 && (
+              <motion.div 
+                animate={{ y: ['100%', '-100%'] }} 
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+                style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, transparent, rgba(255,255,255,0.8), transparent)' }}
+              />
+            )}
+          </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -342,25 +366,49 @@ function SpeedMetric() {
 
 function NodeAnimation() {
   return (
-    <div style={{ position: 'relative', width: '200px', height: '200px' }}>
-      {/* Lines */}
-      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+    <div style={{ position: 'relative', width: '250px', height: '250px' }}>
+      {/* Central Hub */}
+      <motion.div animate={{ scale: [1, 1.2, 1], boxShadow: ['0 0 0px var(--lime)', '0 0 30px var(--lime)', '0 0 0px var(--lime)'] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: 'absolute', left: '50%', top: '50%', width: 24, height: 24, margin: '-12px 0 0 -12px', borderRadius: '50%', background: 'var(--lime)', zIndex: 2 }} />
+      
+      {/* Orbiting nodes */}
+      {[0, 1, 2].map((i) => {
+        const radius = 80;
+        return (
+          <motion.div 
+            key={i}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 10 + i * 2, repeat: Infinity, ease: 'linear' }}
+            style={{ position: 'absolute', left: '50%', top: '50%', width: radius * 2, height: radius * 2, margin: `-${radius}px 0 0 -${radius}px`, border: '1px dashed rgba(255,255,255,0.1)', borderRadius: '50%' }}
+          >
+            <motion.div 
+              animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 2 + i, repeat: Infinity }}
+              style={{ position: 'absolute', top: -5, left: '50%', marginLeft: -5, width: 10, height: 10, borderRadius: '50%', background: 'var(--white)', boxShadow: '0 0 10px rgba(255,255,255,0.5)' }} 
+            />
+          </motion.div>
+        )
+      })}
+      
+      {/* Data packets travelling to center */}
+      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }}>
         <motion.path 
-          d="M 40,100 Q 100,20 160,100" 
-          fill="transparent" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeDasharray="5,5" 
-          animate={{ strokeDashoffset: [0, 20] }} transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          d="M 125,125 L 200,45" 
+          fill="transparent" stroke="var(--lime)" strokeWidth="1" strokeDasharray="4,4" 
+          animate={{ strokeDashoffset: [20, 0] }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          opacity={0.5}
         />
         <motion.path 
-          d="M 40,100 Q 100,180 160,100" 
-          fill="transparent" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeDasharray="5,5" 
-          animate={{ strokeDashoffset: [20, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          d="M 125,125 L 45,200" 
+          fill="transparent" stroke="var(--lime)" strokeWidth="1" strokeDasharray="4,4" 
+          animate={{ strokeDashoffset: [20, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+          opacity={0.5}
+        />
+        <motion.path 
+          d="M 125,125 L 45,45" 
+          fill="transparent" stroke="var(--lime)" strokeWidth="1" strokeDasharray="4,4" 
+          animate={{ strokeDashoffset: [20, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+          opacity={0.5}
         />
       </svg>
-      {/* Nodes */}
-      <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', left: '30px', top: '90px', width: 20, height: 20, borderRadius: '50%', background: 'var(--white)' }} />
-      <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 3, delay: 1, repeat: Infinity }} style={{ position: 'absolute', left: '90px', top: '40px', width: 20, height: 20, borderRadius: '50%', background: 'var(--lime)' }} />
-      <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 3, delay: 1.5, repeat: Infinity }} style={{ position: 'absolute', left: '90px', top: '140px', width: 20, height: 20, borderRadius: '50%', background: 'var(--lime)' }} />
-      <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 3, delay: 2, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '90px', width: 20, height: 20, borderRadius: '50%', background: 'var(--white)' }} />
     </div>
   );
 }
