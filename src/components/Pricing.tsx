@@ -7,33 +7,52 @@ export default function Pricing() {
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
 
   return (
-    <section id="pricing" style={{ position: 'relative', background: 'var(--black-2)', padding: 'calc(var(--pad-y) * 2) var(--pad-x)', overflow: 'hidden' }}>
+    <section id="pricing" style={{ position: 'relative', background: 'var(--black)', padding: 'calc(var(--pad-y) * 2) 0', overflow: 'hidden' }}>
       
-      {/* Background Animated Grid */}
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.05, backgroundImage: 'linear-gradient(var(--white) 1px, transparent 1px), linear-gradient(90deg, var(--white) 1px, transparent 1px)', backgroundSize: '40px 40px', maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)', WebkitMaskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)' }} />
+      {/* Massive Infinite Scrolling Background Text */}
+      <div style={{ position: 'absolute', top: '15%', left: 0, width: '200%', display: 'flex', opacity: 0.02, pointerEvents: 'none', zIndex: 0 }}>
+        <motion.div animate={{ x: ['0%', '-50%'] }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} style={{ whiteSpace: 'nowrap', fontSize: '18vw', fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1 }}>
+          LET'S COLLABORATE LET'S COLLABORATE LET'S COLLABORATE
+        </motion.div>
+      </div>
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+      {/* Atmospheric Aurora Glows */}
+      <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }} transition={{ duration: 10, repeat: Infinity }} style={{ position: 'absolute', top: '10%', left: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, var(--lime) 0%, transparent 70%)', filter: 'blur(100px)', pointerEvents: 'none', zIndex: 0 }} />
+      <motion.div animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 15, repeat: Infinity }} style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, #a855f7 0%, transparent 70%)', filter: 'blur(120px)', pointerEvents: 'none', zIndex: 0 }} />
+
+      <div style={{ width: '95%', maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         
+        {/* Unique Architectural Card Shape */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="liquid-glass"
           style={{
             borderRadius: 'clamp(24px, 4vw, 40px)',
-            background: 'linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)',
             position: 'relative',
             overflow: 'hidden',
-            boxShadow: '0 30px 60px rgba(0,0,0,0.6)',
+            boxShadow: '0 40px 100px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(30px)',
+            WebkitBackdropFilter: 'blur(30px)',
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
           }}
         >
-          {/* Animated Glow Orbs */}
-          <motion.div animate={{ x: ['-20%', '20%', '-20%'], y: ['-20%', '20%', '-20%'] }} transition={{ duration: 15, repeat: Infinity, ease: 'linear' }} style={{ position: 'absolute', top: '-10%', left: '-10%', width: '50%', height: '50%', background: 'var(--lime)', opacity: 0.07, filter: 'blur(100px)', borderRadius: '50%', pointerEvents: 'none' }} />
-          <motion.div animate={{ x: ['20%', '-20%', '20%'], y: ['20%', '-20%', '20%'] }} transition={{ duration: 15, repeat: Infinity, ease: 'linear', delay: 2 }} style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '60%', height: '60%', background: '#a855f7', opacity: 0.04, filter: 'blur(120px)', borderRadius: '50%', pointerEvents: 'none' }} />
+          {/* Animated Glowing Border Trace */}
+          <div 
+            style={{ position: 'absolute', inset: 0, borderRadius: 'inherit', padding: '1px', WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude', pointerEvents: 'none', opacity: 0.6, zIndex: 10 }}
+          >
+            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+              style={{ position: 'absolute', top: '50%', left: '50%', width: '150%', height: '150%', background: 'conic-gradient(from 0deg, transparent 0deg, transparent 270deg, var(--lime) 360deg)', transformOrigin: '0 0', marginTop: '-75%', marginLeft: '-75%' }}
+            />
+          </div>
+
+          {/* Internal gradient map */}
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 60%)', pointerEvents: 'none' }} />
           
           {/* Left Side: Content */}
           <div style={{ flex: '1 1 500px', padding: 'clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 4rem)', position: 'relative', zIndex: 2 }}>
@@ -48,9 +67,29 @@ export default function Pricing() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="display" style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', color: 'var(--white)', margin: '0 0 1.5rem 0', lineHeight: 1.05 }}
+              className="display" style={{ fontSize: 'clamp(3.5rem, 6vw, 6rem)', color: 'var(--white)', margin: '0 0 1.5rem 0', lineHeight: 1.05, letterSpacing: '-0.02em' }}
             >
-              Ready to <br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Elevate</span> Your Brand?
+              Ready to <br />
+              <span style={{ position: 'relative', display: 'inline-block' }}>
+                <motion.span 
+                  animate={{ backgroundPosition: ['0% center', '200% center'] }} 
+                  transition={{ duration: 5, repeat: Infinity, ease: 'linear' }} 
+                  style={{ 
+                    display: 'inline-block',
+                    background: 'linear-gradient(90deg, var(--white), var(--lime), var(--white))', 
+                    backgroundSize: '200% auto', 
+                    WebkitBackgroundClip: 'text', 
+                    WebkitTextFillColor: 'transparent',
+                    fontStyle: 'italic',
+                    paddingRight: '10px'
+                  }}
+                >
+                  Elevate
+                </motion.span>
+                {/* Decorative strike/underline */}
+                <motion.div animate={{ width: ['0%', '100%'] }} transition={{ duration: 1.5, delay: 0.8, ease: 'easeOut' }} style={{ position: 'absolute', bottom: '15%', left: 0, height: '6px', background: 'var(--lime)', borderRadius: '3px', zIndex: -1, opacity: 0.5 }} />
+              </span> 
+              <br />Your Brand?
             </motion.h2>
             
             <motion.p
