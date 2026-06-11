@@ -70,8 +70,8 @@ export default function Work() {
             lineHeight: 0.9,
             letterSpacing: '-0.02em'
           }}>
-            Selected<br />
-            <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Work</span>
+            Featured<br />
+            <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Projects</span>
           </h2>
           <p style={{ maxWidth: '320px', color: 'var(--white-2)', margin: 0, paddingBottom: '0.5rem', fontSize: '1.1rem', lineHeight: 1.6 }}>
             A curated collection of bespoke digital architectures. Designed to perform, built to scale.
