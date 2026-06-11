@@ -113,10 +113,10 @@ export default function Hero() {
 }
 
 const galleryItems = [
-  { id: 1, title: 'Brand Identity', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85', top: '15%', left: '8%', delay: 0 },
-  { id: 2, title: 'Web Design', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85', top: '60%', right: '10%', delay: 2 },
-  { id: 3, title: 'Content Creation', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85', top: '20%', right: '5%', delay: 4 },
-  { id: 4, title: 'E-Commerce', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85', bottom: '15%', left: '12%', delay: 6 },
+  { id: 1, title: 'Brand Identity', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85', top: '25%', left: '5%', delay: 0 },
+  { id: 2, title: 'Web Design', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85', bottom: '25%', left: '15%', delay: 2 },
+  { id: 3, title: 'Content Creation', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85', top: '15%', right: '15%', delay: 4 },
+  { id: 4, title: 'E-Commerce', image: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85', bottom: '30%', right: '5%', delay: 6 },
 ];
 
 function FloatingGallery() {
@@ -126,16 +126,19 @@ function FloatingGallery() {
         <motion.div
           key={item.id}
           className="liquid-glass"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
           animate={{
+            clipPath: ['inset(100% 0 0 0)', 'inset(0% 0 0 0)', 'inset(0% 0 0 0)', 'inset(0 0 100% 0)'],
             opacity: [0, 1, 1, 0],
-            y: [30, 0, -20, -50]
+            y: [20, 0, -10, -30],
+            scale: [0.95, 1, 1, 0.95]
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
             delay: item.delay,
-            ease: "easeInOut"
+            ease: [0.25, 1, 0.36, 1],
+            times: [0, 0.15, 0.85, 1]
           }}
           style={{
             position: 'absolute',
@@ -143,22 +146,35 @@ function FloatingGallery() {
             bottom: item.bottom,
             left: item.left,
             right: item.right,
-            width: '200px',
-            padding: '0.75rem',
-            borderRadius: '16px',
-            border: '1px solid var(--lime-border)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.5rem'
+            width: '260px',
+            height: '160px',
+            borderRadius: '12px',
+            border: '1px solid rgba(255,255,255,0.08)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+            overflow: 'hidden'
           }}
         >
           <img 
             src={item.image} 
             alt={item.title} 
-            style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '10px' }} 
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
           />
-          <div style={{ fontSize: '0.8rem', color: 'var(--white)', fontWeight: 500, textAlign: 'center' }}>
-            {item.title}
+          <div style={{ 
+            position: 'absolute', bottom: 0, left: 0, right: 0, 
+            padding: '1.5rem 1rem 1rem',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)',
+            display: 'flex', alignItems: 'flex-end'
+          }}>
+            <div style={{ 
+              fontFamily: 'var(--font-mono)', 
+              fontSize: '0.7rem', 
+              color: 'var(--lime)', 
+              fontWeight: 500, 
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase'
+            }}>
+              {item.title}
+            </div>
           </div>
         </motion.div>
       ))}
