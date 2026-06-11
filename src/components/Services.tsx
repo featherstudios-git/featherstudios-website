@@ -58,8 +58,8 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
       onClick={() => isMobile && setIsFlipped(!isFlipped)}
       style={{
         width: isMobile ? '100%' : 'clamp(350px, 50vw, 650px)', 
-        height: isMobile ? 'auto' : 'clamp(300px, 48vh, 480px)',
-        minHeight: isMobile ? '380px' : 'auto',
+        height: isMobile ? '480px' : 'clamp(300px, 48vh, 480px)',
+        minHeight: '480px',
         perspective: '1500px',
         position: 'relative',
         cursor: 'pointer'
@@ -151,19 +151,21 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
 }
 
 function MobileStickyServiceCard({ service, index, totalCards, progress, isMobile }: any) {
-  const targetScale = 1 - (totalCards - 1 - index) * 0.04;
+  const targetScale = 1 - (totalCards - 1 - index) * 0.05;
   const scale = useTransform(progress, [index / totalCards, 1], [1, targetScale]);
 
   return (
     <div style={{
       height: '100vh',
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
+      paddingTop: '15vh',
       position: 'sticky',
       top: 0
     }}>
-      <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `calc(15vh + ${index * 20}px)`, position: 'relative' }}>
+      <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `${index * 20}px`, position: 'relative' }}>
         <ServiceFlipCard service={service} isMobile={isMobile} index={index} />
       </motion.div>
     </div>

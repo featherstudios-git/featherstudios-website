@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Twitter, Linkedin, Instagram, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 const links = [
   { label: 'Services', href: '#services' },
@@ -195,9 +195,9 @@ export default function Navbar() {
 
               {/* Socials */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-                <a href="#" style={{ color: 'var(--white-2)' }}><Twitter size={24} /></a>
-                <a href="#" style={{ color: 'var(--white-2)' }}><Linkedin size={24} /></a>
-                <a href="#" style={{ color: 'var(--white-2)' }}><Instagram size={24} /></a>
+                <a href="#" style={{ color: 'var(--white-2)' }}><XIcon /></a>
+                <a href="#" style={{ color: 'var(--white-2)' }}><LinkedinIcon /></a>
+                <a href="#" style={{ color: 'var(--white-2)' }}><InstagramIcon /></a>
               </div>
             </motion.div>
 
@@ -206,4 +206,32 @@ export default function Navbar() {
       </AnimatePresence>
     </>
   );
+}
+
+function LinkedinIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+      <rect x="2" y="9" width="4" height="12"></rect>
+      <circle cx="4" cy="4" r="2"></circle>
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  );
+}
+
+function XIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 4l16 16M4 20L20 4"></path>
+    </svg>
+  )
 }
