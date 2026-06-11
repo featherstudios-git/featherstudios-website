@@ -269,6 +269,7 @@ select {
   justify-content: center;
   gap: 10px;
   font-family: var(--font-display);
+  font-style: italic;
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 0.02em;
