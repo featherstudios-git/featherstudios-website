@@ -156,7 +156,7 @@ function MobileStickyServiceCard({ service, index, totalCards, progress, isMobil
 
   return (
     <div style={{
-      height: '100vh',
+      height: '85vh',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -165,7 +165,7 @@ function MobileStickyServiceCard({ service, index, totalCards, progress, isMobil
       position: 'sticky',
       top: 0
     }}>
-      <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `${index * 20}px`, position: 'relative' }}>
+      <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `${index * 25}px`, position: 'relative' }}>
         <ServiceFlipCard service={service} isMobile={isMobile} index={index} />
       </motion.div>
     </div>
@@ -255,9 +255,6 @@ export default function Services() {
         <h2 className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}>
           Our<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Services</span>
         </h2>
-        <p style={{ color: 'var(--white-2)', marginTop: '1rem', maxWidth: '300px', fontSize: '1.1rem' }}>
-          We provide services that help you build your identity and dominate your market.
-        </p>
       </div>
 
       {/* Horizontal Track (Desktop) or Vertical Stack (Mobile) */}
