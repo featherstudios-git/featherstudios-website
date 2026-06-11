@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Play, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowDown } from 'lucide-react';
 import { FadingVideo } from './ui/FadingVideo';
 import { BlurText } from './ui/BlurText';
 import { useMediaQuery } from '../hooks/useMediaQuery';
@@ -86,21 +86,33 @@ export default function Hero() {
             display: 'flex', alignItems: 'center', gap: '2rem', marginTop: '2.5rem'
           }}
         >
-          <a href="#contact" className="liquid-glass-strong" style={{
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-            padding: '0.75rem 1.5rem', borderRadius: '100px',
-            color: 'var(--white)', textDecoration: 'none',
-            fontSize: '0.9rem', fontWeight: 500, transition: 'all 0.3s ease'
-          }}>
-            Start Your Project <ArrowUpRight size={18} />
-          </a>
-          <a href="#work" style={{
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-            color: 'var(--white)', textDecoration: 'none',
-            fontSize: '0.9rem', fontWeight: 500, opacity: 0.8, transition: 'all 0.3s ease'
-          }}>
-            View Showreel <Play size={16} fill="currentColor" />
-          </a>
+          <motion.a 
+            href="#contact" 
+            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(56,189,248,0.5)' }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '0.75rem',
+              padding: '1rem 2.2rem', borderRadius: '100px',
+              background: 'var(--lime)', color: 'var(--black)', 
+              textDecoration: 'none', fontSize: '1rem', fontWeight: 600,
+              boxShadow: '0 10px 20px rgba(0,0,0,0.5)',
+              border: '1px solid var(--lime)'
+            }}
+          >
+            Start Your Project <ArrowUpRight size={20} strokeWidth={2.5} />
+          </motion.a>
+          
+          <motion.a 
+            href="#work"
+            whileHover={{ x: 10, color: 'var(--lime)' }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              color: 'var(--white)', textDecoration: 'none',
+              fontSize: '1rem', fontWeight: 500, transition: 'color 0.3s ease'
+            }}
+          >
+            Explore Work <ArrowDown size={18} />
+          </motion.a>
         </motion.div>
 
 
