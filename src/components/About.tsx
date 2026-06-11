@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { X, Mail, Zap, Code2, Target, X as CloseIcon } from 'lucide-react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const founders = [
   {
@@ -273,7 +274,7 @@ export default function About() {
   );
 }
 
-function SocialBtn({ href, label, icon }: { href: string; label: string; icon: React.ReactNode }) {
+function SocialBtn({ href, label, icon, isMobile }: { href: string; label: string; icon: React.ReactNode, isMobile?: boolean }) {
   const [hovered, setHovered] = useState(false);
   return (
     <a
@@ -284,7 +285,7 @@ function SocialBtn({ href, label, icon }: { href: string; label: string; icon: R
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        width: 48, height: 48, borderRadius: '50%',
+        width: isMobile ? 40 : 48, height: isMobile ? 40 : 48, borderRadius: '50%',
         background: hovered ? 'var(--lime)' : 'rgba(255,255,255,0.03)',
         border: '1px solid',
         borderColor: hovered ? 'var(--lime)' : 'rgba(255,255,255,0.1)',
@@ -411,9 +412,10 @@ function EndToEndAnimation() {
 function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClose: () => void }) {
   const quoteWords = founder.quote.split(" ");
   const bioWords = founder.bio.split(" ");
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? '1rem' : '2rem' }}>
       
       {/* Backdrop */}
       <motion.div 
@@ -428,13 +430,14 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="liquid-glass-strong"
+        className="liquid-glass-strong no-scrollbar"
         style={{ 
           position: 'relative', zIndex: 1, 
           width: '100%', maxWidth: '1000px', 
-          borderRadius: '32px', 
-          overflow: 'hidden',
-          display: 'flex', flexDirection: 'row', flexWrap: 'wrap',
+          maxHeight: '90vh',
+          borderRadius: isMobile ? '20px' : '32px', 
+          overflowY: 'auto',
+          display: 'flex', flexDirection: isMobile ? 'column' : 'row',
           boxShadow: '0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 40px rgba(56,189,248,0.05)'
         }}
       >
@@ -444,38 +447,38 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
         {/* Close Button */}
         <button 
           onClick={onClose}
-          style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', cursor: 'pointer', transition: 'all 0.3s ease', zIndex: 10 }}
+          style={{ position: 'absolute', top: isMobile ? '1rem' : '1.5rem', right: isMobile ? '1rem' : '1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: isMobile ? 36 : 44, height: isMobile ? 36 : 44, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', cursor: 'pointer', transition: 'all 0.3s ease', zIndex: 10 }}
           onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--lime)'; e.currentTarget.style.color = 'var(--black)'; e.currentTarget.style.borderColor = 'var(--lime)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'var(--white)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
         >
-          <CloseIcon size={20} />
+          <CloseIcon size={18} />
         </button>
 
         {/* Left Side: Avatar Panel */}
-        <div style={{ flex: '1 1 350px', padding: '4rem 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1, borderRight: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ flex: isMobile ? 'none' : '1 1 350px', padding: isMobile ? '3rem 2rem 2rem' : '4rem 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1, borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.05)', borderBottom: isMobile ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
           <motion.div 
             initial={{ scale: 0.8, opacity: 0, rotateY: -30 }} animate={{ scale: 1, opacity: 1, rotateY: 0 }} transition={{ delay: 0.1, duration: 0.8, type: 'spring' }}
             style={{
-              width: '180px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative',
+              width: isMobile ? '120px' : '180px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '4rem', color: 'var(--lime)',
+              fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: isMobile ? '3rem' : '4rem', color: 'var(--lime)',
               background: 'linear-gradient(145deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%)',
               border: '2px solid var(--lime)',
-              boxShadow: '0 0 40px rgba(56,189,248,0.3), inset 0 0 20px rgba(56,189,248,0.2)', marginBottom: '3rem'
+              boxShadow: '0 0 40px rgba(56,189,248,0.3), inset 0 0 20px rgba(56,189,248,0.2)', marginBottom: isMobile ? '2rem' : '3rem'
             }}
           >
             <span style={{ position: 'relative', zIndex: 2 }}>{founder.initials}</span>
           </motion.div>
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ display: 'flex', gap: '1rem' }}>
-             <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={18} />} />
-             <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<LinkedinIcon />} />
-             <SocialBtn href={founder.instagram} label="Instagram" icon={<InstagramIcon />} />
+             <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={16} />} isMobile={isMobile} />
+             <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<LinkedinIcon />} isMobile={isMobile} />
+             <SocialBtn href={founder.instagram} label="Instagram" icon={<InstagramIcon />} isMobile={isMobile} />
           </motion.div>
         </div>
 
         {/* Right Side: Editorial Content */}
-        <div style={{ flex: '2 1 400px', padding: 'clamp(3rem, 5vw, 5rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
+        <div style={{ flex: isMobile ? 'none' : '2 1 400px', padding: isMobile ? '2rem' : 'clamp(3rem, 5vw, 5rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
           <div style={{ marginBottom: '2.5rem' }}>
             <motion.h3 
               initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2, duration: 0.6 }} 
@@ -491,9 +494,9 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
             </motion.div>
           </div>
           
-          <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
-            <span style={{ position: 'absolute', left: '-1.5rem', top: '-1.5rem', color: 'rgba(56,189,248,0.15)', fontSize: '6rem', fontFamily: 'var(--font-display)', lineHeight: 1, pointerEvents: 'none' }}>"</span>
-            <h4 className="display" style={{ fontSize: '1.6rem', color: 'var(--white)', fontStyle: 'italic', margin: 0, lineHeight: 1.4, position: 'relative', zIndex: 1, fontWeight: 400 }}>
+          <div style={{ marginBottom: isMobile ? '1.5rem' : '2.5rem', position: 'relative' }}>
+            <span style={{ position: 'absolute', left: '-1rem', top: '-1rem', color: 'rgba(56,189,248,0.15)', fontSize: isMobile ? '4rem' : '6rem', fontFamily: 'var(--font-display)', lineHeight: 1, pointerEvents: 'none' }}>"</span>
+            <h4 className="display" style={{ fontSize: isMobile ? '1.25rem' : '1.6rem', color: 'var(--white)', fontStyle: 'italic', margin: 0, lineHeight: 1.4, position: 'relative', zIndex: 1, fontWeight: 400 }}>
               {quoteWords.map((word, i) => (
                 <motion.span 
                   key={i} initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.5, delay: 0.3 + (i * 0.04), ease: 'easeOut' }}
@@ -505,9 +508,9 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
             </h4>
           </div>
 
-          <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.5, duration: 0.8 }} style={{ width: '60px', height: '2px', background: 'var(--lime-border)', marginBottom: '2.5rem', transformOrigin: 'left' }} />
+          <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.5, duration: 0.8 }} style={{ width: '60px', height: '2px', background: 'var(--lime-border)', marginBottom: isMobile ? '1.5rem' : '2.5rem', transformOrigin: 'left' }} />
 
-          <p style={{ color: 'var(--white-2)', lineHeight: 1.8, fontSize: '1.1rem', margin: 0, maxWidth: '95%' }}>
+          <p style={{ color: 'var(--white-2)', lineHeight: 1.8, fontSize: isMobile ? '0.95rem' : '1.1rem', margin: 0, maxWidth: '100%' }}>
             {bioWords.map((word, i) => (
               <motion.span 
                 key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.6 + (i * 0.02) }}
