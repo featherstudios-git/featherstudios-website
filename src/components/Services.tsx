@@ -47,13 +47,13 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="service-card-wrapper"
-      onHoverStart={() => !isMobile && setIsFlipped(true)}
+    <motion.div
+      initial={isMobile ? false : { opacity: 0, y: 50 }}
+      whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+      animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+      viewport={isMobile ? undefined : { once: true, margin: '-100px' }}
+      transition={{ delay: index * 0.1, duration: 0.6 }}
+      onMouseEnter={() => !isMobile && setIsFlipped(true)}
       onHoverEnd={() => !isMobile && setIsFlipped(false)}
       onClick={() => isMobile && setIsFlipped(!isFlipped)}
       style={{
