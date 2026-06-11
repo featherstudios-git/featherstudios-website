@@ -151,31 +151,46 @@ function ProcessInner() {
               <AnimatePresence mode="popLayout">
                 {isActive && (
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
-                    transition={{ duration: 0.4, delay: 0.2 }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.2 } },
+                      exit: { opacity: 0, transition: { duration: 0.2 } }
+                    }}
                     style={{ 
                       padding: 'clamp(1.5rem, 3vw, 3rem)', 
                       position: 'relative', zIndex: 2, width: '100%',
-                      display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'flex-end', justifyContent: 'space-between', gap: '2rem'
+                      display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', gap: '2rem'
                     }}
                   >
-                    <div style={{ flex: 1 }}>
-                      <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--lime)', fontStyle: 'italic', marginBottom: '1rem' }}>
-                        {step.title}
+                    <div style={{ flex: 1, zIndex: 2 }}>
+                      <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--lime)', fontStyle: 'italic', marginBottom: '1rem', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                        {step.title.split(' ').map((word, wIdx) => (
+                          <motion.span key={wIdx} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                            {word}
+                          </motion.span>
+                        ))}
                       </h3>
-                      <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', color: 'var(--white-2)', lineHeight: 1.6, maxWidth: '400px', margin: 0 }}>
-                        {step.desc}
+                      <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', color: 'var(--white-2)', lineHeight: 1.6, maxWidth: '400px', margin: 0, display: 'flex', flexWrap: 'wrap', columnGap: '6px' }}>
+                        {step.desc.split(' ').map((word, wIdx) => (
+                          <motion.span key={wIdx} variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
+                            {word}
+                          </motion.span>
+                        ))}
                       </p>
                     </div>
 
-                    <div style={{ flexShrink: 0, transform: 'scale(1.2)', transformOrigin: isMobile ? 'left center' : 'right bottom' }}>
+                    <motion.div 
+                      variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.6 } } }}
+                      style={{ flexShrink: 0, position: isMobile ? 'relative' : 'absolute', right: isMobile ? '0' : '5%', top: isMobile ? '0' : '50%', transform: isMobile ? 'none' : 'translateY(-50%)', zIndex: 1 }}
+                    >
                        {step.num === '01' && <DiscoverAnimation accent="var(--lime)" />}
                        {step.num === '02' && <BuildAnimation accent="var(--lime)" />}
                        {step.num === '03' && <GrowAnimation accent="var(--lime)" />}
                        {step.num === '04' && <SustainAnimation accent="var(--lime)" />}
-                    </div>
+                    </motion.div>
                   </motion.div>
                 )}
               </AnimatePresence>
