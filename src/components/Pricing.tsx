@@ -140,6 +140,27 @@ export default function Pricing() {
                   <div style={{ width: '80%', height: '4px', background: 'rgba(255,255,255,0.2)', borderRadius: '2px' }} />
                 </motion.div>
 
+                {/* Layer 4: Revenue / Growth Chart */}
+                <motion.div 
+                  animate={{ translateZ: [60, 80, 60], y: [-5, 5, -5] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                  style={{ position: 'absolute', top: '-30%', left: '-15%', width: '140px', padding: '16px', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', boxShadow: '15px 15px 30px rgba(0,0,0,0.3)', display: 'flex', flexDirection: 'column', gap: '8px' }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                    <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--lime)', display: 'flex', alignItems: 'center', gap: '4px', fontFamily: 'var(--font-display)' }}>
+                      <span>₹</span>
+                      <motion.div animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} style={{ width: '40px', height: '14px', background: 'rgba(255,255,255,0.8)', borderRadius: '2px' }} />
+                    </div>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                  </div>
+                  
+                  {/* Animated Bar Chart */}
+                  <div style={{ display: 'flex', alignItems: 'flex-end', gap: '6px', height: '40px', marginTop: '8px' }}>
+                    <motion.div animate={{ height: ['40%', '50%', '40%'] }} transition={{ duration: 3, repeat: Infinity }} style={{ flex: 1, background: 'rgba(255,255,255,0.1)', borderRadius: '3px 3px 0 0' }} />
+                    <motion.div animate={{ height: ['60%', '70%', '60%'] }} transition={{ duration: 3.5, repeat: Infinity }} style={{ flex: 1, background: 'rgba(255,255,255,0.2)', borderRadius: '3px 3px 0 0' }} />
+                    <motion.div animate={{ height: ['80%', '95%', '80%'] }} transition={{ duration: 4, repeat: Infinity }} style={{ flex: 1, background: 'var(--lime)', borderRadius: '3px 3px 0 0', boxShadow: '0 0 10px rgba(191,255,0,0.3)' }} />
+                  </div>
+                </motion.div>
+
                 {/* Layer 3: Dynamic Chat Bubble / Notification */}
                 <motion.div 
                   animate={{ translateZ: [80, 100, 80], x: [-10, 10, -10] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
