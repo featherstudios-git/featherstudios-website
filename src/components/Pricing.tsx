@@ -86,8 +86,6 @@ export default function Pricing() {
                 >
                   Elevate
                 </motion.span>
-                {/* Decorative strike/underline */}
-                <motion.div animate={{ width: ['0%', '100%'] }} transition={{ duration: 1.5, delay: 0.8, ease: 'easeOut' }} style={{ position: 'absolute', bottom: '15%', left: 0, height: '6px', background: 'var(--lime)', borderRadius: '3px', zIndex: -1, opacity: 0.5 }} />
               </span> 
               <br />Your Brand?
             </motion.h2>
