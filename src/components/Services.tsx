@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Globe, Rocket, ShoppingBag, Search, Megaphone, Palette, Video } from 'lucide-react';
@@ -149,39 +149,11 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
     </motion.div>
   );
 }
-
-function MobileStickyServiceCard({ service, index, totalCards, progress, isMobile }: any) {
-  const targetScale = 1 - (totalCards - 1 - index) * 0.05;
-  const scale = useTransform(progress, [index / totalCards, 1], [1, targetScale]);
-
-  return (
-    <div style={{
-      height: '85vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      paddingTop: '15vh',
-      position: 'sticky',
-      top: 0
-    }}>
-      <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `${index * 25}px`, position: 'relative' }}>
-        <ServiceFlipCard service={service} isMobile={isMobile} index={index} />
-      </motion.div>
-    </div>
-  );
-}
 // ------------------------------
 
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const mobileContainerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: mobileContainerRef,
-    offset: ['start start', 'end end']
-  });
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -276,16 +248,23 @@ export default function Services() {
           ))}
         </div>
       ) : (
-        <div ref={mobileContainerRef} style={{ position: 'relative', zIndex: 2, padding: '0 var(--pad-x)' }}>
+        <div 
+          className="no-scrollbar"
+          style={{ 
+            position: 'relative', zIndex: 2, 
+            display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory',
+            padding: '2rem var(--pad-x) 4rem', gap: '1rem',
+            scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch'
+          }}
+        >
           {services.map((service, i) => (
-            <MobileStickyServiceCard 
-              key={service.id} 
-              service={service} 
-              index={i} 
-              totalCards={services.length} 
-              progress={scrollYProgress} 
-              isMobile={true} 
-            />
+            <div key={service.id} style={{
+              flexShrink: 0, width: '85vw',
+              scrollSnapAlign: 'center',
+              display: 'flex', alignItems: 'center'
+            }}>
+              <ServiceFlipCard service={service} isMobile={true} index={i} />
+            </div>
           ))}
         </div>
       )}

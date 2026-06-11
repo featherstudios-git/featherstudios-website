@@ -646,3 +646,7 @@ select {
   0%, 100% { box-shadow: 0 0 4px rgba(255,176,0,0.4); }
   50% { box-shadow: 0 0 14px rgba(255,176,0,0.8); }
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
