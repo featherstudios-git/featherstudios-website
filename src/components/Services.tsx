@@ -155,13 +155,14 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     
     // Only apply horizontal scroll on desktop
-    const isDesktop = window.innerWidth > 768;
-    if (!section || !track || !isDesktop) return;
+    if (!section || !track || isMobile) return;
 
     const ctx = gsap.context(() => {
       const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
@@ -183,9 +184,7 @@ export default function Services() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
-
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} id="services" style={{ 
