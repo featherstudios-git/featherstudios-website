@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import { DiscoverAnimation, BuildAnimation, GrowAnimation, SustainAnimation } from './ProcessAnimations';
 
 const steps = [
   {
@@ -156,15 +157,25 @@ function ProcessInner() {
                     transition={{ duration: 0.4, delay: 0.2 }}
                     style={{ 
                       padding: 'clamp(1.5rem, 3vw, 3rem)', 
-                      position: 'relative', zIndex: 2, width: '100%' 
+                      position: 'relative', zIndex: 2, width: '100%',
+                      display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'flex-end', justifyContent: 'space-between', gap: '2rem'
                     }}
                   >
-                    <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--lime)', fontStyle: 'italic', marginBottom: '1rem' }}>
-                      {step.title}
-                    </h3>
-                    <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', color: 'var(--white-2)', lineHeight: 1.6, maxWidth: '500px', margin: 0 }}>
-                      {step.desc}
-                    </p>
+                    <div style={{ flex: 1 }}>
+                      <h3 className="display" style={{ fontSize: 'clamp(2rem, 3vw, 3.5rem)', color: 'var(--lime)', fontStyle: 'italic', marginBottom: '1rem' }}>
+                        {step.title}
+                      </h3>
+                      <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', color: 'var(--white-2)', lineHeight: 1.6, maxWidth: '400px', margin: 0 }}>
+                        {step.desc}
+                      </p>
+                    </div>
+
+                    <div style={{ flexShrink: 0, transform: 'scale(1.2)', transformOrigin: isMobile ? 'left center' : 'right bottom' }}>
+                       {step.num === '01' && <DiscoverAnimation accent="var(--lime)" />}
+                       {step.num === '02' && <BuildAnimation accent="var(--lime)" />}
+                       {step.num === '03' && <GrowAnimation accent="var(--lime)" />}
+                       {step.num === '04' && <SustainAnimation accent="var(--lime)" />}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
