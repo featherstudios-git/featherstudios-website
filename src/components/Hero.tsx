@@ -4,7 +4,7 @@ import { Play, ArrowUpRight } from 'lucide-react';
 import { FadingVideo } from './ui/FadingVideo';
 import { BlurText } from './ui/BlurText';
 
-const VIDEO_SRC = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260506_031045_0e1165dd-ab48-46e3-ad3d-5fe77f217647.mp4';
+const VIDEO_SRC = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260411_104032_69319010-2458-492b-b04d-b40a5dfa4482.mp4';
 
 export default function Hero() {
   return (
