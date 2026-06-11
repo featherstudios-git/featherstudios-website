@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Star } from 'lucide-react';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { DiscoverAnimation, BuildAnimation, GrowAnimation, SustainAnimation } from './ProcessAnimations';
 
@@ -31,15 +30,6 @@ const steps = [
   }
 ];
 
-const testimonials = [
-  { quote: 'Feather Studios completely transformed our online presence. Sales up 40% since launch.', name: 'Marcus K.', role: 'CEO, Apex Solutions', init: 'MK', accent: '#FFB000' },
-  { quote: 'My artist website looks better than any major label site. The animations, the detail — everything is perfect.', name: 'Jay-Lo R.', role: 'Independent Music Artist', init: 'JL', accent: '#a855f7' },
-  { quote: 'The landing page converted at 3× our previous rate. Clean design, sharp copy, ahead of schedule.', name: 'Sophia P.', role: 'Founder, LaunchFast', init: 'SP', accent: '#ec4899' },
-  { quote: '5× ROI in the first month of ads. These guys don\'t just build sites — they build businesses.', name: 'Dani M.', role: 'Owner, Urban Threads', init: 'DM', accent: '#fb923c' },
-  { quote: 'The brand kit blew my mind. My logo is exactly who I am. 10/10, would recommend to everyone.', name: 'Zara V.', role: 'Content Creator — 500K followers', init: 'ZV', accent: '#34d399' },
-  { quote: 'Professional, fast, and incredibly talented. Our corporate site has never looked this good.', name: 'Rahul N.', role: 'Marketing Director, NovaCafe', init: 'RN', accent: '#60a5fa' },
-];
-
 export default function Process() {
   return (
     <>
@@ -61,11 +51,6 @@ export default function Process() {
         <div style={{ position: 'relative', zIndex: 2 }}>
           <ProcessInner />
         </div>
-      </section>
-
-      {/* ── Testimonials ───────────────────────────────────── */}
-      <section id="testimonials" style={{ background: 'var(--black)', borderTop: '1px solid var(--border)', padding: 'var(--pad-y) 0', overflow: 'hidden' }}>
-        <TestimonialsInner />
       </section>
     </>
   );
@@ -213,110 +198,6 @@ function ProcessInner() {
             </motion.div>
           );
         })}
-      </div>
-    </div>
-  );
-}
-
-function TestimonialsInner() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-
-  return (
-    <div>
-      {/* Header */}
-      <div ref={ref} style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '3rem' }}>
-        <div>
-          <motion.span
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            className="label" style={{ display: 'block', marginBottom: '1rem' }}
-          >
-            — Client Reviews
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}
-          >
-            Don't Take Our<br />
-            <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Word For It</span>
-          </motion.h2>
-        </div>
-        <motion.div
-          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.4 }}
-          style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}
-        >
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: '2.5rem', letterSpacing: '-0.04em', color: 'var(--lime)' }}>5.0</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--white-3)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Average Rating</div>
-          </div>
-          <div style={{ height: 55, width: 1, background: 'var(--border)' }} />
-          <div>
-            <div style={{ display: 'flex', gap: 3 }}>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={16} fill="#FFB000" color="#FFB000" />
-              ))}
-            </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--white-3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: 5 }}>50+ Reviews</div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Scrolling track */}
-      <div style={{
-        overflow: 'hidden',
-        maskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
-        WebkitMaskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
-        padding: '0.5rem 0',
-      }}>
-        <motion.div
-          animate={{ x: [0, '-50%'] }}
-          transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
-          style={{ display: 'flex', gap: '1rem', width: 'max-content', flexShrink: 0 }}
-        >
-          {[...testimonials, ...testimonials].map((t, i) => (
-            <TestimonialCard key={i} t={t} />
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
-  return (
-    <div className="liquid-glass" style={{
-      width: 350, minWidth: 350, flexShrink: 0,
-      background: 'rgba(255,255,255,0.02)', border: '1px solid var(--lime-border)',
-      borderRadius: 20, padding: '2rem',
-      display: 'flex', flexDirection: 'column', gap: '1.25rem',
-    }}>
-      {/* Stars */}
-      <div style={{ display: 'flex', gap: 3 }}>
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} size={14} fill={t.accent} color={t.accent} />
-        ))}
-      </div>
-
-      <p style={{ fontSize: '0.9rem', color: 'var(--white-2)', lineHeight: 1.72, fontStyle: 'italic', flex: 1 }}>
-        "{t.quote}"
-      </p>
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <div style={{
-          width: 38, height: 38, borderRadius: '50%', flexShrink: 0,
-          background: `${t.accent}22`, border: `1px solid ${t.accent}40`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.78rem',
-          color: t.accent,
-        }}>
-          {t.init}
-        </div>
-        <div>
-          <div style={{ fontWeight: 600, fontSize: '0.88rem' }}>{t.name}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--white-3)' }}>{t.role}</div>
-        </div>
       </div>
     </div>
   );

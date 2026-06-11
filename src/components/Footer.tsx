@@ -13,7 +13,6 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     { label: 'About Us', href: '#about' },
     { label: 'Our Process', href: '#process' },
     { label: 'Portfolio', href: '#work' },
-    { label: 'Testimonials', href: '#testimonials' },
     { label: 'FAQ', href: '#faq' },
   ],
   Contact: [
