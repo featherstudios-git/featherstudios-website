@@ -106,62 +106,70 @@ export default function Pricing() {
           {/* Right Side: Abstract Visual Animation */}
           <div style={{ flex: '1 1 400px', position: 'relative', minHeight: '400px', borderLeft: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
              
-             {/* Subtle internal glowing grid */}
-             <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(circle at center, var(--lime) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-
-             {/* Complex Circular Wave Animation */}
-             <div style={{ position: 'relative', width: '300px', height: '300px' }}>
-                {[...Array(6)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{ 
-                      scale: [1, 1.5, 1], 
-                      opacity: [0.8, 0, 0.8],
-                      rotate: [0, 90, 180]
-                    }}
-                    transition={{ 
-                      duration: 4, 
-                      repeat: Infinity, 
-                      delay: i * 0.6,
-                      ease: 'easeInOut'
-                    }}
-                    style={{
-                      position: 'absolute', inset: 0,
-                      border: `1px solid ${i % 2 === 0 ? 'var(--lime)' : 'rgba(255,255,255,0.3)'}`,
-                      borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%',
-                      filter: i % 2 === 0 ? 'drop-shadow(0 0 10px var(--lime))' : 'none'
-                    }}
-                  />
-                ))}
-                
-                {/* Core */}
+             {/* The Halo Effect */}
+             <div style={{ position: 'relative', width: '280px', height: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {/* Main Halo */}
                 <motion.div
-                  animate={{ scale: [1, 1.2, 1], filter: ['blur(4px)', 'blur(10px)', 'blur(4px)'] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ position: 'absolute', top: '50%', left: '50%', width: '40px', height: '40px', marginTop: '-20px', marginLeft: '-20px', background: 'var(--lime)', borderRadius: '50%', boxShadow: '0 0 40px var(--lime)' }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                  style={{
+                    position: 'absolute', inset: 0,
+                    borderRadius: '50%',
+                    background: 'linear-gradient(to right, var(--lime) 0%, transparent 50%, transparent 100%)',
+                    padding: '1px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    filter: 'drop-shadow(0 0 20px rgba(56, 189, 248, 0.3))'
+                  }}
                 />
+                
+                {/* Secondary Offset Halo */}
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                  style={{
+                    position: 'absolute', inset: '20px',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(to bottom, var(--white) 0%, transparent 40%, transparent 100%)',
+                    padding: '1px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    opacity: 0.5
+                  }}
+                />
+
+                {/* Inner Glow Core */}
+                <motion.div
+                  animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.4, 0.8, 0.4] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    position: 'absolute',
+                    width: '100px', height: '100px',
+                    borderRadius: '50%',
+                    background: 'radial-gradient(circle, var(--lime) 0%, transparent 70%)',
+                    filter: 'blur(10px)',
+                    opacity: 0.5
+                  }}
+                />
+
+                {/* Center Sharp Dot */}
+                <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--white)', boxShadow: '0 0 10px var(--white)' }} />
              </div>
              
-             {/* Floating UI Elements */}
-             <motion.div 
-               animate={{ y: [-10, 10, -10], rotate: [-5, 5, -5] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-               style={{ position: 'absolute', top: '20%', left: '15%', padding: '8px 12px', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}
-             >
-               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--lime)' }} />
-               <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--white)', letterSpacing: '0.05em' }}>STRATEGY</span>
-             </motion.div>
-             
-             <motion.div 
-               animate={{ y: [10, -10, 10], rotate: [5, -5, 5] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-               style={{ position: 'absolute', bottom: '25%', right: '15%', padding: '8px 12px', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}
-             >
-               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#a855f7' }} />
-               <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--white)', letterSpacing: '0.05em' }}>DESIGN</span>
-             </motion.div>
-             
-             <motion.div 
-               animate={{ x: [-10, 10, -10] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-               style={{ position: 'absolute', top: '70%', left: '20%', width: '40px', height: '4px', background: 'rgba(255,255,255,0.2)', borderRadius: '2px' }}
+             {/* Sweeping Light Ray */}
+             <motion.div
+               animate={{ x: ['-200%', '200%'] }}
+               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2 }}
+               style={{
+                 position: 'absolute',
+                 top: 0, bottom: 0, left: '50%',
+                 width: '1px',
+                 background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent)',
+                 transform: 'rotate(45deg)',
+                 filter: 'blur(2px)'
+               }}
              />
 
           </div>
