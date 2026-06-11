@@ -92,9 +92,9 @@ export default function Hero() {
             whileTap={{ scale: 0.95 }}
             style={{
               display: 'flex', alignItems: 'center', gap: '0.75rem',
-              padding: '1rem 2.2rem', borderRadius: '100px',
+              padding: '0.85rem 1.75rem', borderRadius: '100px',
               background: 'var(--lime)', color: 'var(--black)', 
-              textDecoration: 'none', fontSize: '1rem', fontWeight: 600,
+              textDecoration: 'none', fontSize: '0.95rem', fontWeight: 600,
               boxShadow: '0 10px 20px rgba(0,0,0,0.5)',
               border: '1px solid var(--lime)'
             }}
