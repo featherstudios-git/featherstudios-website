@@ -4,6 +4,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Globe, Rocket, ShoppingBag, Search, Megaphone, Palette, Video } from 'lucide-react';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import { 
+  WebDevAnimation, LandingPageAnimation, EcomAnimation, 
+  SeoAnimation, SocialAdsAnimation, BrandAnimation, ContentAnimation 
+} from './ServiceAnimations';
 
 import { useState } from 'react';
 
@@ -26,48 +30,19 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
   const AbstractAnimation = () => {
     switch (service.id) {
       case 'web':
-        return (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', width: '100px', height: '100px' }}>
-            {[...Array(9)].map((_, i) => (
-              <motion.div key={i} animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1, 0.8] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }} style={{ background: service.accent, borderRadius: '4px' }} />
-            ))}
-          </div>
-        );
+        return <WebDevAnimation accent={service.accent} />;
       case 'landing':
-        return (
-          <motion.div animate={{ y: [60, -60], opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeOut' }} style={{ width: '4px', height: '80px', background: `linear-gradient(to top, transparent, ${service.accent})`, borderRadius: '100px' }} />
-        );
+        return <LandingPageAnimation accent={service.accent} />;
       case 'ecom':
-        return (
-          <div style={{ position: 'relative', width: '100px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-             {[...Array(3)].map((_, i) => (
-               <motion.div key={i} animate={{ scale: [1, 3], opacity: [0.8, 0] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.6 }} style={{ position: 'absolute', width: '40px', height: '40px', border: `2px solid ${service.accent}`, borderRadius: '50%' }} />
-             ))}
-          </div>
-        );
+        return <EcomAnimation accent={service.accent} />;
       case 'seo':
-        return (
-          <motion.div animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: 'linear' }} style={{ width: '100px', height: '100px', borderRadius: '50%', border: `1px solid ${service.accent}40`, borderTop: `4px solid ${service.accent}`, boxShadow: `0 0 20px ${service.accent}40` }} />
-        );
+        return <SeoAnimation accent={service.accent} />;
       case 'social':
-        return (
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', height: '100px' }}>
-            {[...Array(5)].map((_, i) => (
-               <motion.div key={i} animate={{ height: ['20px', '80px', '20px'] }} transition={{ duration: 1, repeat: Infinity, delay: i * 0.1, ease: 'easeInOut' }} style={{ width: '8px', background: service.accent, borderRadius: '4px' }} />
-            ))}
-          </div>
-        );
+        return <SocialAdsAnimation accent={service.accent} />;
       case 'brand':
-        return (
-          <motion.div animate={{ rotate: [0, 180, 360] }} transition={{ duration: 6, repeat: Infinity, ease: 'linear' }} style={{ display: 'flex', gap: '10px' }}>
-             <div style={{ width: '60px', height: '60px', borderRadius: '50%', border: `6px solid ${service.accent}`, mixBlendMode: 'screen' }} />
-             <div style={{ width: '60px', height: '60px', borderRadius: '50%', border: `6px solid ${service.accent}`, mixBlendMode: 'screen', marginLeft: '-30px' }} />
-          </motion.div>
-        );
+        return <BrandAnimation accent={service.accent} />;
       case 'content':
-        return (
-          <motion.div animate={{ rotate: 360, scale: [1, 1.2, 1] }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }} style={{ width: '0', height: '0', borderLeft: `60px solid ${service.accent}`, borderTop: '40px solid transparent', borderBottom: '40px solid transparent' }} />
-        );
+        return <ContentAnimation accent={service.accent} />;
       default: return null;
     }
   };
