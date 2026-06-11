@@ -50,18 +50,33 @@ export default function Work() {
       paddingTop: 'var(--pad-y)',
       paddingBottom: 'var(--pad-y)'
     }}>
-      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)' }}>
+      {/* Dynamic Ambient Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', top: '-10%', right: '-10%', width: '50%', height: '50%', background: 'var(--lime)', opacity: 0.08, filter: 'blur(120px)', borderRadius: '50%' }} />
+        {/* Subtle Grid Lines */}
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: '25%', width: '1px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.03), transparent)' }} />
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: '1px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.05), transparent)' }} />
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: '75%', width: '1px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.03), transparent)' }} />
+      </div>
+
+      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 var(--pad-x)', position: 'relative', zIndex: 2 }}>
         
-        {/* Header */}
-        <h2 className="display" style={{ 
-          fontSize: 'clamp(3rem, 6vw, 5rem)', 
-          color: 'var(--white)', 
-          margin: '0 0 4rem 0', 
-          lineHeight: 1 
-        }}>
-          Selected<br />
-          <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Work</span>
-        </h2>
+        {/* Header - Repositioned to use horizontal space */}
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem', marginBottom: '2rem' }}>
+          <h2 className="display" style={{ 
+            fontSize: 'clamp(4rem, 8vw, 6rem)', 
+            color: 'var(--white)', 
+            margin: 0, 
+            lineHeight: 0.9,
+            letterSpacing: '-0.02em'
+          }}>
+            Selected<br />
+            <span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Work</span>
+          </h2>
+          <p style={{ maxWidth: '320px', color: 'var(--white-2)', margin: 0, paddingBottom: '0.5rem', fontSize: '1.1rem', lineHeight: 1.6 }}>
+            A curated collection of bespoke digital architectures. Designed to perform, built to scale.
+          </p>
+        </div>
 
         {/* Sticky Scroll Container */}
         <div ref={containerRef} style={{ position: 'relative' }}>
