@@ -149,6 +149,26 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
     </motion.div>
   );
 }
+
+function MobileStickyServiceCard({ service, index, totalCards, progress, isMobile }: any) {
+  const targetScale = 1 - (totalCards - 1 - index) * 0.04;
+  const scale = useTransform(progress, [index / totalCards, 1], [1, targetScale]);
+
+  return (
+    <div style={{
+      height: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'sticky',
+      top: 0
+    }}>
+      <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `calc(15vh + ${index * 20}px)`, position: 'relative' }}>
+        <ServiceFlipCard service={service} isMobile={isMobile} index={index} />
+      </motion.div>
+    </div>
+  );
+}
 // ------------------------------
 
 export default function Services() {
@@ -258,26 +278,16 @@ export default function Services() {
         </div>
       ) : (
         <div ref={mobileContainerRef} style={{ position: 'relative', zIndex: 2, padding: '0 var(--pad-x)' }}>
-          {services.map((service, i) => {
-            const totalCards = services.length;
-            const targetScale = 1 - (totalCards - 1 - i) * 0.04;
-            const scale = useTransform(scrollYProgress, [i / totalCards, 1], [1, targetScale]);
-
-            return (
-              <div key={service.id} style={{
-                height: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'sticky',
-                top: 0
-              }}>
-                <motion.div style={{ width: '100%', scale, transformOrigin: 'top center', top: `calc(15vh + ${i * 20}px)`, position: 'relative' }}>
-                  <ServiceFlipCard service={service} isMobile={true} index={i} />
-                </motion.div>
-              </div>
-            );
-          })}
+          {services.map((service, i) => (
+            <MobileStickyServiceCard 
+              key={service.id} 
+              service={service} 
+              index={i} 
+              totalCards={services.length} 
+              progress={scrollYProgress} 
+              isMobile={true} 
+            />
+          ))}
         </div>
       )}
     </section>
