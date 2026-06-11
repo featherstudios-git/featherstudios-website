@@ -238,7 +238,7 @@ export default function Services() {
           alignItems: 'flex-end', 
           paddingBottom: '12vh',
           paddingLeft: 'max(40vw, 350px)', 
-          paddingRight: '15vw', 
+          paddingRight: '5vw', 
           width: 'fit-content',
           position: 'relative', zIndex: 2, 
           gap: '3rem',
