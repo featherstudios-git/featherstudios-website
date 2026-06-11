@@ -103,78 +103,84 @@ export default function Pricing() {
             </motion.div>
           </div>
 
-          {/* Right Side: Visual Representation of Collaboration */}
-          <div style={{ flex: '1 1 400px', position: 'relative', minHeight: '400px', borderLeft: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: 'rgba(0,0,0,0.1)' }}>
+          {/* Right Side: 3D Isometric Collaboration Mockup */}
+          <div style={{ flex: '1 1 400px', position: 'relative', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
              
-             {/* Subtle internal glowing grid */}
-             <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(circle at center, var(--lime) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+             {/* The Isometric Container */}
+             <div style={{ position: 'relative', width: '280px', height: '280px', transformStyle: 'preserve-3d', transform: 'rotateX(60deg) rotateZ(-45deg)' }}>
+                
+                {/* Base Layer: Calendar Dashboard */}
+                <div 
+                  className="liquid-glass"
+                  style={{ position: 'absolute', inset: 0, borderRadius: '24px', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(0,0,0,0.4)', padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px', boxShadow: '20px 20px 60px rgba(0,0,0,0.6)', transform: 'translateZ(0px)' }}
+                >
+                  <div style={{ width: '40%', height: '8px', background: 'var(--white)', borderRadius: '4px', marginBottom: '10px' }} />
+                  {/* Grid */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', flex: 1 }}>
+                     {[...Array(12)].map((_, i) => (
+                       <motion.div 
+                         key={i}
+                         animate={i === 5 || i === 9 ? { backgroundColor: ['rgba(255,255,255,0.05)', 'var(--lime)', 'rgba(255,255,255,0.05)'] } : {}}
+                         transition={{ duration: 4, repeat: Infinity, delay: i * 0.15 }}
+                         style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '6px', border: i === 5 || i === 9 ? '1px solid var(--lime)' : '1px solid rgba(255,255,255,0.02)' }}
+                       />
+                     ))}
+                  </div>
+                </div>
 
-             {/* Connection Line */}
-             <div style={{ position: 'absolute', width: '240px', height: '2px', background: 'rgba(255,255,255,0.05)', transform: 'rotate(-35deg)', zIndex: 1 }}>
-               <motion.div animate={{ x: ['-100px', '300px'] }} transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }} style={{ width: '40px', height: '100%', background: 'var(--lime)', filter: 'blur(2px)', borderRadius: '2px' }} />
+                {/* Layer 2: Floating Strategy Document */}
+                <motion.div 
+                  animate={{ translateZ: [40, 60, 40] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ position: 'absolute', top: '-10%', right: '-20%', width: '140px', height: '180px', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', padding: '20px', boxShadow: '20px 20px 40px rgba(0,0,0,0.4)', display: 'flex', flexDirection: 'column', gap: '12px' }}
+                >
+                  <div style={{ width: '24px', height: '24px', background: '#a855f7', borderRadius: '6px', marginBottom: '8px' }} />
+                  <div style={{ width: '90%', height: '6px', background: 'var(--white)', borderRadius: '3px' }} />
+                  <div style={{ width: '70%', height: '4px', background: 'rgba(255,255,255,0.5)', borderRadius: '2px' }} />
+                  <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.2)', borderRadius: '2px', marginTop: '10px' }} />
+                  <div style={{ width: '80%', height: '4px', background: 'rgba(255,255,255,0.2)', borderRadius: '2px' }} />
+                </motion.div>
+
+                {/* Layer 3: Dynamic Chat Bubble / Notification */}
+                <motion.div 
+                  animate={{ translateZ: [80, 100, 80], x: [-10, 10, -10] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                  style={{ position: 'absolute', bottom: '0%', left: '-30%', width: '180px', padding: '16px', background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid var(--lime)', borderRadius: '20px', boxShadow: '10px 10px 40px rgba(191,255,0,0.15)', display: 'flex', alignItems: 'center', gap: '12px' }}
+                >
+                  <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity }} style={{ width: '16px', height: '16px', background: 'var(--lime)', borderRadius: '50%', boxShadow: '0 0 15px var(--lime)' }} />
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <div style={{ width: '100%', height: '4px', background: 'var(--white)', borderRadius: '2px' }} />
+                    <div style={{ width: '60%', height: '4px', background: 'rgba(255,255,255,0.5)', borderRadius: '2px' }} />
+                  </div>
+                </motion.div>
+
+                {/* Floating Animated Cursor */}
+                <motion.div
+                  animate={{ 
+                    x: ['10%', '80%', '50%', '10%'], 
+                    y: ['80%', '20%', '70%', '80%'],
+                    translateZ: [140, 140, 140, 140] 
+                  }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ position: 'absolute', top: 0, left: 0, width: '32px', height: '32px', filter: 'drop-shadow(10px 10px 10px rgba(0,0,0,0.5))', zIndex: 100 }}
+                >
+                  <svg viewBox="0 0 24 24" fill="var(--white)" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
+                    <path d="M4 2L20 10L13 13L10 20L4 2Z" stroke="var(--black)" strokeWidth="2" strokeLinejoin="round" />
+                  </svg>
+                  {/* Clicking ripple effect */}
+                  <motion.div
+                    animate={{ scale: [0, 2], opacity: [1, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 1 }}
+                    style={{ position: 'absolute', top: '0', left: '0', width: '20px', height: '20px', border: '2px solid var(--lime)', borderRadius: '50%', transform: 'translate(-5px, -5px)' }}
+                  />
+                </motion.div>
+
+                {/* Scanning Laser Overlay */}
+                <motion.div
+                  animate={{ y: ['-100%', '300%'] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                  style={{ position: 'absolute', top: 0, left: '-50%', width: '200%', height: '30px', background: 'linear-gradient(to bottom, transparent, var(--lime) 50%, transparent)', opacity: 0.15, filter: 'blur(5px)', transform: 'translateZ(10px)' }}
+                />
+
              </div>
-
-             {/* Chat / Message Card */}
-             <motion.div 
-               animate={{ y: [-15, 5, -15] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-               className="liquid-glass"
-               style={{ position: 'absolute', top: '20%', left: '15%', width: '160px', padding: '15px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', zIndex: 3 }}
-             >
-               <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                 <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: '#a855f7' }} />
-                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px', justifyContent: 'center' }}>
-                   <div style={{ width: '60%', height: '4px', background: 'var(--white)', borderRadius: '2px' }} />
-                   <div style={{ width: '40%', height: '4px', background: 'var(--white-3)', borderRadius: '2px' }} />
-                 </div>
-               </div>
-               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '8px 8px 8px 0', width: '80%' }}>
-                 <div style={{ display: 'flex', gap: '4px' }}>
-                   {[0,1,2].map(i => (
-                     <motion.div key={i} animate={{ y: [0, -3, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.2 }} style={{ width: '4px', height: '4px', background: 'var(--white)', borderRadius: '50%' }} />
-                   ))}
-                 </div>
-               </div>
-             </motion.div>
-
-             {/* Calendar / Schedule Card */}
-             <motion.div 
-               animate={{ y: [15, -5, 15] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-               className="liquid-glass"
-               style={{ position: 'absolute', bottom: '20%', right: '15%', width: '180px', padding: '15px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', zIndex: 3 }}
-             >
-               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                 <div style={{ width: '40%', height: '6px', background: 'var(--white)', borderRadius: '3px' }} />
-                 <div style={{ width: '20px', height: '6px', background: 'var(--lime)', borderRadius: '3px' }} />
-               </div>
-               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
-                 {[...Array(12)].map((_, i) => (
-                   <motion.div 
-                     key={i}
-                     animate={i === 7 ? { scale: [1, 1.1, 1], boxShadow: ['0 0 0px var(--lime)', '0 0 10px var(--lime)', '0 0 0px var(--lime)'] } : {}}
-                     transition={{ duration: 2, repeat: Infinity }}
-                     style={{ 
-                       height: '24px', 
-                       background: i === 7 ? 'var(--lime)' : 'rgba(255,255,255,0.05)', 
-                       borderRadius: '4px',
-                       border: i === 7 ? 'none' : '1px solid rgba(255,255,255,0.05)'
-                     }} 
-                   />
-                 ))}
-               </div>
-             </motion.div>
-
-             {/* Central Glowing Core (The Meeting Point) */}
-             <motion.div 
-               animate={{ scale: [0.9, 1.2, 0.9], rotate: [0, 90, 180] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-               style={{ position: 'absolute', width: '60px', height: '60px', background: 'var(--lime)', borderRadius: '12px', opacity: 0.15, filter: 'blur(15px)', transform: 'rotate(45deg)', zIndex: 1 }}
-             />
-             <motion.div 
-               animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-               style={{ position: 'absolute', width: '30px', height: '30px', border: '2px solid var(--lime)', borderRadius: '8px', transform: 'rotate(45deg)', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)' }}
-             >
-               <div style={{ width: '6px', height: '6px', background: 'var(--white)', borderRadius: '50%', boxShadow: '0 0 10px var(--white)' }} />
-             </motion.div>
-
           </div>
         </motion.div>
 
