@@ -206,7 +206,7 @@ export default function About() {
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 style={{ display: 'flex', flexDirection: 'column', gap: '2rem', padding: '1rem', borderRadius: '24px' }}
               >
-                {/* Professional Avatar Circle */}
+                {/* Professional Avatar Circle with Blue Theme */}
                 <div style={{
                   width: 'clamp(100px, 12vw, 140px)',
                   aspectRatio: '1/1',
@@ -214,17 +214,17 @@ export default function About() {
                   position: 'relative',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem',
-                  color: 'var(--white)',
+                  color: 'var(--lime)',
                   overflow: 'hidden',
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+                  background: 'linear-gradient(145deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.9) 100%)',
+                  border: '2px solid var(--lime)',
+                  boxShadow: '0 10px 30px rgba(56,189,248,0.2), inset 0 0 15px rgba(56,189,248,0.1)'
                 }}>
-                  {/* Subtle Premium Sweep */}
+                  {/* Subtle Pulse */}
                   <motion.div 
-                    animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                    style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent)', backgroundSize: '200% 100%', zIndex: 1 }}
+                    animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                    style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle, var(--lime-dim) 0%, transparent 70%)', zIndex: 1 }}
                   />
                   <span style={{ position: 'relative', zIndex: 2 }}>
                     {f.initials}
@@ -367,6 +367,9 @@ function NodeAnimation() {
 
 /* --- Founder Modal --- */
 function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClose: () => void }) {
+  const quoteWords = founder.quote.split(" ");
+  const bioWords = founder.bio.split(" ");
+
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
       
@@ -374,87 +377,104 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
         onClick={onClose}
-        style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(15px)', WebkitBackdropFilter: 'blur(15px)', cursor: 'pointer' }} 
+        style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)', cursor: 'pointer' }} 
       />
 
-      {/* Modal Card - High-End Editorial Design */}
+      {/* Modal Card - Glassmorphic Masterpiece */}
       <motion.div 
-        initial={{ opacity: 0, y: 50, scale: 0.98 }}
+        initial={{ opacity: 0, y: 100, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 20, scale: 0.98 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        exit={{ opacity: 0, y: 50, scale: 0.95 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="liquid-glass-strong"
         style={{ 
           position: 'relative', zIndex: 1, 
-          width: '100%', maxWidth: '900px', 
-          background: 'var(--black)',
-          borderRadius: '24px', 
+          width: '100%', maxWidth: '1000px', 
+          borderRadius: '32px', 
           overflow: 'hidden',
           display: 'flex', flexDirection: 'row', flexWrap: 'wrap',
-          boxShadow: '0 40px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.05)'
+          boxShadow: '0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 40px rgba(56,189,248,0.05)'
         }}
       >
+        {/* Glow effect behind */}
+        <div style={{ position: 'absolute', top: '-20%', left: '-10%', width: '50%', height: '50%', background: 'var(--lime)', opacity: 0.1, filter: 'blur(100px)', borderRadius: '50%', zIndex: 0 }} />
+
         {/* Close Button */}
         <button 
           onClick={onClose}
-          style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', cursor: 'pointer', transition: 'all 0.3s ease', zIndex: 10 }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--white)'; e.currentTarget.style.color = 'var(--black)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'var(--white)'; }}
+          style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', cursor: 'pointer', transition: 'all 0.3s ease', zIndex: 10 }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--lime)'; e.currentTarget.style.color = 'var(--black)'; e.currentTarget.style.borderColor = 'var(--lime)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'var(--white)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
         >
-          <CloseIcon size={18} />
+          <CloseIcon size={20} />
         </button>
 
         {/* Left Side: Avatar Panel */}
-        <div style={{ flex: '1 1 300px', background: 'var(--black-2)', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ flex: '1 1 350px', padding: '4rem 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1, borderRight: '1px solid rgba(255,255,255,0.05)' }}>
           <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1, duration: 0.5 }}
+            initial={{ scale: 0.8, opacity: 0, rotateY: -30 }} animate={{ scale: 1, opacity: 1, rotateY: 0 }} transition={{ delay: 0.1, duration: 0.8, type: 'spring' }}
             style={{
-              width: '160px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative',
+              width: '180px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '3.5rem', color: 'var(--white)',
-              background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.5)', marginBottom: '2.5rem', overflow: 'hidden'
+              fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '4rem', color: 'var(--lime)',
+              background: 'linear-gradient(145deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%)',
+              border: '2px solid var(--lime)',
+              boxShadow: '0 0 40px rgba(56,189,248,0.3), inset 0 0 20px rgba(56,189,248,0.2)', marginBottom: '3rem'
             }}
           >
-            {/* Subtle Premium Sweep */}
-            <motion.div 
-              animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-              style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent)', backgroundSize: '200% 100%', zIndex: 1 }}
-            />
             <span style={{ position: 'relative', zIndex: 2 }}>{founder.initials}</span>
           </motion.div>
           
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ display: 'flex', gap: '0.8rem' }}>
-             <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={16} />} />
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ display: 'flex', gap: '1rem' }}>
+             <SocialBtn href={founder.twitter} label="X (Twitter)" icon={<X size={18} />} />
              <SocialBtn href={founder.linkedin} label="LinkedIn" icon={<LinkedinIcon />} />
              <SocialBtn href={founder.instagram} label="Instagram" icon={<InstagramIcon />} />
           </motion.div>
         </div>
 
         {/* Right Side: Editorial Content */}
-        <div style={{ flex: '2 1 400px', padding: 'clamp(2.5rem, 5vw, 4rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-            <h3 className="display" style={{ fontSize: 'clamp(2.5rem, 4vw, 3rem)', color: 'var(--white)', margin: '0 0 0.8rem 0', letterSpacing: '-0.02em', lineHeight: 1 }}>
+        <div style={{ flex: '2 1 400px', padding: 'clamp(3rem, 5vw, 5rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
+          <div style={{ marginBottom: '2.5rem' }}>
+            <motion.h3 
+              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2, duration: 0.6 }} 
+              className="display" style={{ fontSize: 'clamp(3rem, 5vw, 4rem)', color: 'var(--white)', margin: '0 0 1rem 0', letterSpacing: '-0.03em', lineHeight: 1 }}
+            >
               {founder.name}
-            </h3>
-            <div style={{ display: 'inline-block', padding: '0.4rem 1rem', background: 'rgba(191,255,0,0.1)', border: '1px solid rgba(191,255,0,0.2)', borderRadius: '100px', color: 'var(--lime)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '2.5rem' }}>
+            </motion.h3>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }}
+              style={{ display: 'inline-flex', alignItems: 'center', padding: '0.5rem 1.2rem', background: 'var(--lime-dim)', border: '1px solid var(--lime-border)', borderRadius: '100px', color: 'var(--lime)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}
+            >
               {founder.role}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
           
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ marginBottom: '2rem', position: 'relative' }}>
-            <span style={{ position: 'absolute', left: '-1rem', top: '-1rem', color: 'rgba(255,255,255,0.05)', fontSize: '5rem', fontFamily: 'serif', lineHeight: 1, pointerEvents: 'none' }}>"</span>
-            <p style={{ fontSize: '1.4rem', color: 'var(--white)', fontStyle: 'italic', margin: 0, lineHeight: 1.5, position: 'relative', zIndex: 1 }}>
-              {founder.quote}
-            </p>
-          </motion.div>
+          <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+            <span style={{ position: 'absolute', left: '-1.5rem', top: '-1.5rem', color: 'rgba(56,189,248,0.15)', fontSize: '6rem', fontFamily: 'var(--font-display)', lineHeight: 1, pointerEvents: 'none' }}>"</span>
+            <h4 className="display" style={{ fontSize: '1.6rem', color: 'var(--white)', fontStyle: 'italic', margin: 0, lineHeight: 1.4, position: 'relative', zIndex: 1, fontWeight: 400 }}>
+              {quoteWords.map((word, i) => (
+                <motion.span 
+                  key={i} initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.5, delay: 0.3 + (i * 0.04), ease: 'easeOut' }}
+                  style={{ display: 'inline-block', marginRight: '0.25em' }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h4>
+          </div>
 
-          <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.3 }} style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.2)', marginBottom: '2rem', transformOrigin: 'left' }} />
+          <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 0.5, duration: 0.8 }} style={{ width: '60px', height: '2px', background: 'var(--lime-border)', marginBottom: '2.5rem', transformOrigin: 'left' }} />
 
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ color: 'var(--white-2)', lineHeight: 1.7, fontSize: '1.05rem', margin: 0, maxWidth: '95%' }}>
-            {founder.bio}
-          </motion.p>
+          <p style={{ color: 'var(--white-2)', lineHeight: 1.8, fontSize: '1.1rem', margin: 0, maxWidth: '95%' }}>
+            {bioWords.map((word, i) => (
+              <motion.span 
+                key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.6 + (i * 0.02) }}
+                style={{ display: 'inline-block', marginRight: '0.25em' }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </p>
         </div>
 
       </motion.div>
