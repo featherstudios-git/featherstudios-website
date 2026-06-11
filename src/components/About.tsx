@@ -36,7 +36,7 @@ export default function About() {
     <section id="about" style={{
       position: 'relative',
       background: 'var(--black)',
-      paddingTop: 'calc(var(--pad-y) * 2)',
+      paddingTop: 'var(--pad-y)',
       paddingBottom: 'calc(var(--pad-y) * 2)',
       zIndex: 10,
     }}>

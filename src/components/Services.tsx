@@ -194,7 +194,7 @@ export default function Services() {
       minHeight: isMobile ? 'auto' : '100vh', 
       position: 'relative', 
       overflow: 'hidden',
-      paddingBottom: isMobile ? '6rem' : 0
+      paddingBottom: isMobile ? '2rem' : 0
     }}>
       {/* Background Video */}
       <video
@@ -236,7 +236,7 @@ export default function Services() {
           flexDirection: 'row',
           height: '100vh', 
           alignItems: 'flex-end', 
-          paddingBottom: '12vh',
+          paddingBottom: '5vh',
           paddingLeft: 'max(40vw, 350px)', 
           paddingRight: '5vw', 
           width: 'fit-content',
@@ -266,6 +266,7 @@ export default function Services() {
               <ServiceFlipCard service={service} isMobile={true} index={i} />
             </div>
           ))}
+          <div style={{ flexShrink: 0, width: '5vw' }} />
         </div>
       )}
     </section>

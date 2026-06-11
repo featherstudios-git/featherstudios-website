@@ -13,7 +13,6 @@ import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ScrollFeather3D from './components/ScrollFeather3D';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -57,7 +56,6 @@ export default function App() {
         </main>
         <Footer />
       </div>
-      <ScrollFeather3D />
     </>
   );
 }
