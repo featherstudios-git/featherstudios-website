@@ -104,11 +104,13 @@ export default function Hero() {
           
           <motion.a 
             href="#work"
-            whileHover={{ x: 10, color: 'var(--lime)' }}
+            whileHover={{ borderColor: 'var(--lime)', color: 'var(--lime)', x: 5 }}
             style={{
               display: 'flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.85rem 1.75rem', borderRadius: '100px',
+              border: '1px solid transparent',
               color: 'var(--white)', textDecoration: 'none',
-              fontSize: '1rem', fontWeight: 500, transition: 'color 0.3s ease'
+              fontSize: '0.95rem', fontWeight: 500, transition: 'all 0.3s ease'
             }}
           >
             Explore Work <ArrowDown size={18} />
