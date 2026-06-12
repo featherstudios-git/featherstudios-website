@@ -223,46 +223,61 @@ function AnimatedNumber({ value, prefix = '', suffix = '', isFloat = false }: { 
 
 function FbAdsAnimation() {
   return (
-    <div style={{ background: '#18191A', borderRadius: 'clamp(12px, 3vw, 40px)', padding: '1.5rem', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
-      <div style={{ color: '#E4E6EB', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 'auto' }}>Meta Ads Manager</div>
+    <motion.div 
+      whileHover={{ y: -8, scale: 1.02, boxShadow: '0 20px 40px rgba(24, 119, 242, 0.15)', borderColor: 'rgba(24, 119, 242, 0.3)' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      style={{ background: '#18191A', borderRadius: 'clamp(12px, 3vw, 40px)', padding: '1.5rem', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)', cursor: 'default' }}
+    >
+      <div style={{ color: '#E4E6EB', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 'auto' }}>Ads Manager</div>
       <div style={{ position: 'relative', zIndex: 2 }}>
         <div style={{ color: '#B0B3B8', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Impressions Generated</div>
         <div style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#1877F2', fontWeight: 800, fontFamily: 'var(--font-display)', lineHeight: 1 }}>
-          <AnimatedNumber value={10} suffix="M+" />
+          <AnimatedNumber value={100} suffix="K+" />
         </div>
       </div>
       <RisingChart color="rgba(24, 119, 242, 0.4)" />
-    </div>
+    </motion.div>
   );
 }
 
 function GoogleAdsAnimation() {
   return (
-    <div style={{ background: '#202124', borderRadius: 'clamp(12px, 3vw, 40px)', padding: '1.5rem', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
-      <div style={{ color: '#E8EAED', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 'auto' }}>Google Ads</div>
+    <motion.div 
+      whileHover={{ y: -8, scale: 1.02, boxShadow: '0 20px 40px rgba(52, 168, 83, 0.15)', borderColor: 'rgba(52, 168, 83, 0.3)' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      style={{ background: '#202124', borderRadius: 'clamp(12px, 3vw, 40px)', padding: '1.5rem', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)', cursor: 'default' }}
+    >
+      <div style={{ color: '#E8EAED', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 'auto' }}>Ads Manager</div>
       <div style={{ position: 'relative', zIndex: 2 }}>
-        <div style={{ color: '#9AA0A6', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Revenue Earned</div>
+        <div style={{ color: '#9AA0A6', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Leads Generated</div>
         <div style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#34A853', fontWeight: 800, fontFamily: 'var(--font-display)', lineHeight: 1 }}>
-          <AnimatedNumber value={2.5} prefix="$" suffix="M+" isFloat={true} />
+          <AnimatedNumber value={100} suffix="+" />
         </div>
       </div>
       <RisingChart color="rgba(52, 168, 83, 0.4)" />
-    </div>
+    </motion.div>
   );
 }
 
 function ContentCreationAnimation() {
   return (
-    <div style={{ background: 'linear-gradient(145deg, #111, #1a1a1a)', borderRadius: 'clamp(12px, 3vw, 40px)', padding: '2rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
+    <motion.div 
+      whileHover={{ y: -8, scale: 1.02, boxShadow: '0 20px 40px rgba(163, 230, 53, 0.15)', borderColor: 'rgba(163, 230, 53, 0.3)' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      style={{ background: 'linear-gradient(145deg, #111, #1a1a1a)', borderRadius: 'clamp(12px, 3vw, 40px)', padding: '2rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)', cursor: 'default' }}
+    >
       <div style={{ color: '#FFF', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', position: 'relative', zIndex: 2 }}>Content Studio</div>
       <div style={{ position: 'relative', zIndex: 2 }}>
         <div style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--lime)', fontWeight: 800, fontFamily: 'var(--font-display)', lineHeight: 1, marginBottom: '0.5rem' }}>
-          <AnimatedNumber value={150} suffix="+" />
+          <AnimatedNumber value={5} suffix="+" />
         </div>
         <div style={{ color: 'var(--white-2)', fontSize: '1.1rem' }}>Videos Shot, Edited & Designed</div>
+        <div style={{ color: 'var(--lime-dim)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', marginTop: '0.5rem', fontStyle: 'italic' }}>
+          (still counting)
+        </div>
       </div>
       <VideoTimeline />
-    </div>
+    </motion.div>
   );
 }
 
