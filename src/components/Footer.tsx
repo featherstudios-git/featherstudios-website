@@ -79,12 +79,11 @@ export default function Footer() {
           {/* Brand col */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.25rem' }}>
-              <div style={{ width: 28, height: 28, background: 'var(--lime)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
-                  <path d="M3 15 C3 15 9 12 15 3 C12 6 9 9 9 15" stroke="#0C0C0C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M3 15 C3 15 6 9 15 3" stroke="#0C0C0C" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
-                </svg>
-              </div>
+              <img 
+                src="/feather_icon.jpg" 
+                alt="Feather Studios" 
+                style={{ width: 28, height: 28, borderRadius: 7, objectFit: 'cover' }} 
+              />
               <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1rem', letterSpacing: '-0.02em' }}>
                 Feather<span style={{ color: 'var(--lime)' }}>.</span>
               </span>

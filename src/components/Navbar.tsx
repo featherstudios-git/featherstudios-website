@@ -70,17 +70,11 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#hero" onClick={(e) => { e.preventDefault(); handleNav('#hero'); }}
             style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <div style={{
-              width: 32, height: 32,
-              background: 'var(--lime)',
-              borderRadius: 8,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M3 15 C3 15 9 12 15 3 C12 6 9 9 9 15" stroke="#0C0C0C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M3 15 C3 15 6 9 15 3" stroke="#0C0C0C" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
-              </svg>
-            </div>
+            <img 
+              src="/feather_icon.jpg" 
+              alt="Feather Studios" 
+              style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'cover' }} 
+            />
             <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1rem', letterSpacing: '-0.02em', color: 'var(--white)' }}>
               Feather<span style={{ color: 'var(--lime)' }}>.</span>
             </span>
