@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, MessageCircle, Clock, Camera, X, Link2, Paintbrush } from 'lucide-react';
+import { Mail, MessageCircle, Clock, Camera, X, Link2, Paintbrush, MapPin } from 'lucide-react';
 
 export default function Contact() {
   const ref = useRef(null);
