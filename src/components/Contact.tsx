@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, MessageCircle, Clock, Camera, X, Link2, Paintbrush } from 'lucide-react';
-
+import { Mail, MessageCircle, Clock } from 'lucide-react';
+import { FaInstagram, FaXTwitter, FaLinkedin } from 'react-icons/fa6';
 export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
@@ -62,10 +62,9 @@ export default function Contact() {
   ];
 
   const socialLinks = [
-    { Icon: Camera, label: 'Instagram', href: '#' },
-    { Icon: X, label: 'X (Twitter)', href: '#' },
-    { Icon: Link2, label: 'LinkedIn', href: '#' },
-    { Icon: Paintbrush, label: 'Behance', href: '#' },
+    { Icon: FaInstagram, label: 'Instagram', href: 'https://www.instagram.com/feather.studios.in/' },
+    { Icon: FaXTwitter, label: 'X (Twitter)', href: 'https://x.com/featherstudiosx' },
+    { Icon: FaLinkedin, label: 'LinkedIn', href: '#' },
   ];
 
   return (
