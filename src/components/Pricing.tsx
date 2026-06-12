@@ -104,8 +104,9 @@ export default function Pricing() {
               style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}
             >
               <a 
-                href="#contact" 
-                onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                href="https://cal.com/feather-studios" 
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="btn btn-lime"
                 style={{ 
                   display: 'flex', alignItems: 'center', gap: '10px', 
@@ -119,8 +120,7 @@ export default function Pricing() {
               </a>
               
               <a 
-                href="#contact" 
-                onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                href="mailto:featherstudiosxyz@gmail.com" 
                 className="btn"
                 style={{ 
                   display: 'flex', alignItems: 'center', gap: '10px', 

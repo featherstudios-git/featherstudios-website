@@ -1,4 +1,4 @@
-import { Camera, Link2, X } from 'lucide-react';
+import { FaInstagram, FaXTwitter, FaLinkedin } from 'react-icons/fa6';
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
   Services: [
@@ -23,9 +23,9 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
 };
 
 const socialLinks = [
-  { Icon: Camera, label: 'Instagram', href: 'https://www.instagram.com/feather.studios.in/' },
-  { Icon: X, label: 'X', href: 'https://x.com/featherstudiosx' },
-  { Icon: Link2, label: 'LinkedIn', href: '#' },
+  { Icon: FaInstagram, label: 'Instagram', href: 'https://www.instagram.com/feather.studios.in/' },
+  { Icon: FaXTwitter, label: 'X', href: 'https://x.com/featherstudiosx' },
+  { Icon: FaLinkedin, label: 'LinkedIn', href: '#' },
 ];
 
 export default function Footer() {
