@@ -10,8 +10,8 @@ const projects = [
     type: 'images',
     images: [
       '/images/work/media__1781246197866.png',
-      '/images/work/media__1781246197889.png',
-      '/images/work/media__1781246197886.png'
+      '/images/work/media__1781246197886.png',
+      '/images/work/media__1781246197889.png'
     ]
   },
   {
