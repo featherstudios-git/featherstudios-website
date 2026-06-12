@@ -9,11 +9,40 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', service: '', budget: '', message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
+    
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSubmitted(true); }, 1800);
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/featherstudiosxyz@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New Project Inquiry from ${formData.name}`,
+          name: formData.name,
+          email: formData.email,
+          service: formData.service || 'Not specified',
+          budget: formData.budget || 'Not specified',
+          message: formData.message
+        })
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong submitting the form. Please try again or email us directly.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Something went wrong submitting the form. Please try again or email us directly.");
+    } finally {
+      setLoading(false);
+      setFormData({ name: '', email: '', service: '', budget: '', message: '' });
+    }
   };
 
   const inputStyle: React.CSSProperties = {
