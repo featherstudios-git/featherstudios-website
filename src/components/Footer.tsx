@@ -130,11 +130,9 @@ export default function Footer() {
         {/* Bottom bar */}
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: '2rem', marginTop: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', color: 'var(--white-3)', letterSpacing: '0.08em' }}>
-            © 2025 Feather Studios. All rights reserved.
+            © 2026 Feather Studios. All rights reserved.
           </span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', color: 'var(--white-3)', letterSpacing: '0.08em' }}>
-            Made with <span style={{ color: 'var(--lime)' }}>♥</span> in India
-          </span>
+
           <div style={{ display: 'flex', gap: '1.5rem' }}>
             <a href="/terms.html" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', color: 'var(--white-3)', letterSpacing: '0.08em', transition: 'color 0.2s', textDecoration: 'none' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
