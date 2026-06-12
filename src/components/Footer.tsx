@@ -136,14 +136,12 @@ export default function Footer() {
             Made with <span style={{ color: 'var(--lime)' }}>♥</span> in India
           </span>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
-            {['Privacy Policy', 'Terms of Service'].map((t) => (
-              <a key={t} href="#" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', color: 'var(--white-3)', letterSpacing: '0.08em', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white-3)')}
-              >
-                {t}
-              </a>
-            ))}
+            <a href="/terms.html" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', color: 'var(--white-3)', letterSpacing: '0.08em', transition: 'color 0.2s', textDecoration: 'none' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white-3)')}
+            >
+              Terms of Service
+            </a>
           </div>
       </div>
       </div>
