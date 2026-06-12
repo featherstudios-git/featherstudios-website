@@ -17,9 +17,9 @@ const services = [
   { id: 'landing', num: '02', icon: Rocket, name: 'Landing Pages', desc: 'Conversion machines. Every element is intentional — built to turn traffic into customers and inquiries into revenue.', tags: ['CRO', 'A/B Testing'], accent: '#60a5fa', sloganParts: ['Convert', 'Clicks.', 'Drive', 'Revenue.'] },
   { id: 'ecom', num: '03', icon: ShoppingBag, name: 'E-Commerce Stores', desc: 'Full online stores with seamless checkout, product showcases, and payment integrations ready on day one.', tags: ['Shopify', 'WooCommerce'], accent: '#fb923c', sloganParts: ['Sell', 'More.', 'Grow', 'Wildly.'] },
   { id: 'seo', num: '04', icon: Search, name: 'Google SEO Optimization', desc: 'Get found. We handle keyword strategy, technical audits, and content optimization to own your search rankings.', tags: ['On-Page SEO', 'Technical Audit'], accent: '#34d399', sloganParts: ['Rank', 'Higher.', 'Dominate', 'Search.'] },
-  { id: 'social', num: '05', icon: Megaphone, name: 'Social Media Ads', desc: 'Campaigns that actually perform. Meta, TikTok, and Google Ads built around your goals and your audience.', tags: ['Meta Ads', 'TikTok Ads'], accent: '#f472b6', sloganParts: ['Reach', 'Millions.', 'Go', 'Viral.'] },
+  { id: 'social', num: '05', icon: Megaphone, name: 'Social Media Ads', desc: 'Campaigns that actually perform. Meta and Google Ads built around your goals and your audience.', tags: ['Meta Ads', 'Google Ads'], accent: '#f472b6', sloganParts: ['Reach', 'Millions.', 'Go', 'Viral.'] },
   { id: 'brand', num: '06', icon: Palette, name: 'Brand Identity & Design', desc: 'Logos, typography, color systems, brand guidelines — everything to make you completely unmistakable.', tags: ['Logo Design', 'Brand Kit'], accent: '#a78bfa', sloganParts: ['Be', 'Unmistakable.', 'Stand', 'Out.'] },
-  { id: 'content', num: '07', icon: Video, name: 'Social Media Content Creation', desc: 'Engaging, viral-ready video and static content tailored for Instagram, TikTok, and LinkedIn to build your audience.', tags: ['Short-form Video', 'Reels/TikTok'], accent: '#eab308', sloganParts: ['Scroll', 'Stopping.', 'Cult', 'Following.'] },
+  { id: 'content', num: '07', icon: Video, name: 'Social Media Content Creation', desc: 'Engaging, viral-ready video and static content tailored for Instagram, YouTube, and LinkedIn to build your audience.', tags: ['Short-form Video', 'Reels/Shorts'], accent: '#eab308', sloganParts: ['Scroll', 'Stopping.', 'Cult', 'Following.'] },
 ];
 
 // --- 3D Flip Card Component ---
@@ -106,16 +106,24 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
               {service.desc}
             </p>
             
-            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
-              {service.tags.map((tag: string) => (
-                <span key={tag} style={{
-                  padding: '0.4rem 0.8rem', background: 'var(--black-3)',
-                  borderRadius: '100px', fontSize: '0.8rem', color: 'var(--white-2)',
-                  border: '1px solid var(--border)', fontWeight: 500
-                }}>
-                  {tag}
-                </span>
-              ))}
+            <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+              <div style={{ display: 'flex', gap: '4px', alignItems: 'flex-end', height: '24px' }}>
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{ height: ['20%', '100%', '20%'] }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
+                    style={{ width: '4px', background: service.accent, borderRadius: '4px', opacity: 0.5 }}
+                  />
+                ))}
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ marginLeft: '1rem', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: service.accent, opacity: 0.8, alignSelf: 'center' }}
+                >
+                  {isMobile ? 'Tap to explore' : 'Hover to explore'} &rarr;
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>
