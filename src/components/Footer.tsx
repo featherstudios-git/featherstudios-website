@@ -88,7 +88,7 @@ export default function Footer() {
               </span>
             </div>
             <p style={{ fontSize: '0.87rem', color: 'var(--white-3)', lineHeight: 1.7, maxWidth: 260, marginBottom: '1.5rem' }}>
-              A boutique digital agency building premium websites, brands, and campaigns that drive real results.
+              A digital agency building premium websites, brands, and campaigns that drive real results.
             </p>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               {socialLinks.map(({ Icon, label, href }) => (
