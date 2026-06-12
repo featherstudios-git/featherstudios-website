@@ -22,7 +22,7 @@ const projects = [
     images: [
       '/images/work/media__1781246197934.png',
       '/images/work/media__1781246238653.png',
-      '/images/work/media__1781246197866.png'
+      '/images/work/media__1781247153007.png'
     ]
   },
   {
