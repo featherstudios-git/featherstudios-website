@@ -415,14 +415,36 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? '1rem' : '2rem' }}>
+    <div style={{ 
+      position: 'fixed', inset: 0, zIndex: 9999, 
+      display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', 
+      padding: isMobile ? '4rem 1rem 2rem' : '2rem',
+      overflowY: 'auto',
+      WebkitOverflowScrolling: 'touch'
+    }}>
       
       {/* Backdrop */}
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
         onClick={onClose}
-        style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)', cursor: 'pointer' }} 
+        style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)', cursor: 'pointer' }} 
       />
+
+      {/* Fixed Close Button */}
+      <button 
+        onClick={onClose}
+        style={{ 
+          position: 'fixed', top: isMobile ? '0.75rem' : '1.5rem', right: isMobile ? '0.75rem' : '1.5rem', 
+          background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', 
+          borderRadius: '50%', width: isMobile ? 36 : 44, height: isMobile ? 36 : 44, 
+          display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', 
+          cursor: 'pointer', transition: 'all 0.3s ease', zIndex: 10000 
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--lime)'; e.currentTarget.style.color = 'var(--black)'; e.currentTarget.style.borderColor = 'var(--lime)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'var(--white)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
+      >
+        <CloseIcon size={isMobile ? 16 : 18} />
+      </button>
 
       {/* Modal Card - Glassmorphic Masterpiece */}
       <motion.div 
@@ -434,25 +456,16 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
         style={{ 
           position: 'relative', zIndex: 1, 
           width: '100%', maxWidth: '1000px', 
-          maxHeight: '90vh',
+          maxHeight: isMobile ? 'none' : '90vh',
+          height: 'auto',
           borderRadius: isMobile ? '20px' : '32px', 
-          overflowY: 'auto',
+          overflowY: isMobile ? 'visible' : 'auto',
           display: 'flex', flexDirection: isMobile ? 'column' : 'row',
           boxShadow: '0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 40px rgba(56,189,248,0.05)'
         }}
       >
         {/* Glow effect behind */}
         <div style={{ position: 'absolute', top: '-20%', left: '-10%', width: '50%', height: '50%', background: 'var(--lime)', opacity: 0.1, filter: 'blur(100px)', borderRadius: '50%', zIndex: 0 }} />
-
-        {/* Close Button */}
-        <button 
-          onClick={onClose}
-          style={{ position: 'absolute', top: isMobile ? '1rem' : '1.5rem', right: isMobile ? '1rem' : '1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: isMobile ? 36 : 44, height: isMobile ? 36 : 44, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', cursor: 'pointer', transition: 'all 0.3s ease', zIndex: 10 }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--lime)'; e.currentTarget.style.color = 'var(--black)'; e.currentTarget.style.borderColor = 'var(--lime)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'var(--white)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
-        >
-          <CloseIcon size={18} />
-        </button>
 
         {/* Left Side: Avatar Panel */}
         <div style={{ flex: isMobile ? 'none' : '1 1 350px', padding: isMobile ? '3rem 2rem 2rem' : '4rem 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1, borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.05)', borderBottom: isMobile ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>

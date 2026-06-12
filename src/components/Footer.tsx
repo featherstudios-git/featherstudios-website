@@ -18,7 +18,7 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
   Contact: [
     { label: 'Start a Project', href: '#contact' },
     { label: 'Custom Quote', href: '#contact' },
-    { label: 'hello@featherstudios.co', href: 'mailto:hello@featherstudios.co' },
+    { label: 'featherstudiosxyz@gmail.com', href: 'mailto:featherstudiosxyz@gmail.com' },
   ],
 };
 

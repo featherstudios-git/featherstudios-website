@@ -27,8 +27,9 @@ export default function Contact() {
   };
 
   const infoItems = [
-    { Icon: Mail, label: 'Email', value: 'hello@featherstudios.co' },
+    { Icon: Mail, label: 'Email', value: 'featherstudiosxyz@gmail.com' },
     { Icon: MessageCircle, label: 'WhatsApp', value: 'Available on request' },
+    { Icon: MapPin, label: 'Location', value: 'Global / Remote' },
     { Icon: Clock, label: 'Response Time', value: 'Within 24–48 hours' },
   ];
 
