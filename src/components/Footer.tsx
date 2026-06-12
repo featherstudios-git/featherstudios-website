@@ -1,4 +1,4 @@
-import { Camera, X, Link2, Paintbrush } from 'lucide-react';
+import { Camera, Link2, X } from 'lucide-react';
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
   Services: [
@@ -23,10 +23,9 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
 };
 
 const socialLinks = [
-  { Icon: Camera, label: 'Instagram', href: '#' },
-  { Icon: X, label: 'Twitter', href: '#' },
+  { Icon: Camera, label: 'Instagram', href: 'https://www.instagram.com/feather.studios.in/' },
+  { Icon: X, label: 'X', href: 'https://x.com/featherstudiosx' },
   { Icon: Link2, label: 'LinkedIn', href: '#' },
-  { Icon: Paintbrush, label: 'Behance', href: '#' },
 ];
 
 export default function Footer() {
