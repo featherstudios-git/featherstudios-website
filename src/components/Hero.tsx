@@ -74,7 +74,7 @@ export default function Hero() {
             fontWeight: 300
           }}
         >
-          Discover the digital universe in ways once unimaginable. Our pioneering designs and breakthrough engineering bring premium web experiences within reach—secure and extraordinary.
+          We help individuals, startups, businesses, and organizations start, grow, and thrive through every stage of their journey. Together, we build stories worth telling and turn ambitions into reality.
         </motion.p>
 
         {/* CTAs */}
