@@ -22,7 +22,7 @@ const founders = [
     bio: 'Designer with an eye for detail and a mind for strategy — turning complex ideas into clear, beautiful visuals.',
     quote: '"Design is not just what it looks like and feels like. Design is how it works."',
     twitter: 'https://x.com/arindamnanda9',
-    linkedin: 'https://www.linkedin.com/in/arindam-nanda-967596229/',
+    linkedin: '',
     instagram: 'https://www.instagram.com/arindamnanda_18/',
     email: 'featherstudiosxyz@gmail.com',
   },
@@ -278,10 +278,10 @@ function SocialBtn({ href, label, icon, isMobile }: { href: string; label: strin
   const [hovered, setHovered] = useState(false);
   return (
     <a
-      href={href}
+      href={href || undefined}
       aria-label={label}
-      target={href.startsWith('mailto') ? undefined : '_blank'}
-      rel="noopener noreferrer"
+      target={!href || href.startsWith('mailto') ? undefined : '_blank'}
+      rel={!href ? undefined : "noopener noreferrer"}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -292,6 +292,7 @@ function SocialBtn({ href, label, icon, isMobile }: { href: string; label: strin
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         color: hovered ? 'var(--black)' : 'var(--white)',
         transition: 'all 0.3s ease',
+        cursor: !href ? 'default' : 'pointer',
       }}
     >
       {icon}
