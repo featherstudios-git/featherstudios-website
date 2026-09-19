@@ -1,25 +1,19 @@
-import { useRef, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Globe, Rocket, ShoppingBag, Search, Megaphone, Palette, Video } from 'lucide-react';
+import { Globe, ShoppingBag, Search, Megaphone, Palette, Video } from 'lucide-react';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { 
   WebDevAnimation, LandingPageAnimation, EcomAnimation, 
   SeoAnimation, SocialAdsAnimation, BrandAnimation, ContentAnimation 
 } from './ServiceAnimations';
 
-
-gsap.registerPlugin(ScrollTrigger);
-
 const services = [
-  { id: 'web', num: '01', icon: Globe, name: 'Website Design & Development', desc: 'Custom-built from scratch. Pixel-perfect, performance-first, and designed to make your competitors jealous.', tags: ['HTML/CSS', 'React', 'Next.js'], accent: 'var(--lime)', sloganParts: ['Build', 'Faster.', 'Scale', 'Further.'] },
-  { id: 'landing', num: '02', icon: Rocket, name: 'Landing Pages', desc: 'Conversion machines. Every element is intentional — built to turn traffic into customers and inquiries into revenue.', tags: ['CRO', 'A/B Testing'], accent: '#60a5fa', sloganParts: ['Convert', 'Clicks.', 'Drive', 'Revenue.'] },
-  { id: 'ecom', num: '03', icon: ShoppingBag, name: 'E-Commerce Stores', desc: 'Full online stores with seamless checkout, product showcases, and payment integrations ready on day one.', tags: ['Shopify', 'WooCommerce'], accent: '#fb923c', sloganParts: ['Sell', 'More.', 'Grow', 'Wildly.'] },
-  { id: 'seo', num: '04', icon: Search, name: 'Google SEO Optimization', desc: 'Get found. We handle keyword strategy, technical audits, and content optimization to own your search rankings.', tags: ['On-Page SEO', 'Technical Audit'], accent: '#34d399', sloganParts: ['Rank', 'Higher.', 'Dominate', 'Search.'] },
-  { id: 'social', num: '05', icon: Megaphone, name: 'Social Media Ads', desc: 'Campaigns that actually perform. Meta and Google Ads built around your goals and your audience.', tags: ['Meta Ads', 'Google Ads'], accent: '#f472b6', sloganParts: ['Reach', 'Millions.', 'Go', 'Viral.'] },
-  { id: 'brand', num: '06', icon: Palette, name: 'Brand Identity & Design', desc: 'Logos, typography, color systems, brand guidelines — everything to make you completely unmistakable.', tags: ['Logo Design', 'Brand Kit'], accent: '#a78bfa', sloganParts: ['Be', 'Unmistakable.', 'Stand', 'Out.'] },
-  { id: 'content', num: '07', icon: Video, name: 'Social Media Content Creation', desc: 'Engaging, viral-ready video and static content tailored for Instagram, YouTube, and LinkedIn to build your audience.', tags: ['Short-form Video', 'Reels/Shorts'], accent: '#eab308', sloganParts: ['Scroll', 'Stopping.', 'Cult', 'Following.'] },
+  { id: 'web', num: '01', icon: Globe, name: 'Website Design & Development', desc: 'Custom-built from scratch. Pixel-perfect, performance-first websites and high-converting landing pages designed to make your competitors jealous.', tags: ['HTML/CSS', 'React', 'Next.js'], accent: 'var(--lime)', sloganParts: ['Build', 'Faster.', 'Scale', 'Further.'] },
+  { id: 'ecom', num: '02', icon: ShoppingBag, name: 'E-Commerce Stores', desc: 'Full online stores with seamless checkout, product showcases, and payment integrations ready on day one.', tags: ['Shopify', 'WooCommerce'], accent: '#fb923c', sloganParts: ['Sell', 'More.', 'Grow', 'Wildly.'] },
+  { id: 'seo', num: '03', icon: Search, name: 'Google SEO Optimization', desc: 'Get found. We handle keyword strategy, technical audits, and content optimization to own your search rankings.', tags: ['On-Page SEO', 'Technical Audit'], accent: '#34d399', sloganParts: ['Rank', 'Higher.', 'Dominate', 'Search.'] },
+  { id: 'social', num: '04', icon: Megaphone, name: 'Social Media Ads', desc: 'Campaigns that actually perform. Meta and Google Ads built around your goals and your audience.', tags: ['Meta Ads', 'Google Ads'], accent: '#f472b6', sloganParts: ['Reach', 'Millions.', 'Go', 'Viral.'] },
+  { id: 'brand', num: '05', icon: Palette, name: 'Brand Identity & Design', desc: 'Logos, typography, color systems, brand guidelines — everything to make you completely unmistakable.', tags: ['Logo Design', 'Brand Kit'], accent: '#a78bfa', sloganParts: ['Be', 'Unmistakable.', 'Stand', 'Out.'] },
+  { id: 'content', num: '06', icon: Video, name: 'Social Media Content Creation', desc: 'Engaging, viral-ready video and static content tailored for Instagram, YouTube, and LinkedIn to build your audience.', tags: ['Short-form Video', 'Reels/Shorts'], accent: '#eab308', sloganParts: ['Scroll', 'Stopping.', 'Cult', 'Following.'] },
 ];
 
 // --- 3D Flip Card Component ---
@@ -57,9 +51,10 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
       onHoverEnd={() => !isMobile && setIsFlipped(false)}
       onClick={() => isMobile && setIsFlipped(!isFlipped)}
       style={{
-        width: isMobile ? '100%' : 'clamp(350px, 50vw, 650px)', 
-        height: isMobile ? '480px' : 'clamp(300px, 48vh, 480px)',
-        minHeight: '480px',
+        flex: isMobile ? '1 1 100%' : '1 1 350px',
+        maxWidth: isMobile ? '100%' : '500px',
+        width: '100%',
+        minHeight: '450px',
         perspective: '1500px',
         position: 'relative',
         cursor: 'pointer'
@@ -157,51 +152,18 @@ function ServiceFlipCard({ service, isMobile, index }: { service: any, isMobile:
     </motion.div>
   );
 }
+
 // ------------------------------
 
 export default function Services() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    
-    // Only apply horizontal scroll on desktop
-    if (!section || !track || isMobile) return;
-
-    const ctx = gsap.context(() => {
-      const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
-
-      const tween = gsap.to(track, {
-        x: getScrollAmount,
-        ease: 'none'
-      });
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${getScrollAmount() * -1}`,
-        pin: true,
-        animation: tween,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isMobile]);
-
   return (
-    <section ref={sectionRef} id="services" style={{ 
+    <section id="services" style={{ 
       background: 'var(--black)', 
-      height: 'auto', 
-      minHeight: isMobile ? 'auto' : '100vh', 
       position: 'relative', 
       overflow: 'hidden',
-      paddingBottom: isMobile ? '2rem' : 0
+      padding: 'var(--pad-y) var(--pad-x)'
     }}>
       {/* Background Video */}
       <video
@@ -222,60 +184,33 @@ export default function Services() {
         background: 'linear-gradient(to right, var(--black) 0%, transparent 15%, transparent 85%, var(--black) 100%), linear-gradient(to bottom, var(--black) 0%, transparent 20%, transparent 80%, var(--black) 100%)',
       }} />
 
-      {/* Intro Header Fixed Left (Desktop) or Normal (Mobile) */}
+      {/* Intro Header */}
       <div className="services-header" style={{
-        position: isMobile ? 'relative' : 'absolute', 
-        top: isMobile ? 0 : 'max(5%, 2rem)', 
-        left: isMobile ? 0 : 'max(5vw, 2rem)', 
+        position: 'relative',
         zIndex: 3,
-        pointerEvents: 'none',
-        padding: isMobile ? 'var(--pad-y) var(--pad-x) 2rem' : 0,
+        marginBottom: '4rem',
+        textAlign: 'center'
       }}>
         <h2 className="display" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', color: 'var(--white)', margin: 0, lineHeight: 1 }}>
           Our<br /><span style={{ color: 'var(--lime)', fontStyle: 'italic' }}>Services</span>
         </h2>
       </div>
 
-      {/* Horizontal Track (Desktop) or Vertical Stack (Mobile) */}
-      {!isMobile ? (
-        <div ref={trackRef} className="services-track" style={{
-          display: 'flex', 
-          flexDirection: 'row',
-          height: '100vh', 
-          alignItems: 'flex-end', 
-          paddingBottom: '5vh',
-          paddingLeft: 'max(40vw, 350px)', 
-          paddingRight: '5vw', 
-          width: 'fit-content',
-          position: 'relative', zIndex: 2, 
-          gap: '3rem',
-        }}>
-          {services.map((service, i) => (
-            <ServiceFlipCard key={service.id} service={service} isMobile={false} index={i} />
-          ))}
-        </div>
-      ) : (
-        <div 
-          className="no-scrollbar"
-          style={{ 
-            position: 'relative', zIndex: 2, 
-            display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory',
-            padding: '2rem var(--pad-x) 4rem', gap: '1rem',
-            scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch'
-          }}
-        >
-          {services.map((service, i) => (
-            <div key={service.id} style={{
-              flexShrink: 0, width: '85vw',
-              scrollSnapAlign: 'center',
-              display: 'flex', alignItems: 'center'
-            }}>
-              <ServiceFlipCard service={service} isMobile={true} index={i} />
-            </div>
-          ))}
-          <div style={{ flexShrink: 0, width: '5vw' }} />
-        </div>
-      )}
+      {/* Flex Layout for Cards */}
+      <div style={{
+        position: 'relative',
+        zIndex: 2,
+        maxWidth: 'var(--max-w)',
+        margin: '0 auto',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '2.5rem'
+      }}>
+        {services.map((svc, i) => (
+          <ServiceFlipCard key={svc.id} service={svc} isMobile={isMobile} index={i} />
+        ))}
+      </div>
     </section>
   );
 }

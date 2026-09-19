@@ -8,6 +8,7 @@ const founders = [
     initials: 'SC',
     name: 'Suyash Chandra',
     role: 'Co-Founder & Lead Developer',
+    image: '/images/suyash.png',
     bio: 'Full-stack developer with a passion for building fast, elegant web experiences from the ground up.',
     quote: '"Great code is like great poetry—it expresses complex ideas with elegance and simplicity."',
     twitter: 'https://x.com/suyash_xyz',
@@ -19,6 +20,7 @@ const founders = [
     initials: 'AN',
     name: 'Arindam Nanda',
     role: 'Co-Founder & Creative Director',
+    image: '/images/arindam.jpg',
     bio: 'Designer with an eye for detail and a mind for strategy — turning complex ideas into clear, beautiful visuals.',
     quote: '"Design is not just what it looks like and feels like. Design is how it works."',
     twitter: 'https://x.com/arindamnanda9',
@@ -224,15 +226,21 @@ export default function About() {
                   border: '2px solid var(--lime)',
                   boxShadow: '0 10px 30px rgba(56,189,248,0.2), inset 0 0 15px rgba(56,189,248,0.1)'
                 }}>
-                  {/* Subtle Pulse */}
-                  <motion.div 
-                    animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle, var(--lime-dim) 0%, transparent 70%)', zIndex: 1 }}
-                  />
-                  <span style={{ position: 'relative', zIndex: 2 }}>
-                    {f.initials}
-                  </span>
+                  {f.image ? (
+                    <img src={f.image} alt={f.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <>
+                      {/* Subtle Pulse */}
+                      <motion.div 
+                        animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                        style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle, var(--lime-dim) 0%, transparent 70%)', zIndex: 1 }}
+                      />
+                      <span style={{ position: 'relative', zIndex: 2 }}>
+                        {f.initials}
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 <div>
@@ -473,7 +481,7 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
           <motion.div 
             initial={{ scale: 0.8, opacity: 0, rotateY: -30 }} animate={{ scale: 1, opacity: 1, rotateY: 0 }} transition={{ delay: 0.1, duration: 0.8, type: 'spring' }}
             style={{
-              width: isMobile ? '120px' : '180px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative',
+              width: isMobile ? '120px' : '180px', aspectRatio: '1/1', borderRadius: '50%', position: 'relative', overflow: 'hidden',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: isMobile ? '3rem' : '4rem', color: 'var(--lime)',
               background: 'linear-gradient(145deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%)',
@@ -481,7 +489,11 @@ function FounderModal({ founder, onClose }: { founder: typeof founders[0]; onClo
               boxShadow: '0 0 40px rgba(56,189,248,0.3), inset 0 0 20px rgba(56,189,248,0.2)', marginBottom: isMobile ? '2rem' : '3rem'
             }}
           >
-            <span style={{ position: 'relative', zIndex: 2 }}>{founder.initials}</span>
+            {founder.image ? (
+              <img src={founder.image} alt={founder.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            ) : (
+              <span style={{ position: 'relative', zIndex: 2 }}>{founder.initials}</span>
+            )}
           </motion.div>
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ display: 'flex', gap: '1rem' }}>
