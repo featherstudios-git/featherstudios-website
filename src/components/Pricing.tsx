@@ -108,7 +108,12 @@ export default function Pricing() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-lime"
-                style={{ flex: '1 1 auto', justifyContent: 'center' }}
+                style={{ 
+                  display: 'flex', alignItems: 'center', gap: '10px', 
+                  padding: '1.2rem 2.5rem', fontSize: '1rem', borderRadius: '100px',
+                  boxShadow: '0 0 40px rgba(191,255,0,0.15)', flex: '1 1 auto', justifyContent: 'center',
+                  textDecoration: 'none'
+                }}
               >
                 <Calendar size={18} />
                 Schedule a Meet
@@ -116,8 +121,17 @@ export default function Pricing() {
               
               <a 
                 href="mailto:featherstudiosxyz@gmail.com" 
-                className="btn btn-glass"
-                style={{ flex: '1 1 auto', justifyContent: 'center' }}
+                className="btn"
+                style={{ 
+                  display: 'flex', alignItems: 'center', gap: '10px', 
+                  padding: '1.2rem 2.5rem', fontSize: '1rem', borderRadius: '100px',
+                  background: 'rgba(255,255,255,0.05)', color: 'var(--white)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  transition: 'all 0.3s', flex: '1 1 auto', justifyContent: 'center',
+                  textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
               >
                 <MessageSquare size={18} />
                 Contact for Project

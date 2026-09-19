@@ -88,18 +88,30 @@ export default function Hero() {
         >
           <motion.a 
             href="#contact" 
-            className="btn btn-lime"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(56,189,248,0.5)' }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '0.75rem',
+              padding: '0.85rem 1.75rem', borderRadius: '100px',
+              background: 'var(--lime)', color: 'var(--black)', 
+              textDecoration: 'none', fontSize: '0.95rem', fontWeight: 600,
+              boxShadow: '0 10px 20px rgba(0,0,0,0.5)',
+              border: '1px solid var(--lime)'
+            }}
           >
-            Start Your Project <ArrowUpRight size={18} strokeWidth={2.5} />
+            Start Your Project <ArrowUpRight size={20} strokeWidth={2.5} />
           </motion.a>
           
           <motion.a 
             href="#work"
-            className="btn btn-glass"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ borderColor: 'var(--lime)', color: 'var(--lime)', x: 5 }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.85rem 1.75rem', borderRadius: '100px',
+              border: '1px solid transparent',
+              color: 'var(--white)', textDecoration: 'none',
+              fontSize: '0.95rem', fontWeight: 500, transition: 'all 0.3s ease'
+            }}
           >
             Explore Work <ArrowDown size={18} />
           </motion.a>
