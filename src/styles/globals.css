@@ -267,48 +267,57 @@ select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  padding: 0.9rem 2.2rem;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  padding: 0.8rem 1.8rem;
   border-radius: 999px;
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
-  transform: translateZ(0);
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.5;
 }
 
 .btn-lime {
   background: var(--lime);
   color: var(--black);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+  border: 1px solid var(--lime);
 }
 
 .btn-lime:hover {
-  background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+  background: #7dd3fc;
+  border-color: #7dd3fc;
   color: var(--black);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(148, 163, 184, 0.4), 0 0 15px rgba(148, 163, 184, 0.3);
-  border-color: rgba(255,255,255,0.6);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: var(--white);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .btn-outline:hover {
-  border-color: rgba(255,255,255,0.4);
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 15px rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  color: var(--white);
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
 
 /* ── NAV RESPONSIVE VISIBILITY ─────────────── */
